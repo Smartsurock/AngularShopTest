@@ -1,0 +1,19 @@
+.header {
+  height: 70px;
+  max-width: 1280px;
+  margin: 0px auto;
+  background-color: rgb(115, 187, 0);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 15px;
+  border-radius: 3px;
+  &__logo {
+    background-color: #fff;
+  }
+  &__search {
+  }
+  &__basket {
+    background-color: #fff;
+  }
+}
