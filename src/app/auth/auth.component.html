@@ -1,0 +1,12 @@
+<div class="container" #container>
+  <div class="form" #form>
+    <form [formGroup]="authForm">
+      <input formControlName="email" type="text" id="email">
+      <input formControlName="password" type="password" id="password">
+      <div class="buttons">
+        <button type="button" (click)="onLogin()">Login</button>
+        <button type="button" (click)="onSignUp()">Sign Up</button>
+      </div>
+    </form>
+  </div>
+</div>

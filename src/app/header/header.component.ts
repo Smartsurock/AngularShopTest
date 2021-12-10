@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import * as AuthActions from '../auth/auth-store/auth.actions';
+import * as fromAppReducer from '../store/app.reducer';
 
 @Component({
   selector: 'app-header',
@@ -7,14 +10,27 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  constructor() { }
+  constructor(private store: Store<fromAppReducer.AppState>) { }
 
   searchForm: FormGroup;
+  @Output() loginStart = new EventEmitter<boolean>();
+  logged: boolean = false;
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.searchForm = new FormGroup({
       search: new FormControl(null),
-    })
+    });
+
+    this.store.select('auth').subscribe(state => {
+      this.logged = state.logged;
+    });
   }
 
+  onLogin() {
+    this.loginStart.emit(true);
+  }
+
+  onLogout() {
+    this.store.dispatch(new AuthActions.Logout());
+  }
 }

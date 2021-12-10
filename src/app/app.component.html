@@ -1,4 +1,5 @@
 <div class="container">
-  <app-header></app-header>
+  <app-header (loginStart)="onLoginStart($event)"></app-header>
   <app-catalog></app-catalog>
+  <app-auth (loginStart)="onLoginStart($event)" *ngIf="loginStart"></app-auth>
 </div>
