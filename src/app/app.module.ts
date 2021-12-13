@@ -7,7 +7,7 @@ import { routes } from './app.routes';
 import { HeaderComponent } from './header/header.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { PoductCardComponent } from './catalog/poduct-card/poduct-card.component';
+import { PoductCardComponent } from './products/poduct-card/poduct-card.component';
 import { AuthComponent } from './auth/auth.component';
 import { StoreModule } from '@ngrx/store';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,6 +15,7 @@ import * as fromAppReducer from './store/app.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './auth/auth-store/auth.effects';
 import { HttpClientModule } from '@angular/common/http';
+import { ProductsComponent } from './products/products.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     HeaderComponent,
     CatalogComponent,
     PoductCardComponent,
-    AuthComponent
+    AuthComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,

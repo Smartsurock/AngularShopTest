@@ -14,7 +14,8 @@ export class HeaderComponent implements OnInit {
 
   searchForm: FormGroup;
   @Output() loginStart = new EventEmitter<boolean>();
-  logged: boolean = false;
+  @Output() catalog = new EventEmitter<boolean>();
+  isLogged: boolean = false;
 
   ngOnInit() {
     this.searchForm = new FormGroup({
@@ -22,7 +23,7 @@ export class HeaderComponent implements OnInit {
     });
 
     this.store.select('auth').subscribe(state => {
-      this.logged = state.logged;
+      this.isLogged = state.logged;
     });
   }
 
@@ -32,5 +33,15 @@ export class HeaderComponent implements OnInit {
 
   onLogout() {
     this.store.dispatch(new AuthActions.Logout());
+  }
+
+  onBasket() {
+    if (!this.isLogged) {
+      this.onLogin();
+    }
+  }
+
+  onCatalog() {
+    this.catalog.emit();
   }
 }

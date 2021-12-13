@@ -1,0 +1,28 @@
+@import "../scss/variables.scss";
+
+.catalog {
+  position: fixed;
+  width: 320px;
+  height: calc(100vh - 70px);
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  &__item {
+    background-color: #fff;
+    margin: 0px 0px 10px 0px;
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 10px;
+    font-size: 19px;
+    border-radius: $border-radius;
+    cursor: pointer;
+    transition: 0.3s;
+    & span:last-child {
+      color: $main-color;
+    }
+    &:hover {
+      transform: translateX(10px);
+    }
+  }
+}

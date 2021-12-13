@@ -6,10 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./catalog.component.scss']
 })
 export class CatalogComponent implements OnInit {
-
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
 }

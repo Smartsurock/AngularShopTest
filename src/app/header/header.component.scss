@@ -5,24 +5,27 @@
   position: fixed;
   height: 70px;
   width: 100%;
-  max-width: 1280px;
   top: 0;
   left: 50%;
+  z-index: 10;
   transform: translateX(-50%);
   @include flex-center;
   padding: 0px 15px;
   background-color: $main-color;
   border-radius: $border-radius;
+  &__catalog,
   &__logo {
     padding: 0px 10px;
+    margin: 0px 10px 0px 0px;
     line-height: 30px;
     background-color: $bg-color;
     border-radius: $border-radius;
     cursor: pointer;
+    user-select: none;
   }
   &__search {
     flex: 1 1 auto;
-    margin: 0px 10px;
+    margin: 0px 10px 0 0;
     & input {
       width: calc(100% - 80px);
       line-height: 30px;

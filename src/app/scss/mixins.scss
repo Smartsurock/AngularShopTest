@@ -3,3 +3,9 @@
   justify-content: center;
   align-items: center;
 }
+@mixin hex {
+  clip-path: polygon(25% 0, 75% 0, 100% 50%, 75% 100%, 25% 100%, 0 50%);
+}
+@mixin star {
+  clip-path: polygon(50% 0%, 64% 35%, 100% 38%, 72% 60%, 82% 100%, 50% 77%, 18% 100%, 28% 60%, 0% 38%, 36% 35%);
+}
