@@ -1,5 +1,5 @@
 <div class="card">
-  <a class="card__image" style="background-image: url({{product.images[0]}});">
+  <a [routerLink]="id" class="card__image" style="background-image: url({{product.images[0]}});">
   </a>
   <div class="card__description">
     {{product.description}}
@@ -7,13 +7,6 @@
   <div class="card__stars stars">
     <div class="stars__body">
       <div #starsActive class="stars__active"></div>
-      <!-- <div class="stars__items">
-        <input type="radio" class="stars__item" name="stars" value="1">
-        <input type="radio" class="stars__item" name="stars" value="2">
-        <input type="radio" class="stars__item" name="stars" value="3">
-        <input type="radio" class="stars__item" name="stars" value="4">
-        <input type="radio" class="stars__item" name="stars" value="5">
-      </div> -->
     </div>
     <div #starsValue class="stars__value">{{product.stars}}</div>
   </div>

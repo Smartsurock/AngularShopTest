@@ -16,6 +16,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './auth/auth-store/auth.effects';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductsComponent } from './products/products.component';
+import { ProductInfoComponent } from './products/product-info/product-info.component';
+import { ProductsListComponent } from './products/products-list/products-list.component';
+import { StarsDirective } from './products/product-info/stars.directive';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { ProductsComponent } from './products/products.component';
     CatalogComponent,
     PoductCardComponent,
     AuthComponent,
-    ProductsComponent
+    ProductsComponent,
+    ProductInfoComponent,
+    ProductsListComponent,
+    StarsDirective
   ],
   imports: [
     BrowserModule,

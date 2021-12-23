@@ -1,0 +1,106 @@
+@import "../../scss/variables.scss";
+@import "../../scss/mixins.scss";
+
+.info {
+  &__row {
+    display: flex;
+  }
+  &__left {
+    flex: 1 1 65%;
+  }
+  &__name {
+    font-weight: 700;
+    font-size: 26px;
+  }
+  &__image {
+    width: 400px;
+    height: 300px;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: contain;
+  }
+  &__description {
+    font-size: 18px;
+    letter-spacing: 0.5px;
+  }
+  &__right {
+    flex: 1 1 35%;
+  }
+  &__basket {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__price {
+    font-size: 28px;
+    color: red;
+  }
+  &__buy {
+    width: 70px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: $border-radius;
+    background-color: $main-color;
+  }
+}
+.stars {
+  &__container {
+    display: flex;
+    align-items: center;
+  }
+  &__body {
+    position: relative;
+    font-size: 30px;
+    &:before {
+      content: "★★★★★";
+      display: block;
+      color: rgb(167, 167, 167);
+    }
+  }
+  &__active {
+    position: absolute;
+    width: 0;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    &:before {
+      content: "★★★★★";
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      position: absolute;
+      color: #ff8800;
+    }
+  }
+  &__value {
+    margin: 0px 0px 0px 15px;
+  }
+}
+.rating {
+  &__container {
+    display: flex;
+    align-items: center;
+  }
+  &__body {
+    @extend .stars__body;
+  }
+  &__active {
+    @extend .stars__active;
+  }
+  &__items {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+  }
+  &__item {
+    flex: 0 0 20%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+}

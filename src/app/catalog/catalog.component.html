@@ -1,28 +1,8 @@
 <div class="catalog">
   <ul class="catalog__list">
-    <li class="catalog__item">
-      <span>Телефоны</span><span>►</span>
-    </li>
-    <li class="catalog__item">
-      <span>Шарики для пинпонга</span><span>►</span>
-    </li>
-    <li class="catalog__item">
-      <span>Кирпичи</span><span>►</span>
-    </li>
-    <li class="catalog__item">
-      <span>Негативные эмоции</span><span>►</span>
-    </li>
-    <li class="catalog__item">
-      <span>Бомбы</span><span>►</span>
-    </li>
-    <li class="catalog__item">
-      <span>Ружья</span><span>►</span>
-    </li>
-    <li class="catalog__item">
-      <span>Телевизоры</span><span>►</span>
-    </li>
-    <li class="catalog__item">
-      <span>Магнитолы</span><span>►</span>
+    <li class="catalog__item" [routerLink]="[category]" (click)="onCategory(category)"
+      *ngFor="let category of categories">
+      <span>{{category}}</span><span>►</span>
     </li>
   </ul>
 </div>

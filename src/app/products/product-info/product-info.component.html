@@ -1,0 +1,35 @@
+<div class="info__container">
+  <div class="info__row">
+    <div class="info__left">
+      <div class="info__name">{{product.name}}</div>
+      <div class="info__image" style="background-image: url({{product.images[0]}});"></div>
+      <div class="info__description">{{product.description}}</div>
+    </div>
+    <div class="info__right">
+      <div class="info__rating stars">
+        <div class="stars__container">
+          <div class="stars__body">
+            <div #starsActive class="stars__active"></div>
+          </div>
+          <div #starsValue class="stars__value">{{product.stars}}</div>
+        </div>
+      </div>
+      <div class="info__basket">
+        <div class="info__price">{{product.price}} &#8372;</div>
+        <div role="button" class="info__buy">Купить</div>
+      </div>
+      <div class="rating__container">
+        <div rating class="rating__body">
+          <div class="rating__active"></div>
+          <div class="rating__items">
+            <input type="radio" class="rating__item" name="rating" value="1">
+            <input type="radio" class="rating__item" name="rating" value="2">
+            <input type="radio" class="rating__item" name="rating" value="3">
+            <input type="radio" class="rating__item" name="rating" value="4">
+            <input type="radio" class="rating__item" name="rating" value="5">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

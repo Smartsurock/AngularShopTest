@@ -1,10 +1,10 @@
 <div class="container">
   <app-header (loginStart)="onLoginStart($event)" (catalog)="onCatalogClick()"></app-header>
   <div class="catalog" [ngClass]="catalog ? 'active' : ''">
-    <app-catalog></app-catalog>
+    <app-catalog (catalog)="onCatalogClick()"></app-catalog>
   </div>
   <div class="products">
-    <app-products></app-products>
+    <router-outlet></router-outlet>
   </div>
   <app-auth (loginStart)="onLoginStart($event)" *ngIf="loginStart"></app-auth>
 </div>

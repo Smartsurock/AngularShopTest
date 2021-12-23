@@ -14,6 +14,7 @@ export class PoductCardComponent implements OnInit, AfterViewInit {
   @ViewChild('starsValue') starsValue: ElementRef;
 
   @Input() product: Product;
+  @Input() id: number;
 
   ngOnInit() {
   }
@@ -24,6 +25,7 @@ export class PoductCardComponent implements OnInit, AfterViewInit {
 
   setStarsValue() {
     const starsValue = this.starsValue.nativeElement.innerHTML;
-    this.starsActive.nativeElement.style.width = `${starsValue / 0.05}%`
+    this.starsActive.nativeElement.style.width = `${starsValue / 0.05}%`;
   }
+
 }

@@ -1,6 +1,6 @@
 <header class="header">
   <div class="header__catalog" (click)="onCatalog()">Каталог</div>
-  <div class="header__logo">Логотип</div>
+  <div class="header__logo" routerLink="">Логотип</div>
   <div class="header__search">
     <form [formGroup]="searchForm">
       <input type="text" id="search" formControlName="search">
