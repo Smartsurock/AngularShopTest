@@ -17,11 +17,15 @@ export class ProductInfoComponent implements OnInit, AfterViewInit {
   @ViewChild('starsActive') starsActive: ElementRef;
   @ViewChild('starsValue') starsValue: ElementRef;
 
+  productGrade: number;
+
   ngOnInit() {
     this.route.params.pipe(take(1)).subscribe((params: Params) => {
       const id = +params['id'];
       this.product = this.productsService.getProduct(id)[0];
     });
+
+    this.productGrade = this.product.stars.reduce((a, b) => a + b) / this.product.stars.length;
   }
 
   ngAfterViewInit() {

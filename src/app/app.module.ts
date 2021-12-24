@@ -7,7 +7,7 @@ import { routes } from './app.routes';
 import { HeaderComponent } from './header/header.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { PoductCardComponent } from './products/poduct-card/poduct-card.component';
+import { PoductCardComponent } from './products/products-list/poduct-card/poduct-card.component';
 import { AuthComponent } from './auth/auth.component';
 import { StoreModule } from '@ngrx/store';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';

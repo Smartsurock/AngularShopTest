@@ -5,7 +5,7 @@ export class Product {
     public category: string,
     public images: string[],
     public description: string,
-    public stars: number,
+    public stars: number[],
     public price: number,
   ) { }
 }

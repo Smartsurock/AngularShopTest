@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { Product } from '../product.model';
-import { ProductsService } from '../products.service';
+import { Product } from '../../product.model';
+import { ProductsService } from '../../products.service';
 
 @Component({
   selector: 'app-poduct-card',
@@ -15,8 +15,10 @@ export class PoductCardComponent implements OnInit, AfterViewInit {
 
   @Input() product: Product;
   @Input() id: number;
+  productGrade: number;
 
   ngOnInit() {
+    this.productGrade = this.product.stars.reduce((a, b) => a + b) / this.product.stars.length;
   }
 
   ngAfterViewInit() {
