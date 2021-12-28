@@ -1,0 +1,26 @@
+<form [formGroup]="commentForm" class="comment__container rating">
+  <div class="rating__container">
+    <div starsDirective class="rating__body">
+      <div class="rating__active"></div>
+      <div class="rating__items">
+        <input type="radio" class="rating__item" name="rating" value="1">
+        <input type="radio" class="rating__item" name="rating" value="2">
+        <input type="radio" class="rating__item" name="rating" value="3">
+        <input type="radio" class="rating__item" name="rating" value="4">
+        <input type="radio" class="rating__item" name="rating" value="5">
+      </div>
+    </div>
+  </div>
+  <div class="form__inputs">
+    <label for="name">Ваше имя:</label>
+    <input type="text" formControlName="name" id="name">
+    <label for="mail">Ваш Email:</label>
+    <input type="mail" formControlName="mail" id="mail">
+    <label for="message">Ваш комментарий:</label>
+    <textarea formControlName="message" id="message" cols="30" rows="5"></textarea>
+  </div>
+  <div class="form__buttons">
+    <button (click)="onCancel()">Отменить</button>
+    <button>Отправить</button>
+  </div>
+</form>

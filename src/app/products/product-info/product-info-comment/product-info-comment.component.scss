@@ -1,0 +1,51 @@
+.stars {
+  &__container {
+    display: flex;
+    align-items: center;
+  }
+  &__body {
+    position: relative;
+    font-size: 26px;
+    &:before {
+      content: "★★★★★";
+      display: block;
+      color: rgb(167, 167, 167);
+    }
+  }
+  &__active {
+    position: absolute;
+    width: 0;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    &:before {
+      content: "★★★★★";
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      position: absolute;
+      color: #ff8800;
+    }
+  }
+  &__value {
+    margin: 0px 0px 0px 15px;
+    font-size: 13px;
+  }
+}
+.comment {
+  &__name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
+    font-size: 18px;
+    margin: 0px 0px 10px 0px;
+  }
+  &__text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: rgb(75, 75, 75);
+    padding: 0px 10px 0px 0px;
+  }
+}

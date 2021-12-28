@@ -2,42 +2,61 @@
 @import "../../scss/mixins.scss";
 
 .info {
+  &__container {
+    width: 100%;
+  }
   &__row {
     display: flex;
+    width: 100%;
   }
   &__left {
-    flex: 1 1 65%;
+    flex: 0 0 60%;
+    width: 60%;
+    margin: 0px 10px 0px 0px;
   }
   &__name {
     font-weight: 700;
     font-size: 26px;
+    margin: 0px 10px 15px;
   }
   &__image {
-    width: 400px;
-    height: 300px;
+    width: 100%;
+    height: 400px;
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-size: contain;
+    margin: 0px 0px 15px 0px;
   }
   &__description {
     font-size: 18px;
     letter-spacing: 0.5px;
+    padding: 0px 5px;
   }
   &__right {
-    flex: 1 1 35%;
+    flex: 0 0 40%;
+    width: 40%;
+    overflow: hidden;
   }
   &__basket {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+  }
+  &__comments {
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 10px 0px;
+    margin: 20px 0px 0px 0px;
+    height: calc(100vh - 265px);
+    overflow: auto;
   }
   &__price {
     font-size: 28px;
     color: red;
+    margin: 0px 20px 0px 0px;
   }
   &__buy {
-    width: 70px;
+    width: 80px;
     line-height: 30px;
+    font-weight: 500;
     text-align: center;
     border-radius: $border-radius;
     background-color: $main-color;
@@ -55,7 +74,7 @@
   }
   &__body {
     position: relative;
-    font-size: 30px;
+    font-size: 26px;
     &:before {
       content: "★★★★★";
       display: block;
@@ -81,31 +100,49 @@
   }
   &__value {
     margin: 0px 0px 0px 15px;
+    font-size: 13px;
   }
 }
 .rating {
+  margin: 10px 0px 0px 0px;
+  position: relative;
+  width: calc(100% - 17px);
+  &__btn {
+    width: auto;
+    line-height: 30px;
+    padding: 0px 15px;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    border-radius: $border-radius;
+    background-color: rgb(0, 153, 224);
+    cursor: pointer;
+    user-select: none;
+    transition: 0.3s;
+    &:hover {
+      box-shadow: 0 0 5px inset #ff8800;
+    }
+  }
   &__container {
-    display: flex;
-    align-items: center;
-  }
-  &__body {
-    @extend .stars__body;
-  }
-  &__active {
-    @extend .stars__active;
-  }
-  &__items {
+    background-color: #fff;
+    overflow: hidden;
+    transition: 0.5s;
     position: absolute;
     width: 100%;
-    height: 100%;
-    top: 0;
+    height: 402px;
+    top: 30px;
     left: 0;
-    display: flex;
-  }
-  &__item {
-    flex: 0 0 20%;
-    height: 100%;
+    right: 0;
+    transform: translate(-100%, -100%);
     opacity: 0;
-    cursor: pointer;
+    visibility: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 0 10px;
+    &.open {
+      width: auto;
+      transform: translate(0, -100%);
+      opacity: 1;
+      visibility: visible;
+    }
   }
 }

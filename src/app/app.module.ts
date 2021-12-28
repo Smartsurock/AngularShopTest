@@ -19,6 +19,8 @@ import { ProductsComponent } from './products/products.component';
 import { ProductInfoComponent } from './products/product-info/product-info.component';
 import { ProductsListComponent } from './products/products-list/products-list.component';
 import { StarsDirective } from './products/product-info/stars.directive';
+import { ProductInfoCommentComponent } from './products/product-info/product-info-comment/product-info-comment.component';
+import { ProductInfoFormComponent } from './products/product-info/product-info-form/product-info-form.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { StarsDirective } from './products/product-info/stars.directive';
     ProductsComponent,
     ProductInfoComponent,
     ProductsListComponent,
-    StarsDirective
+    StarsDirective,
+    ProductInfoCommentComponent,
+    ProductInfoFormComponent
   ],
   imports: [
     BrowserModule,

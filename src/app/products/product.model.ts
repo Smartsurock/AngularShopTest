@@ -1,3 +1,5 @@
+import { Comment } from "./comment.model";
+
 export class Product {
   constructor(
     public id: number,
@@ -7,5 +9,6 @@ export class Product {
     public description: string,
     public stars: number[],
     public price: number,
+    public comments: Comment[],
   ) { }
 }

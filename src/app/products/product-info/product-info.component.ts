@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { Product } from '../product.model';
@@ -11,13 +11,16 @@ import { ProductsService } from '../products.service';
 })
 export class ProductInfoComponent implements OnInit, AfterViewInit {
   constructor(private route: ActivatedRoute,
-    private productsService: ProductsService) { }
+    private productsService: ProductsService,
+    private renderer: Renderer2) { }
 
   product: Product;
   @ViewChild('starsActive') starsActive: ElementRef;
   @ViewChild('starsValue') starsValue: ElementRef;
+  @ViewChild('rating') rating: ElementRef;
 
   productGrade: number;
+  commentForm: boolean = false;
 
   ngOnInit() {
     this.route.params.pipe(take(1)).subscribe((params: Params) => {
@@ -29,11 +32,14 @@ export class ProductInfoComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.setStarsValue(this.starsValue, this.starsActive);
+    this.setStarsValue(this.starsActive, this.productGrade);
   }
 
-  setStarsValue(value, active) {
-    const starsValue = value.nativeElement.innerHTML;
-    active.nativeElement.style.width = `${starsValue / 0.05}%`;
+  setStarsValue(active, grade) {
+    this.renderer.setStyle(active.nativeElement, 'width', `${grade / 0.05}%`);
+  }
+
+  onAddComment() {
+    this.commentForm = !this.commentForm;
   }
 }
