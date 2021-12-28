@@ -1,5 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { take } from 'rxjs/operators';
+import * as fromAppReducer from 'src/app/store/app.reducer';
+import * as ProductsActions from '../../products-store/products.actions';
 
 @Component({
   selector: 'app-product-info-form',
@@ -7,20 +11,30 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./product-info-form.component.scss']
 })
 export class ProductInfoFormComponent implements OnInit {
-  constructor() { }
+  constructor(
+    private store: Store<fromAppReducer.AppState>,
+  ) { }
 
   commentForm: FormGroup;
   @Output() cancel = new EventEmitter<boolean>();
 
   ngOnInit() {
     this.commentForm = new FormGroup({
-      name: new FormControl(null),
-      mail: new FormControl(null),
-      message: new FormControl(null),
+      rating: new FormControl(null, [Validators.required]),
+      name: new FormControl(null, [Validators.required]),
+      mail: new FormControl(null, [Validators.required, Validators.email]),
+      text: new FormControl(null, [Validators.required]),
     });
   }
 
   onCancel() {
+    this.cancel.emit();
+  }
+
+  onSubmit() {
+    if (this.commentForm.invalid) return;
+    console.log(this.commentForm.value);
+    // this.store.dispatch(new ProductsActions.SaveProducts());
     this.cancel.emit();
   }
 }

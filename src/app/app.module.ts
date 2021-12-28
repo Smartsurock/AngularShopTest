@@ -21,6 +21,7 @@ import { ProductsListComponent } from './products/products-list/products-list.co
 import { StarsDirective } from './products/product-info/stars.directive';
 import { ProductInfoCommentComponent } from './products/product-info/product-info-comment/product-info-comment.component';
 import { ProductInfoFormComponent } from './products/product-info/product-info-form/product-info-form.component';
+import { ProductsEffects } from './products/products-store/products.effects';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { ProductInfoFormComponent } from './products/product-info/product-info-f
     RouterModule.forRoot(routes, { useHash: true }),
     ReactiveFormsModule,
     StoreModule.forRoot(fromAppReducer.appReducer),
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, ProductsEffects]),
     BrowserAnimationsModule,
     HttpClientModule,
   ],
