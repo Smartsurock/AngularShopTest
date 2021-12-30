@@ -4,7 +4,7 @@ import { catchError, map, switchMap, tap } from "rxjs/operators";
 import { Actions, Effect, ofType } from "@ngrx/effects";
 import * as AuthActions from "./auth.actions";
 import { environment } from "src/environments/environment";
-import { LogoutService } from "../logout.service";
+import { AuthService } from "../auth.service";
 import { of } from "rxjs";
 import { User } from "../user.model";
 import { Router } from "@angular/router";
@@ -24,7 +24,7 @@ export class AuthEffects {
   constructor(
     private actions: Actions,
     private http: HttpClient,
-    private logoutService: LogoutService,
+    private authService: AuthService,
     private router: Router,
   ) { }
 
@@ -38,7 +38,7 @@ export class AuthEffects {
         returnSecureToken: true
       }).pipe(
         tap(response => {
-          this.logoutService.setTokenValidTimer(+response.expiresIn * 1000);
+          this.authService.setTokenValidTimer(+response.expiresIn * 1000);
         }),
         map((response: AuthResponseData) => {
           return hendleAuthentication(response);
@@ -60,7 +60,7 @@ export class AuthEffects {
         returnSecureToken: true
       }).pipe(
         tap(response => {
-          this.logoutService.setTokenValidTimer(+response.expiresIn * 1000);
+          this.authService.setTokenValidTimer(+response.expiresIn * 1000);
         }),
         map((response: AuthResponseData) => {
           return hendleAuthentication(response);
@@ -77,15 +77,15 @@ export class AuthEffects {
     ofType(AuthActions.LOGOUT),
     tap(() => {
       localStorage.removeItem('user');
-      this.logoutService.clearTokenValidTimer();
+      this.authService.clearTokenValidTimer();
     })
   );
 
   @Effect({ dispatch: false })
   basketRedirect = this.actions.pipe(
     ofType(AuthActions.AUTH_SUCCESS),
-    tap((authSuccessAction: AuthActions.AuthSuccess) => {
-      this.logoutService.basketRedirect();
+    tap(() => {
+      this.authService.basketRedirect();
     })
   );
 
@@ -108,7 +108,7 @@ export class AuthEffects {
 
       if (loadedUser.token) {
         const expirationDate = new Date(user._tokenExpirationDate).getTime() - new Date().getTime();
-        this.logoutService.setTokenValidTimer(expirationDate);
+        this.authService.setTokenValidTimer(expirationDate);
 
         return new AuthActions.AuthSuccess(loadedUser);
       }

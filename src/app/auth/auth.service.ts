@@ -6,7 +6,7 @@ import * as fromAppReducer from "../store/app.reducer";
 import * as AuthActions from "./auth-store/auth.actions";
 
 @Injectable({ providedIn: 'root' })
-export class LogoutService {
+export class AuthService {
   constructor(
     private store: Store<fromAppReducer.AppState>,
     private router: Router,
@@ -28,9 +28,12 @@ export class LogoutService {
   }
 
   basketRedirect() {
-    if (this.store.select('auth').pipe(take(1)).subscribe(state => {
-      return state.basketRedirect;
-    })) {
+    let goToBasket: boolean;
+    this.store.select('auth').pipe(take(1)).subscribe(state => {
+      goToBasket = state.basketRedirect;
+    });
+
+    if (goToBasket) {
       this.router.navigate(['basket']);
       this.store.dispatch(new AuthActions.BasketRedirect(false));
     }
