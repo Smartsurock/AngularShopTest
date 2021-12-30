@@ -1,8 +1,8 @@
 export class Comment {
   constructor(
-    public star: number,
-    public email: string,
+    public rating: number,
     public name: string,
+    public email: string,
     public text: string,
   ) { }
 }

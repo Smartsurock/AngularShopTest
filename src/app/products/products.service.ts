@@ -6,13 +6,7 @@ import { Store } from "@ngrx/store";
 
 @Injectable({ providedIn: 'root' })
 export class ProductsService {
-  constructor(
-    // private store: Store<fromAppReducer.AppState>,
-  ) {
-    // this.store.select('products').subscribe(state => {
-    //   this.products = state.products;
-    // });
-  }
+  constructor() { }
 
   products: Product[] = [];
   categories: string[] = [];

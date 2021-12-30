@@ -27,6 +27,10 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  onSubmit() {
+
+  }
+
   onLogin() {
     this.loginStart.emit(true);
   }

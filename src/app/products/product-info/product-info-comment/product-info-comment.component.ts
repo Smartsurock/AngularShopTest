@@ -20,6 +20,6 @@ export class ProductInfoCommentComponent implements OnInit, AfterViewInit {
   }
 
   setStarsValue() {
-    this.renderer.setStyle(this.starsActive.nativeElement, 'width', `${this.comment.star * 20}%`);
+    this.renderer.setStyle(this.starsActive.nativeElement, 'width', `${this.comment.rating * 20}%`);
   }
 }

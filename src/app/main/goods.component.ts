@@ -1,30 +1,35 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { ProductsService } from '../products/products.service';
 import * as fromAppReducer from '../store/app.reducer';
 
 @Component({
-  selector: 'app-catalog',
-  templateUrl: './catalog.component.html',
-  styleUrls: ['./catalog.component.scss']
+  selector: 'app-goods',
+  templateUrl: './goods.component.html',
+  styleUrls: ['./goods.component.scss']
 })
-export class CatalogComponent implements OnInit, OnDestroy {
+export class GoodsComponent implements OnInit {
   constructor(
     private store: Store<fromAppReducer.AppState>,
     private router: Router,
   ) { }
 
-  categories: string[] = [];
-  @Output() catalog = new EventEmitter<boolean>();
+  goods = {
+    categories: [],
+    items: [],
+  };
   productsSub: Subscription;
 
   ngOnInit() {
     this.productsSub = this.store.select('products').subscribe(state => {
       state.products.forEach(product => {
-        if (!this.categories.includes(product.category)) {
-          this.categories.push(product.category);
+        if (!this.goods.categories.includes(product.category)) {
+          this.goods.categories.push(product.category);
+          this.goods.items.push({
+            category: product.category,
+            image: product.images[0],
+          });
         }
       });
     });
@@ -40,8 +45,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
     }
   }
 
-  onCategory(category) {
-    setTimeout(() => this.catalog.emit(), 50);
+  onGoodClick(category) {
     this.router.navigate([`goods/${category}`]);
   }
 }

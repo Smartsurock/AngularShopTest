@@ -1,0 +1,31 @@
+.goods {
+  &__items {
+    display: flex;
+  }
+  &__item {
+    flex: 0 0 25%;
+    padding: 0px 10px;
+    cursor: pointer;
+  }
+  &__image {
+    width: 100%;
+    height: 200px;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    transition: 0.3s;
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+  &__title {
+    text-align: center;
+    font-weight: 500;
+    font-size: 20px;
+    margin: 10px 0px 0px 0px;
+    letter-spacing: 1px;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

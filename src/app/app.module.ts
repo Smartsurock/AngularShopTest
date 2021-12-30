@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { routes } from './app.routes';
+import { appRoutes } from './app.routes';
 import { HeaderComponent } from './header/header.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -22,6 +22,9 @@ import { StarsDirective } from './products/product-info/stars.directive';
 import { ProductInfoCommentComponent } from './products/product-info/product-info-comment/product-info-comment.component';
 import { ProductInfoFormComponent } from './products/product-info/product-info-form/product-info-form.component';
 import { ProductsEffects } from './products/products-store/products.effects';
+import { BasketComponent } from './basket/basket.component';
+import { CommonModule } from '@angular/common';
+import { GoodsComponent } from './main/goods.component';
 
 @NgModule({
   declarations: [
@@ -35,12 +38,15 @@ import { ProductsEffects } from './products/products-store/products.effects';
     ProductsListComponent,
     StarsDirective,
     ProductInfoCommentComponent,
-    ProductInfoFormComponent
+    ProductInfoFormComponent,
+    BasketComponent,
+    GoodsComponent,
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes, { useHash: true }),
+    RouterModule.forRoot(appRoutes, { useHash: true }),
     ReactiveFormsModule,
+    CommonModule,
     StoreModule.forRoot(fromAppReducer.appReducer),
     EffectsModule.forRoot([AuthEffects, ProductsEffects]),
     BrowserAnimationsModule,

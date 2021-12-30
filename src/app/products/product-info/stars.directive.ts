@@ -6,7 +6,7 @@ import { Directive, ElementRef, Renderer2, HostListener } from '@angular/core';
 export class StarsDirective {
   constructor(private element: ElementRef, private renderer: Renderer2) { }
 
-  starsValue: number;
+  private starsValue: number;
 
   @HostListener("mouseover", ['$event'])
   onMouseOver(event) {
@@ -25,9 +25,9 @@ export class StarsDirective {
   @HostListener("click", ["$event"])
   onMouseClick(event) {
     this.element.nativeElement.classList.add('user-selected');
-    const inputs: HTMLElement[] = Array.from(this.element.nativeElement.children[1].children);
-    inputs.forEach(input => input.classList.remove('selected'));
-    event.target.classList.add('selected');
+    // const inputs: HTMLElement[] = Array.from(this.element.nativeElement.children[1].children);
+    // inputs.forEach(input => input.classList.remove('selected'));
+    // event.target.classList.add('selected');
     this.starsValue = +event.target.value;
     this.setStarsValue(this.starsValue);
   }

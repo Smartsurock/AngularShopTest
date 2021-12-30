@@ -20,12 +20,16 @@ export function productsReducer(
         products: action.payload,
       }
 
-    case ProductsActions.GET_FILTERED_PRODUCTS:
+    case ProductsActions.EDIT_PRODUCT:
+      const editedProduct = {
+        ...state.products[action.payload.index],
+        ...action.payload.newProduct
+      }
+      const editedProducts = [...state.products];
+      editedProducts[action.payload.index] = editedProduct;
       return {
         ...state,
-        products: state.products.filter(product => {
-          return product.category === action.payload;
-        })
+        products: [...editedProducts]
       }
 
     default: return state;

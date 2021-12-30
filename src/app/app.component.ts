@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { appAnimation } from './app.animation';
 import * as AuthActions from './auth/auth-store/auth.actions';
@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
     this.loginStart = value;
   }
 
-  @HostListener('document:keydown.escape', ['$event'])
+  @HostListener('document:keydown.escape')
   onEscape() {
     this.loginStart = false;
     this.catalog = false;

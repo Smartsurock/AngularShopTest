@@ -1,0 +1,8 @@
+<div class="goods">
+  <div class="goods__items">
+    <div *ngFor="let item of goods.items" (click)="onGoodClick(item.category)" class="goods__item">
+      <div class="goods__image" style="background-image: url({{item.image}});"></div>
+      <div class="goods__title">{{item.category}}</div>
+    </div>
+  </div>
+</div>

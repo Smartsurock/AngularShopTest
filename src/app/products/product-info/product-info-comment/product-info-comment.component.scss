@@ -35,6 +35,8 @@
   }
 }
 .comment {
+  border-bottom: 1px solid rgb(75, 75, 75);
+  padding: 0px 0px 10px 0px;
   &__name {
     overflow: hidden;
     text-overflow: ellipsis;

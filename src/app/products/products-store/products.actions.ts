@@ -3,7 +3,7 @@ import { Product } from "../product.model";
 
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const SET_PRODUCTS = "SET_PRODUCTS";
-export const GET_FILTERED_PRODUCTS = "GET_FILTERED_PRODUCTS";
+export const EDIT_PRODUCT = "EDIT_PRODUCT";
 export const SAVE_PRODUCTS = "SAVE_PRODUCTS";
 
 export class GetProducts implements Action {
@@ -16,10 +16,10 @@ export class SetProducts implements Action {
   constructor(public payload: Product[]) { }
 }
 
-export class GetFilteredProducts implements Action {
-  readonly type = GET_FILTERED_PRODUCTS;
+export class EditProduct implements Action {
+  readonly type = EDIT_PRODUCT;
 
-  constructor(public payload: string) { }
+  constructor(public payload: { newProduct: Product, index: number }) { }
 }
 
 export class SaveProducts implements Action {
@@ -27,7 +27,7 @@ export class SaveProducts implements Action {
 }
 
 export type ProductsActions =
-  | GetFilteredProducts
+  | EditProduct
   | SaveProducts
   | SetProducts
   | GetProducts;

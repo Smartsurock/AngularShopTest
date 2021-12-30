@@ -1,7 +1,6 @@
 <div class="catalog">
   <ul class="catalog__list">
-    <li class="catalog__item" [routerLink]="[category]" (click)="onCategory(category)"
-      *ngFor="let category of categories">
+    <li class="catalog__item" (click)="onCategory(category)" *ngFor="let category of categories">
       <span>{{category}}</span><span>►</span>
     </li>
   </ul>

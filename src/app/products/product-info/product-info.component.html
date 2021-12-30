@@ -25,7 +25,7 @@
       <div class="info__form rating">
         <button class="rating__btn" (click)="onAddComment()">Оставить отзыв</button>
         <div class="rating__container" [ngClass]="commentForm ? 'open' : ''">
-          <app-product-info-form (cancel)="onAddComment()">
+          <app-product-info-form (cancel)="onAddComment($event)">
           </app-product-info-form>
         </div>
       </div>

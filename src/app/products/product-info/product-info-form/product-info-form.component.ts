@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs/operators';
 import * as fromAppReducer from 'src/app/store/app.reducer';
+import { Comment } from '../../comment.model';
 import * as ProductsActions from '../../products-store/products.actions';
 
 @Component({
@@ -16,7 +17,7 @@ export class ProductInfoFormComponent implements OnInit {
   ) { }
 
   commentForm: FormGroup;
-  @Output() cancel = new EventEmitter<boolean>();
+  @Output() cancel = new EventEmitter();
 
   ngOnInit() {
     this.commentForm = new FormGroup({
@@ -33,8 +34,8 @@ export class ProductInfoFormComponent implements OnInit {
 
   onSubmit() {
     if (this.commentForm.invalid) return;
-    console.log(this.commentForm.value);
-    // this.store.dispatch(new ProductsActions.SaveProducts());
-    this.cancel.emit();
+    const newComment: Comment = this.commentForm.value;
+    newComment.rating = +newComment.rating;
+    this.cancel.emit(newComment);
   }
 }

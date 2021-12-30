@@ -40,7 +40,7 @@ export class ProductsEffects {
 
   @Effect({ dispatch: false })
   saveProducts = this.actions.pipe(
-    ofType(ProductsActions.SAVE_PRODUCTS),
+    ofType(ProductsActions.SAVE_PRODUCTS, ProductsActions.EDIT_PRODUCT),
     withLatestFrom(this.store.select('products')),
     switchMap(([action, state]) => {
       return this.http.put<Product[]>('https://shopapp-22f84-default-rtdb.europe-west1.firebasedatabase.app/products.json', state.products);
