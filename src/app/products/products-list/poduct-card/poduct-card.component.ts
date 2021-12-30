@@ -1,6 +1,9 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Product } from '../../product.model';
-import { ProductsService } from '../../products.service';
+import * as fromAppReducer from 'src/app/store/app.reducer';
+import * as ProductsActions from '../../products-store/products.actions';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-poduct-card',
@@ -8,7 +11,9 @@ import { ProductsService } from '../../products.service';
   styleUrls: ['./poduct-card.component.scss']
 })
 export class PoductCardComponent implements OnInit, AfterViewInit {
-  constructor() { }
+  constructor(
+    private store: Store<fromAppReducer.AppState>
+  ) { }
 
   @ViewChild('starsActive') starsActive: ElementRef;
   @ViewChild('starsValue') starsValue: ElementRef;
@@ -16,9 +21,16 @@ export class PoductCardComponent implements OnInit, AfterViewInit {
   @Input() product: Product;
   @Input() id: number;
   productGrade: number;
+  index: number;
 
   ngOnInit() {
     this.productGrade = this.product.stars.reduce((a, b) => a + b) / this.product.stars.length;
+
+    this.store.select('products').pipe(take(1)).subscribe(state => {
+      this.index = state.products.findIndex(product => {
+        return product.id === this.id;
+      });
+    });
   }
 
   ngAfterViewInit() {
@@ -30,4 +42,7 @@ export class PoductCardComponent implements OnInit, AfterViewInit {
     this.starsActive.nativeElement.style.width = `${starsValue / 0.05}%`;
   }
 
+  onAddToBasket() {
+    this.store.dispatch(new ProductsActions.AddToBasket(this.index));
+  }
 }

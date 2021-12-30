@@ -75,4 +75,8 @@ export class ProductInfoComponent implements OnInit, OnDestroy, AfterViewInit {
       this.setStarsValue(this.starsActive, this.productGrade);
     }
   }
+
+  onAddToBasket() {
+    this.store.dispatch(new ProductsActions.AddToBasket(this.index));
+  }
 }

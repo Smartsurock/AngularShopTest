@@ -1,13 +1,14 @@
-import { Comment } from "../comment.model";
 import { Product } from "../product.model";
 import * as ProductsActions from "./products.actions";
 
 export interface State {
   products: Product[];
+  basket: Product[];
 }
 
 const initialState = {
   products: [],
+  basket: [],
 }
 
 export function productsReducer(
@@ -30,6 +31,21 @@ export function productsReducer(
       return {
         ...state,
         products: [...editedProducts]
+      }
+
+    case ProductsActions.ADD_TO_BASKET:
+      const addBasket = [...state.basket, state.products[action.payload]];
+      return {
+        ...state,
+        basket: [...addBasket]
+      }
+
+    case ProductsActions.REMOVE_FROM_BASKET:
+      return {
+        ...state,
+        basket: state.basket.filter((item, index) => {
+          return index !== action.payload;
+        }),
       }
 
     default: return state;

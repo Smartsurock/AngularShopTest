@@ -7,6 +7,7 @@ import { environment } from "src/environments/environment";
 import { LogoutService } from "../logout.service";
 import { of } from "rxjs";
 import { User } from "../user.model";
+import { Router } from "@angular/router";
 
 export interface AuthResponseData {
   idToken: string;
@@ -20,9 +21,12 @@ export interface AuthResponseData {
 
 @Injectable()
 export class AuthEffects {
-  constructor(private actions: Actions,
+  constructor(
+    private actions: Actions,
     private http: HttpClient,
-    private logoutService: LogoutService) { }
+    private logoutService: LogoutService,
+    private router: Router,
+  ) { }
 
   @Effect()
   authSignUp = this.actions.pipe(
@@ -74,6 +78,14 @@ export class AuthEffects {
     tap(() => {
       localStorage.removeItem('user');
       this.logoutService.clearTokenValidTimer();
+    })
+  );
+
+  @Effect({ dispatch: false })
+  basketRedirect = this.actions.pipe(
+    ofType(AuthActions.AUTH_SUCCESS),
+    tap((authSuccessAction: AuthActions.AuthSuccess) => {
+      this.logoutService.basketRedirect();
     })
   );
 

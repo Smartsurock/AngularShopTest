@@ -40,10 +40,19 @@ export class ProductsEffects {
 
   @Effect({ dispatch: false })
   saveProducts = this.actions.pipe(
-    ofType(ProductsActions.SAVE_PRODUCTS, ProductsActions.EDIT_PRODUCT),
+    ofType(ProductsActions.SAVE_PRODUCTS, ProductsActions.EDIT_PRODUCT, ProductsActions.ADD_TO_BASKET, ProductsActions.REMOVE_FROM_BASKET),
     withLatestFrom(this.store.select('products')),
     switchMap(([action, state]) => {
       return this.http.put<Product[]>('https://shopapp-22f84-default-rtdb.europe-west1.firebasedatabase.app/products.json', state.products);
+    })
+  );
+
+  @Effect({ dispatch: false })
+  saveBasket = this.actions.pipe(
+    ofType(ProductsActions.ADD_TO_BASKET, ProductsActions.REMOVE_FROM_BASKET),
+    withLatestFrom(this.store.select('products')),
+    switchMap(([action, state]) => {
+      return this.http.put<Product[]>('https://shopapp-22f84-default-rtdb.europe-west1.firebasedatabase.app/basket.json', state.basket);
     })
   );
 }

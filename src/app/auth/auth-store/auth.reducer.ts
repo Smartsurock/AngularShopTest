@@ -6,6 +6,7 @@ export interface State {
   error: string;
   loading: boolean;
   logged: boolean;
+  basketRedirect: boolean;
 }
 
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
   error: null,
   loading: false,
   logged: false,
+  basketRedirect: false,
 }
 
 export function authReducer(
@@ -26,6 +28,12 @@ export function authReducer(
         error: null,
         loading: false,
         logged: true,
+      }
+
+    case AuthActoins.BASKET_REDIRECT:
+      return {
+        ...state,
+        basketRedirect: action.payload,
       }
 
     case AuthActoins.LOGIN_START:

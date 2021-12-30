@@ -16,7 +16,7 @@
       </div>
       <div class="info__basket">
         <div class="info__price">{{product.price}} &#8372;</div>
-        <div role="button" class="info__buy">Купить</div>
+        <div (click)="onAddToBasket()" role="button" class="info__buy">Купить</div>
       </div>
       <div class="info__comments">
         <app-product-info-comment *ngFor="let comment of product.comments" [comment]="comment">

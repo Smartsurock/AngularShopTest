@@ -1,6 +1,8 @@
-import { Component, ElementRef, EventEmitter, HostListener, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 import * as fromAppReducer from '../store/app.reducer';
 import * as AuthActions from './auth-store/auth.actions';
 
@@ -9,10 +11,11 @@ import * as AuthActions from './auth-store/auth.actions';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss']
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent implements OnInit, OnDestroy {
   constructor(private store: Store<fromAppReducer.AppState>) { }
 
   authForm: FormGroup;
+  authSub: Subscription;
   @Output() loginStart = new EventEmitter<boolean>();
   @ViewChild('container') container: ElementRef;
   @ViewChild('form') form: ElementRef;
@@ -23,11 +26,17 @@ export class AuthComponent implements OnInit {
       password: new FormControl(null),
     });
 
-    this.store.select('auth').subscribe(state => {
+    this.authSub = this.store.select('auth').subscribe(state => {
       if (state.user) {
         this.loginStart.emit(false);
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.authSub) {
+      this.authSub.unsubscribe();
+    }
   }
 
   onLogin() {

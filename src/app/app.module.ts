@@ -25,6 +25,7 @@ import { ProductsEffects } from './products/products-store/products.effects';
 import { BasketComponent } from './basket/basket.component';
 import { CommonModule } from '@angular/common';
 import { GoodsComponent } from './main/goods.component';
+import { BasketItemComponent } from './basket/basket-item/basket-item.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { GoodsComponent } from './main/goods.component';
     ProductInfoFormComponent,
     BasketComponent,
     GoodsComponent,
+    BasketItemComponent,
   ],
   imports: [
     BrowserModule,

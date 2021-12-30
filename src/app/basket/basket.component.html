@@ -1,4 +1,11 @@
 <div class="basket">
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit libero blanditiis aut fuga dolores voluptatibus
-    unde eius, beatae mollitia. Possimus ducimus, ullam laboriosam id doloribus animi odio aspernatur rem unde!</p>
+  <div class="basket-cards">
+    <div class="basket-card" *ngFor="let product of products">
+      <app-poduct-card [product]="product" [id]="product.id"></app-poduct-card>
+    </div>
+  </div>
+  <div class="basket-order">
+    <p>Оформить заказ</p>
+    <button>Подтвердить</button>
+  </div>
 </div>

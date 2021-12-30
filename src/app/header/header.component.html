@@ -11,5 +11,5 @@
     <span *ngIf="!isLogged" (click)="onLogin()">Войти</span>
     <span *ngIf="isLogged" (click)="onLogout()">Выйти</span>
   </div>
-  <div class="header__basket" routerLink="basket" (click)="onBasket()">Корзина</div>
+  <div class="header__basket" (click)="onBasket()">Корзина</div>
 </header>

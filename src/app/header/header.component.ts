@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as AuthActions from '../auth/auth-store/auth.actions';
 import * as fromAppReducer from '../store/app.reducer';
@@ -10,7 +11,10 @@ import * as fromAppReducer from '../store/app.reducer';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  constructor(private store: Store<fromAppReducer.AppState>) { }
+  constructor(
+    private store: Store<fromAppReducer.AppState>,
+    private router: Router,
+  ) { }
 
   searchForm: FormGroup;
   @Output() loginStart = new EventEmitter<boolean>();
@@ -42,6 +46,9 @@ export class HeaderComponent implements OnInit {
   onBasket() {
     if (!this.isLogged) {
       this.onLogin();
+      this.store.dispatch(new AuthActions.BasketRedirect(true));
+    } else {
+      this.router.navigate(['basket']);
     }
   }
 
