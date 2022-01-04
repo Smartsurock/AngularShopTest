@@ -1,5 +1,6 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import { appAnimation } from './app.animation';
 import * as AuthActions from './auth/auth-store/auth.actions';
 import * as fromAppReducer from './store/app.reducer';
@@ -10,19 +11,29 @@ import * as fromAppReducer from './store/app.reducer';
   styleUrls: ['./app.component.scss'],
   animations: [appAnimation]
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   constructor(private store: Store<fromAppReducer.AppState>) { }
 
   loginStart: boolean = false;
   catalog: boolean = false;
+  authSub: Subscription;
 
   ngOnInit() {
     this.store.dispatch(new AuthActions.AutoLogin());
+    this.authSub = this.store.select('auth').subscribe(state => {
+      this.loginStart = state.tryToLogin;
+    });
   }
 
-  onLoginStart(value: boolean) {
-    this.loginStart = value;
+  ngOnDestroy(): void {
+    if (this.authSub) {
+      this.authSub.unsubscribe();
+    }
   }
+
+  // onLoginStart(value: boolean) {
+  //   this.loginStart = value;
+  // }
 
   @HostListener('document:keydown.escape')
   onEscape() {

@@ -36,7 +36,8 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogin() {
-    this.loginStart.emit(true);
+    // this.loginStart.emit(true);
+    this.store.dispatch(new AuthActions.TryToLogin(true));
   }
 
   onLogout() {

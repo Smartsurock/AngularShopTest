@@ -16,7 +16,7 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   authForm: FormGroup;
   authSub: Subscription;
-  @Output() loginStart = new EventEmitter<boolean>();
+  // @Output() loginStart = new EventEmitter<boolean>();
   @ViewChild('container') container: ElementRef;
   @ViewChild('form') form: ElementRef;
 
@@ -26,11 +26,11 @@ export class AuthComponent implements OnInit, OnDestroy {
       password: new FormControl(null),
     });
 
-    this.authSub = this.store.select('auth').subscribe(state => {
-      if (state.user) {
-        this.loginStart.emit(false);
-      }
-    });
+    // this.authSub = this.store.select('auth').subscribe(state => {
+    //   if (state.user) {
+    //     this.loginStart.emit(false);
+    //   }
+    // });
   }
 
   ngOnDestroy(): void {
@@ -57,7 +57,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   onLoginEscape(event) {
     if (this.container.nativeElement.contains(event.target) &&
       !this.form.nativeElement.contains(event.target)) {
-      this.loginStart.emit(false);
+      // this.loginStart.emit(false);
     }
   }
 }

@@ -1,1 +1,14 @@
-<p>basket-item works!</p>
+<div class="item">
+  <div class="item__image" (click)="routerLink()" style="background-image: url({{product.images[0]}});"></div>
+  <div class="item__description">
+    <div class="item__name">
+      <span (click)="routerLink()">{{product.name}}</span>
+    </div>
+    <div class="item__price">{{product.price}} &#8372;</div>
+  </div>
+  <div class="item__count">
+    <span (click)="onMinus()" class="item__plus">&minus;</span>
+    <span class="item__number">{{count}}</span>
+    <span (click)="onPlus()" class="item__minus">+</span>
+  </div>
+</div>

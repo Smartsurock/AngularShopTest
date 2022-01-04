@@ -7,6 +7,7 @@ export interface State {
   loading: boolean;
   logged: boolean;
   basketRedirect: boolean;
+  tryToLogin: boolean;
 }
 
 const initialState = {
@@ -15,6 +16,7 @@ const initialState = {
   loading: false,
   logged: false,
   basketRedirect: false,
+  tryToLogin: false,
 }
 
 export function authReducer(
@@ -28,6 +30,7 @@ export function authReducer(
         error: null,
         loading: false,
         logged: true,
+        tryToLogin: false,
       }
 
     case AuthActoins.BASKET_REDIRECT:
@@ -42,6 +45,12 @@ export function authReducer(
         ...state,
         error: null,
         loading: true,
+      }
+
+    case AuthActoins.TRY_TO_LOGIN:
+      return {
+        ...state,
+        tryToLogin: action.payload,
       }
 
     case AuthActoins.LOGOUT:

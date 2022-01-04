@@ -4,6 +4,7 @@ import { Product } from '../../product.model';
 import * as fromAppReducer from 'src/app/store/app.reducer';
 import * as ProductsActions from '../../products-store/products.actions';
 import { take } from 'rxjs/operators';
+import * as AuthActions from 'src/app/auth/auth-store/auth.actions';
 
 @Component({
   selector: 'app-poduct-card',
@@ -19,7 +20,6 @@ export class PoductCardComponent implements OnInit, AfterViewInit {
   @ViewChild('starsValue') starsValue: ElementRef;
 
   @Input() product: Product;
-  @Input() id: number;
   productGrade: number;
   index: number;
 
@@ -28,7 +28,7 @@ export class PoductCardComponent implements OnInit, AfterViewInit {
 
     this.store.select('products').pipe(take(1)).subscribe(state => {
       this.index = state.products.findIndex(product => {
-        return product.id === this.id;
+        return product.id === this.product.id;
       });
     });
   }
@@ -43,6 +43,17 @@ export class PoductCardComponent implements OnInit, AfterViewInit {
   }
 
   onAddToBasket() {
-    this.store.dispatch(new ProductsActions.AddToBasket(this.index));
+    let email: string;
+    this.store.select('auth').pipe(take(1)).subscribe(state => {
+      if (state.user) {
+        email = state.user.email;
+      }
+    });
+    if (email) {
+      this.store.dispatch(new ProductsActions.AddToBasket(this.index));
+      console.log(email);
+    } else {
+      this.store.dispatch(new AuthActions.TryToLogin(true));
+    }
   }
 }

@@ -9,6 +9,7 @@ export const AUTH_FAIL = "AUTH_FAIL";
 export const CLEAR_ERROR = "CLEAR_ERROR";
 export const AUTO_LOGIN = "AUTO_LOGIN";
 export const BASKET_REDIRECT = "BASKET_REDIRECT";
+export const TRY_TO_LOGIN = "TRY_TO_LOGIN";
 
 export class AuthSuccess implements Action {
   readonly type = AUTH_SUCCESS;
@@ -52,7 +53,14 @@ export class BasketRedirect implements Action {
   constructor(public payload: boolean) { }
 }
 
+export class TryToLogin implements Action {
+  readonly type = TRY_TO_LOGIN;
+
+  constructor(public payload: boolean) { }
+}
+
 export type AuthActions =
+  | TryToLogin
   | BasketRedirect
   | ClearError
   | AutoLogin
