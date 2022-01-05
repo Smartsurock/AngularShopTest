@@ -30,6 +30,7 @@ export class ProductInfoFormComponent implements OnInit {
 
   onCancel() {
     this.cancel.emit();
+    this.commentForm.reset();
   }
 
   onSubmit() {
@@ -37,5 +38,6 @@ export class ProductInfoFormComponent implements OnInit {
     const newComment: Comment = this.commentForm.value;
     newComment.rating = +newComment.rating;
     this.cancel.emit(newComment);
+    this.commentForm.reset();
   }
 }

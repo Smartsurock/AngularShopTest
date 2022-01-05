@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { BasketComponent } from './basket/basket.component';
+import { BasketResolver } from './basket/basket.resolver';
 import { GoodsComponent } from './main/goods.component';
 import { ProductInfoComponent } from './products/product-info/product-info.component';
 import { ProductsListComponent } from './products/products-list/products-list.component';
@@ -10,7 +11,7 @@ export const appRoutes: Routes = [
   { path: '', redirectTo: '/goods', pathMatch: 'full', },
   {
     path: 'basket', component: BasketComponent,
-    resolve: [ProductsResolver],
+    resolve: [ProductsResolver, BasketResolver],
   },
   {
     path: 'goods', component: ProductsComponent,

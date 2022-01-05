@@ -22,6 +22,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
 
   products: Product[];
   routeSub: Subscription;
+  userMail: string;
 
   ngOnInit() {
     this.routeSub = this.route.params.subscribe((params: Params) => {
@@ -31,6 +32,12 @@ export class ProductsListComponent implements OnInit, OnDestroy {
           return product.category === category;
         });
       });
+    });
+
+    this.store.select('auth').pipe(take(1)).subscribe(state => {
+      if (state.user) {
+        this.userMail = state.user.email;
+      }
     });
   }
 

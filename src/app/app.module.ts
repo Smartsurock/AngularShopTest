@@ -26,6 +26,7 @@ import { BasketComponent } from './basket/basket.component';
 import { CommonModule } from '@angular/common';
 import { GoodsComponent } from './main/goods.component';
 import { BasketItemComponent } from './basket/basket-item/basket-item.component';
+import { DropdownDirective } from './basket/dropdown.directive';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { BasketItemComponent } from './basket/basket-item/basket-item.component'
     BasketComponent,
     GoodsComponent,
     BasketItemComponent,
+    DropdownDirective,
   ],
   imports: [
     BrowserModule,

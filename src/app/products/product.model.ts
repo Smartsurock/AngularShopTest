@@ -10,6 +10,5 @@ export class Product {
     public stars: number[],
     public price: number,
     public comments: Comment[],
-    public buyers: string[],
   ) { }
 }

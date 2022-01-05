@@ -1,39 +1,68 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs/operators';
+import { Buyer } from 'src/app/products/buyer.model';
 import { Product } from 'src/app/products/product.model';
 import * as fromAppReducer from 'src/app/store/app.reducer';
+import * as ProductsActions from 'src/app/products/products-store/products.actions';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-basket-item',
   templateUrl: './basket-item.component.html',
   styleUrls: ['./basket-item.component.scss']
 })
-export class BasketItemComponent implements OnInit {
+export class BasketItemComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store<fromAppReducer.AppState>,
     private router: Router,
   ) { }
 
-  count: number = 1;
-  @Input() product: Product;
-  category: string;
-  id: number;
+  @Input() buyer: Buyer;
+  product: Product;
+  productsSub: Subscription;
+  buyerIndex: number;
 
   ngOnInit(): void {
+    this.productsSub = this.store.select('products').subscribe(state => {
+      const productIndex = state.products.findIndex(product => {
+        return product.id === this.buyer.productId;
+      });
+      this.product = state.products[productIndex];
+      this.buyerIndex = state.basket.findIndex(buyer => {
+        return buyer.productId === this.buyer.productId;
+      });
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.productsSub) {
+      this.productsSub.unsubscribe();
+    }
   }
 
   routerLink() {
-    this.router.navigate([`goods/${this.product.category}/${this.product.id}`])
+    this.router.navigate([`goods/${this.product.category}/${this.product.id}`]);
   }
 
   onPlus() {
-    this.count += 1;
+    this.editCount();
   }
 
   onMinus() {
-    if (this.count === 1) return;
-    this.count -= 1;
+    if (this.buyer.count === 1) return;
+    this.editCount();
+  }
+
+  editCount() {
+    const newBuyer = new Buyer(this.buyer.productId, this.buyer.count + 1, this.buyer.userMail);
+    this.store.dispatch(new ProductsActions.EditBasket({
+      newBuyer, index: this.buyerIndex,
+    }));
+  }
+
+  onDelete() {
+    this.store.dispatch(new ProductsActions.RemoveFromBasket(this.buyerIndex));
   }
 }

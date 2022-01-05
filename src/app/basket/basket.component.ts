@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Product } from '../products/product.model';
 import * as fromAppReducer from 'src/app/store/app.reducer';
 import { take } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Buyer } from '../products/buyer.model';
+import * as ProductsActions from '../products/products-store/products.actions';
 
 @Component({
   selector: 'app-basket',
@@ -17,24 +18,35 @@ export class BasketComponent implements OnInit, OnDestroy {
     private router: Router
   ) { }
 
-  products: Product[];
+  buyers: Buyer[] = [];
   authSub: Subscription;
+  productsSub: Subscription;
+  userMail: string;
 
   ngOnInit(): void {
-    this.store.select('products').pipe(take(1)).subscribe(state => {
-      this.products = state.basket;
-    });
-
     this.authSub = this.store.select('auth').subscribe(state => {
       if (!state.user) {
         this.router.navigate(['goods']);
+      } else {
+        this.userMail = state.user.email;
       }
+    });
+
+    this.productsSub = this.store.select('products').subscribe(state => {
+      this.buyers = state.basket.filter(buyer => {
+        return buyer.userMail === this.userMail;
+      });
     });
   }
 
   ngOnDestroy(): void {
-    if (this.authSub) {
-      this.authSub.unsubscribe();
+    this.unsubscriber(this.authSub);
+    this.unsubscriber(this.productsSub);
+  }
+
+  unsubscriber(subscription: Subscription) {
+    if (subscription) {
+      subscription.unsubscribe();
     }
   }
 }

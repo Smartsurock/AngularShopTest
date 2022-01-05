@@ -28,6 +28,7 @@ export class ProductInfoComponent implements OnInit, OnDestroy, AfterViewInit {
   productGrade: number;
   commentForm: boolean = false;
   index: number;
+  userMail: string;
 
   ngOnInit() {
     this.route.params.pipe(take(1)).subscribe((params: Params) => {
@@ -40,6 +41,12 @@ export class ProductInfoComponent implements OnInit, OnDestroy, AfterViewInit {
         this.product = state.products[this.index];
         this.productGrade = this.product.stars.reduce((a, b) => a + b) / this.product.stars.length;
       });
+    });
+
+    this.store.select('auth').pipe(take(1)).subscribe(state => {
+      if (state.user) {
+        this.userMail = state.user.email;
+      }
     });
   }
 
@@ -77,6 +84,8 @@ export class ProductInfoComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onAddToBasket() {
-    this.store.dispatch(new ProductsActions.AddToBasket(this.index));
+    this.store.dispatch(new ProductsActions.AddToBasket({
+      productId: this.product.id, count: 1, userMail: this.userMail
+    }));
   }
 }

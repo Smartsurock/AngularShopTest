@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Product } from '../../product.model';
 import * as fromAppReducer from 'src/app/store/app.reducer';
@@ -13,13 +13,14 @@ import * as AuthActions from 'src/app/auth/auth-store/auth.actions';
 })
 export class PoductCardComponent implements OnInit, AfterViewInit {
   constructor(
-    private store: Store<fromAppReducer.AppState>
+    private store: Store<fromAppReducer.AppState>,
+    private renderer: Renderer2,
   ) { }
 
   @ViewChild('starsActive') starsActive: ElementRef;
-  @ViewChild('starsValue') starsValue: ElementRef;
 
   @Input() product: Product;
+  @Input() userMail: string;
   productGrade: number;
   index: number;
 
@@ -38,8 +39,7 @@ export class PoductCardComponent implements OnInit, AfterViewInit {
   }
 
   setStarsValue() {
-    const starsValue = this.starsValue.nativeElement.innerHTML;
-    this.starsActive.nativeElement.style.width = `${starsValue / 0.05}%`;
+    this.renderer.setStyle(this.starsActive.nativeElement, 'width', `${this.productGrade / 0.05}%`);
   }
 
   onAddToBasket() {
@@ -50,8 +50,9 @@ export class PoductCardComponent implements OnInit, AfterViewInit {
       }
     });
     if (email) {
-      this.store.dispatch(new ProductsActions.AddToBasket(this.index));
-      console.log(email);
+      this.store.dispatch(new ProductsActions.AddToBasket({
+        productId: this.product.id, count: 1, userMail: this.userMail
+      }));
     } else {
       this.store.dispatch(new AuthActions.TryToLogin(true));
     }
