@@ -10,8 +10,7 @@
     width: 100%;
   }
   &__left {
-    flex: 0 0 60%;
-    width: 60%;
+    flex: 0 1 calc(60% - 20px);
     margin: 0px 10px 0px 0px;
   }
   &__name {
@@ -33,20 +32,48 @@
     padding: 0px 5px;
   }
   &__right {
-    flex: 0 0 40%;
+    flex: 1 1 40%;
     width: 40%;
     overflow: hidden;
+    position: fixed;
+    right: 10px;
   }
   &__basket {
     display: flex;
     align-items: center;
+    position: relative;
+    & span {
+      position: absolute;
+      top: 110%;
+      left: 0;
+      color: red;
+      opacity: 0;
+      visibility: hidden;
+      background-color: #fff;
+      padding: 5px 10px;
+      z-index: 111;
+      &.active {
+        animation: alreadyInBasket 2s;
+      }
+    }
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 0px 0px 10px 0px;
   }
   &__comments {
-    border-top: 1px solid rgba(0, 0, 0, 0.2);
-    padding: 10px 0px;
-    margin: 20px 0px 0px 0px;
+    padding: 10px 10px 10px 0;
+    margin: 10px 0px 0px 0px;
     height: calc(100vh - 265px);
     overflow: auto;
+    &::-webkit-scrollbar {
+      width: 3px;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: rgb(228, 228, 228);
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: rgb(112, 112, 112);
+      border-radius: $border-radius;
+    }
   }
   &__price {
     font-size: 28px;
@@ -61,12 +88,17 @@
     border-radius: $border-radius;
     background-color: $main-color;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.2s;
+    user-select: none;
     &:hover {
-      box-shadow: 0 0 5px inset #ff8800;
+      box-shadow: 0 0 5px inset #ff8800, 0 0 10px inset #ff8800;
+    }
+    &:active {
+      background-color: #ff8800;
     }
   }
 }
+
 .stars {
   &__container {
     display: flex;
@@ -120,7 +152,20 @@
     user-select: none;
     transition: 0.3s;
     &:hover {
-      box-shadow: 0 0 5px inset #ff8800;
+      box-shadow: 0 0 5px inset rgb(0, 8, 126), 0 0 10px inset rgb(0, 8, 126);
+    }
+  }
+  &__authorization {
+    position: absolute;
+    color: red;
+    bottom: 110%;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+    background-color: #fff;
+    padding: 5px 10px;
+    &.active {
+      animation: alreadyInBasket 2s;
     }
   }
   &__container {
@@ -129,7 +174,7 @@
     transition: 0.5s;
     position: absolute;
     width: 100%;
-    height: 402px;
+    height: 342px;
     top: 30px;
     left: 0;
     right: 0;
@@ -144,5 +189,24 @@
       opacity: 1;
       visibility: visible;
     }
+  }
+}
+
+@keyframes alreadyInBasket {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  30% {
+    opacity: 1;
+    visibility: visible;
+  }
+  60% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
   }
 }

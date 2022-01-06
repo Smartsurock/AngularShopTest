@@ -27,6 +27,9 @@ import { CommonModule } from '@angular/common';
 import { GoodsComponent } from './main/goods.component';
 import { BasketItemComponent } from './basket/basket-item/basket-item.component';
 import { DropdownDirective } from './basket/dropdown.directive';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import { AuthErrorComponent } from './auth/auth-error/auth-error.component';
+import { SpinnerComponent } from './auth/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +48,9 @@ import { DropdownDirective } from './basket/dropdown.directive';
     GoodsComponent,
     BasketItemComponent,
     DropdownDirective,
+    ErrorPageComponent,
+    AuthErrorComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,

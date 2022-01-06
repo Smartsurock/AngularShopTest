@@ -1,10 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { take } from 'rxjs/operators';
-import * as fromAppReducer from 'src/app/store/app.reducer';
 import { Comment } from '../../comment.model';
-import * as ProductsActions from '../../products-store/products.actions';
+import * as fromAppReducer from 'src/app/store/app.reducer';
 
 @Component({
   selector: 'app-product-info-form',
@@ -14,30 +12,38 @@ import * as ProductsActions from '../../products-store/products.actions';
 export class ProductInfoFormComponent implements OnInit {
   constructor(
     private store: Store<fromAppReducer.AppState>,
+    private renderer: Renderer2,
   ) { }
 
   commentForm: FormGroup;
   @Output() cancel = new EventEmitter();
+  @Input() userMail: string;
+  @ViewChild('starsActive') starsActive: ElementRef;
 
   ngOnInit() {
     this.commentForm = new FormGroup({
       rating: new FormControl(null, [Validators.required]),
       name: new FormControl(null, [Validators.required]),
-      mail: new FormControl(null, [Validators.required, Validators.email]),
       text: new FormControl(null, [Validators.required]),
     });
   }
 
   onCancel() {
     this.cancel.emit();
-    this.commentForm.reset();
+    this.resetCommentForm();
   }
 
   onSubmit() {
     if (this.commentForm.invalid) return;
     const newComment: Comment = this.commentForm.value;
+    newComment.email = this.userMail;
     newComment.rating = +newComment.rating;
     this.cancel.emit(newComment);
+    this.resetCommentForm();
+  }
+
+  resetCommentForm() {
     this.commentForm.reset();
+    this.renderer.setStyle(this.starsActive.nativeElement, 'width', '0%');
   }
 }

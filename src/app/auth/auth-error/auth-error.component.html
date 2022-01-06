@@ -1,0 +1,14 @@
+<div class="error">
+  <div class="error__title">
+    Чёто ты накосячил с авторизацией!
+  </div>
+  <div class="error__text">
+    <span>Эрор:</span>
+    <span> {{error}}</span>
+  </div>
+  <div class="error__reset">
+    <span>Попробуешь снова: </span>
+    <button (click)="resetError()">Да?</button>
+    <button (click)="resetError()">ДА!</button>
+  </div>
+</div>

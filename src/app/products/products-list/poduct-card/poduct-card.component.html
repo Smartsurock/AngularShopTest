@@ -1,6 +1,9 @@
 <div class="card">
   <a [routerLink]="product.id" class="card__image" style="background-image: url({{product.images[0]}});">
   </a>
+  <div class="card__name">
+    {{product.name}}
+  </div>
   <div class="card__description">
     {{product.description}}
   </div>

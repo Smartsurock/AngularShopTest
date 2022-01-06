@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Buyer } from '../products/buyer.model';
 import * as ProductsActions from '../products/products-store/products.actions';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-basket',
@@ -18,10 +19,11 @@ export class BasketComponent implements OnInit, OnDestroy {
     private router: Router
   ) { }
 
-  buyers: Buyer[] = [];
+  buyers: Buyer[];
   authSub: Subscription;
   productsSub: Subscription;
   userMail: string;
+  orderForm: FormGroup;
 
   ngOnInit(): void {
     this.authSub = this.store.select('auth').subscribe(state => {
@@ -37,6 +39,8 @@ export class BasketComponent implements OnInit, OnDestroy {
         return buyer.userMail === this.userMail;
       });
     });
+
+    this.initForm();
   }
 
   ngOnDestroy(): void {
@@ -48,5 +52,18 @@ export class BasketComponent implements OnInit, OnDestroy {
     if (subscription) {
       subscription.unsubscribe();
     }
+  }
+
+  initForm() {
+    this.orderForm = new FormGroup({
+      mailService: new FormControl(null, [Validators.required]),
+      address: new FormControl(null, [Validators.required]),
+      payment: new FormControl(null, [Validators.required]),
+    });
+  }
+
+  onSubmit() {
+    console.log(this.orderForm.value);
+    console.log(this.buyers);
   }
 }

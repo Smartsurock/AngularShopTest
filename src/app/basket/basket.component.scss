@@ -1,3 +1,6 @@
+@import "../scss/mixins.scss";
+@import "../scss/variables.scss";
+
 .basket {
   display: flex;
   padding: 10px 0px;
@@ -19,12 +22,72 @@
   &-card {
     margin: 0px 0px 10px 0px;
   }
+  &-empty {
+    height: 500px;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: relative;
+    & span {
+      position: absolute;
+      text-align: center;
+      width: 100%;
+      top: 100%;
+    }
+  }
 }
 .basket-order {
   flex: 0 0 40%;
   height: calc(100vh - 100px);
   overflow: auto;
-  text-align: center;
-  padding: 10px;
+  padding: 10px 30px;
   margin: 0px 0px 0px 2px;
+  &__row {
+    margin: 0px 0px 20px 0px;
+    & label {
+      display: block;
+      margin: 0px 0px 10px 0px;
+      font-weight: 500;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    & input {
+      width: 100%;
+      line-height: 34px;
+      font-size: 17px;
+      color: rgb(102, 102, 102);
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      padding: 0px 10px;
+    }
+  }
+  & button {
+    line-height: 36px;
+    width: 100%;
+    background-color: $main-color;
+    border-radius: $border-radius;
+    font-size: 18px;
+    margin: 20px 0px 0px 0px;
+    transition: 0.3s;
+    &:hover {
+      box-shadow: 0 0 5px inset #ff8800, 0 0 10px inset #ff8800;
+      &:disabled {
+        box-shadow: none;
+      }
+    }
+  }
+  &__radio {
+    margin: 0px 0px 20px 0px;
+    & span {
+      font-size: 18px;
+      font-weight: 500;
+      margin: 0px 0px 10px 0px;
+      display: block;
+    }
+    & input {
+      margin: 0px 15px 10px 0px;
+    }
+    & label {
+      cursor: pointer;
+    }
+  }
 }

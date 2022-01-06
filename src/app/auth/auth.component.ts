@@ -1,8 +1,7 @@
-import { Component, ElementRef, EventEmitter, HostListener, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
 import * as fromAppReducer from '../store/app.reducer';
 import * as AuthActions from './auth-store/auth.actions';
 
@@ -16,9 +15,8 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   authForm: FormGroup;
   authSub: Subscription;
-  // @Output() loginStart = new EventEmitter<boolean>();
-  @ViewChild('container') container: ElementRef;
-  @ViewChild('form') form: ElementRef;
+  loading: boolean = false;
+  error: string = null;
 
   ngOnInit() {
     this.authForm = new FormGroup({
@@ -26,11 +24,10 @@ export class AuthComponent implements OnInit, OnDestroy {
       password: new FormControl(null),
     });
 
-    // this.authSub = this.store.select('auth').subscribe(state => {
-    //   if (state.user) {
-    //     this.loginStart.emit(false);
-    //   }
-    // });
+    this.authSub = this.store.select('auth').subscribe(state => {
+      this.loading = state.loading;
+      this.error = state.error;
+    });
   }
 
   ngOnDestroy(): void {
@@ -51,13 +48,5 @@ export class AuthComponent implements OnInit, OnDestroy {
       email: this.authForm.value.email,
       password: this.authForm.value.password,
     }));
-  }
-
-  @HostListener('document:click', ['$event'])
-  onLoginEscape(event) {
-    if (this.container.nativeElement.contains(event.target) &&
-      !this.form.nativeElement.contains(event.target)) {
-      // this.loginStart.emit(false);
-    }
   }
 }

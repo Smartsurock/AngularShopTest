@@ -10,10 +10,21 @@
   left: 0;
   @include flex-center;
 }
+.spinner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.error {
+  @extend .spinner;
+}
 .form {
   width: 500px;
   height: 300px;
   background-color: #fff;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.3) inset;
   & form {
     width: 100%;
     height: 100%;
@@ -28,7 +39,9 @@
     margin: 0px 0px 15px 0px;
     padding: 0px 15px;
     font-size: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
     background-color: $bg-color;
+    border-radius: $border-radius;
   }
 }
 .buttons {

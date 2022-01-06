@@ -1,0 +1,279 @@
+{
+  "basket": [
+    {
+      "count": 1,
+      "productId": 100002,
+      "userMail": "test@test.ru"
+    },
+    {
+      "count": 1,
+      "productId": 100001,
+      "userMail": "test@test.ru"
+    },
+    {
+      "count": 1,
+      "productId": 100006,
+      "userMail": "test@test.ru"
+    },
+    {
+      "count": 1,
+      "productId": 100005,
+      "userMail": "test@test.ru"
+    },
+    {
+      "count": 1,
+      "productId": 100008,
+      "userMail": "test@test.ru"
+    },
+    {
+      "count": 1,
+      "productId": 100004,
+      "userMail": "test@test.ru"
+    }
+  ],
+  "products": [
+    {
+      "category": "Телефоны",
+      "comments": [
+        {
+          "email": "test@test.ru",
+          "name": "Surock",
+          "rating": 5,
+          "text": "dasdasd"
+        },
+        {
+          "mail": "prokopets88@mail.ru",
+          "name": "Павел Валерьевич Прокопец",
+          "rating": 3,
+          "text": "dasdasd"
+        },
+        {
+          "email": "test@test.ru",
+          "name": "Вася Пупкин",
+          "rating": 4,
+          "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt cumque officiis animi dignissimos ipsam aut omnis quod, earum reprehenderit et beatae culpa asperiores. Quo nam dolor ducimus fugiat magnam quia?"
+        }
+      ],
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo ut dolore sunt consequatur id tempora inventore similique eum quis odio, atque, animi perferendis dignissimos vitae at corrupti necessitatibus. Ipsum, repudiandae.",
+      "id": 100001,
+      "images": [
+        "https://avatars.mds.yandex.net/get-zen_doc/96748/pub_5b6920497f5fa100a9a9a58a_5b69715db3263300a9c78a59/scale_1200"
+      ],
+      "name": "Телехфон",
+      "price": 449,
+      "stars": [
+        4,
+        5,
+        3,
+        1,
+        1,
+        5,
+        3,
+        5
+      ]
+    },
+    {
+      "category": "Телефоны",
+      "comments": [
+        {
+          "email": "test@test.ru",
+          "name": "Apples",
+          "rating": 5,
+          "text": "dasdasdasdasd"
+        },
+        {
+          "mail": "prokopets88@mail.ru",
+          "name": "Павел Валерьевич Прокопец",
+          "rating": 5,
+          "text": "sadas da sa das das"
+        },
+        {
+          "email": "test@test.ru",
+          "name": "Вася Пупкин",
+          "rating": 4,
+          "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt cumque officiis animi dignissimos ipsam aut omnis quod, earum reprehenderit et beatae culpa asperiores. Quo nam dolor ducimus fugiat magnam quia?"
+        }
+      ],
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo ut dolore sunt consequatur id tempora inventore similique eum quis odio, atque, animi perferendis dignissimos vitae at corrupti necessitatibus. Ipsum, repudiandae.",
+      "id": 100002,
+      "images": [
+        "https://avatars.mds.yandex.net/get-mpic/4362548/img_id2592907152391763995.jpeg/orig"
+      ],
+      "name": "Ещё 1 телехфон",
+      "price": 3249,
+      "stars": [
+        4,
+        5,
+        3,
+        1,
+        1,
+        5,
+        5,
+        5
+      ]
+    },
+    {
+      "category": "TV",
+      "comments": [
+        {
+          "email": "test@test.ru",
+          "name": "Вася Пупкин",
+          "rating": 4,
+          "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt cumque officiis animi dignissimos ipsam aut omnis quod, earum reprehenderit et beatae culpa asperiores. Quo nam dolor ducimus fugiat magnam quia?"
+        }
+      ],
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo ut dolore sunt consequatur id tempora inventore similique eum quis odio, atque, animi perferendis dignissimos vitae at corrupti necessitatibus. Ipsum, repudiandae.",
+      "id": 100003,
+      "images": [
+        "https://avatars.mds.yandex.net/get-mpic/4383514/img_id8774552388959286494.jpeg/14hq"
+      ],
+      "name": "Телевизор 1",
+      "price": 8249,
+      "stars": [
+        4,
+        5,
+        3,
+        1,
+        1,
+        5
+      ]
+    },
+    {
+      "category": "TV",
+      "comments": [
+        {
+          "email": "test@test.ru",
+          "name": "Вася Пупкин",
+          "rating": 4,
+          "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt cumque officiis animi dignissimos ipsam aut omnis quod, earum reprehenderit et beatae culpa asperiores. Quo nam dolor ducimus fugiat magnam quia?"
+        }
+      ],
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo ut dolore sunt consequatur id tempora inventore similique eum quis odio, atque, animi perferendis dignissimos vitae at corrupti necessitatibus. Ipsum, repudiandae.",
+      "id": 100004,
+      "images": [
+        "https://cmp24.com.ua/images/prodacts/sourse/65934/65934357_televizor-hyundai-h-led32r405bs2.jpg"
+      ],
+      "name": "Телевизор 2",
+      "price": 8249,
+      "stars": [
+        4,
+        5,
+        3,
+        1,
+        1,
+        5
+      ]
+    },
+    {
+      "category": "Оружие",
+      "comments": [
+        {
+          "mail": "prokopets88@mail.ru",
+          "name": "Юзер Третий",
+          "rating": 5,
+          "text": "1111111111"
+        },
+        {
+          "email": "test@test.ru",
+          "name": "Вася Пупкин",
+          "rating": 4,
+          "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt cumque officiis animi dignissimos ipsam aut omnis quod, earum reprehenderit et beatae culpa asperiores. Quo nam dolor ducimus fugiat magnam quia?"
+        }
+      ],
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo ut dolore sunt consequatur id tempora inventore similique eum quis odio, atque, animi perferendis dignissimos vitae at corrupti necessitatibus. Ipsum, repudiandae.",
+      "id": 100005,
+      "images": [
+        "https://img3.goodfon.ru/original/800x480/c/8d/remington-870-pompovoe-ruzhe.jpg"
+      ],
+      "name": "Дробаш",
+      "price": 2249,
+      "stars": [
+        4,
+        5,
+        3,
+        1,
+        1,
+        5,
+        5
+      ]
+    },
+    {
+      "category": "Оружие",
+      "comments": [
+        {
+          "email": "test@test.ru",
+          "name": "Вася Пупкин",
+          "rating": 4,
+          "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt cumque officiis animi dignissimos ipsam aut omnis quod, earum reprehenderit et beatae culpa asperiores. Quo nam dolor ducimus fugiat magnam quia?"
+        }
+      ],
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo ut dolore sunt consequatur id tempora inventore similique eum quis odio, atque, animi perferendis dignissimos vitae at corrupti necessitatibus. Ipsum, repudiandae.",
+      "id": 100006,
+      "images": [
+        "http://i1.ytimg.com/vi/WT1uLvNvPdk/maxresdefault.jpg"
+      ],
+      "name": "Афтамат",
+      "price": 1249,
+      "stars": [
+        4,
+        5,
+        3,
+        1,
+        1,
+        5
+      ]
+    },
+    {
+      "category": "Сапоги",
+      "comments": [
+        {
+          "email": "test@test.ru",
+          "name": "Вася Пупкин",
+          "rating": 4,
+          "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt cumque officiis animi dignissimos ipsam aut omnis quod, earum reprehenderit et beatae culpa asperiores. Quo nam dolor ducimus fugiat magnam quia?"
+        }
+      ],
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo ut dolore sunt consequatur id tempora inventore similique eum quis odio, atque, animi perferendis dignissimos vitae at corrupti necessitatibus. Ipsum, repudiandae.",
+      "id": 100007,
+      "images": [
+        "https://img3.st.kloomba.com/img/used/2018/07/31/11/b/38535563_4.jpg"
+      ],
+      "name": "Берцы женские, армейские",
+      "price": 8249,
+      "stars": [
+        4,
+        5,
+        3,
+        1,
+        1,
+        5
+      ]
+    },
+    {
+      "category": "Сапоги",
+      "comments": [
+        {
+          "email": "test@test.ru",
+          "name": "Вася Пупкин",
+          "rating": 4,
+          "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt cumque officiis animi dignissimos ipsam aut omnis quod, earum reprehenderit et beatae culpa asperiores. Quo nam dolor ducimus fugiat magnam quia?"
+        }
+      ],
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo ut dolore sunt consequatur id tempora inventore similique eum quis odio, atque, animi perferendis dignissimos vitae at corrupti necessitatibus. Ipsum, repudiandae.",
+      "id": 100008,
+      "images": [
+        "https://images.by.prom.st/80719388_w640_h640_sapogi-rabochie-praktik.jpg"
+      ],
+      "name": "Берцы мужские, гламурные",
+      "price": 8249,
+      "stars": [
+        4,
+        5,
+        3,
+        1,
+        1,
+        5
+      ]
+    }
+  ]
+}

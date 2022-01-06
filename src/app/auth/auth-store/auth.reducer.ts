@@ -60,6 +60,19 @@ export function authReducer(
         logged: false,
       }
 
+    case AuthActoins.AUTH_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      }
+
+    case AuthActoins.CLEAR_ERROR:
+      return {
+        ...state,
+        error: null,
+      }
+
     default: return state;
   }
 }

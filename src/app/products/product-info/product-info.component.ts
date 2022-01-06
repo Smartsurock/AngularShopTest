@@ -1,13 +1,13 @@
-import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs/operators';
 import { Product } from '../product.model';
-import { ProductsService } from '../products.service';
-import * as fromAppReducer from 'src/app/store/app.reducer';
 import { Comment } from '../comment.model';
-import * as ProductsActions from '../products-store/products.actions';
 import { Subscription } from 'rxjs';
+import * as fromAppReducer from 'src/app/store/app.reducer';
+import * as ProductsActions from '../products-store/products.actions';
+import * as AuthActions from 'src/app/auth/auth-store/auth.actions';
 
 @Component({
   selector: 'app-product-info',
@@ -17,7 +17,6 @@ import { Subscription } from 'rxjs';
 export class ProductInfoComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private route: ActivatedRoute,
-    private productsService: ProductsService,
     private renderer: Renderer2,
     private store: Store<fromAppReducer.AppState>
   ) { }
@@ -29,6 +28,8 @@ export class ProductInfoComponent implements OnInit, OnDestroy, AfterViewInit {
   commentForm: boolean = false;
   index: number;
   userMail: string;
+  alreadyInBasket: boolean = false;
+  needAuthorization: boolean = false;
 
   ngOnInit() {
     this.route.params.pipe(take(1)).subscribe((params: Params) => {
@@ -69,23 +70,69 @@ export class ProductInfoComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onAddComment(comment?: Comment) {
-    this.commentForm = !this.commentForm;
+    let user = this.checkUser();
 
-    if (comment) {
-      const newProduct: Product = JSON.parse(JSON.stringify(this.product));
-      newProduct.comments.unshift(comment);
-      newProduct.stars.push(+comment.rating);
-      this.store.dispatch(new ProductsActions.EditProduct({
-        newProduct, index: this.index
-      }));
+    if (!user) {
+      if (this.needAuthorization) return;
+      this.needAuthorization = true;
+      setTimeout(() => {
+        this.needAuthorization = false;
+      }, 2000);
+      return;
+    } else {
+      this.commentForm = !this.commentForm;
 
-      this.setStarsValue(this.starsActive, this.productGrade);
+      if (comment) {
+        const newProduct: Product = JSON.parse(JSON.stringify(this.product));
+        newProduct.comments.unshift(comment);
+        newProduct.stars.push(+comment.rating);
+        this.store.dispatch(new ProductsActions.EditProduct({
+          newProduct, index: this.index
+        }));
+
+        this.setStarsValue(this.starsActive, this.productGrade);
+      }
     }
   }
 
   onAddToBasket() {
-    this.store.dispatch(new ProductsActions.AddToBasket({
-      productId: this.product.id, count: 1, userMail: this.userMail
-    }));
+    let user = this.checkUser();
+
+    if (user) {
+      let alreadyInBasket: boolean = false;
+      this.store.select('products').pipe(take(1)).subscribe(state => {
+        state.basket.find(product => {
+          if (product.productId === this.product.id) {
+            alreadyInBasket = true;
+            return;
+          }
+        });
+      });
+
+      if (alreadyInBasket) {
+        if (this.alreadyInBasket) return;
+        this.alreadyInBasket = true;
+        setTimeout(() => {
+          this.alreadyInBasket = false;
+        }, 2000);
+        return;
+      };
+
+      this.store.dispatch(new ProductsActions.AddToBasket({
+        productId: this.product.id, count: 1, userMail: this.userMail
+      }));
+    } else {
+      this.store.dispatch(new AuthActions.TryToLogin(true));
+    }
+  }
+
+  checkUser() {
+    let user: boolean = false;
+    this.store.select('auth').pipe(take(1)).subscribe(state => {
+      if (state.user) {
+        user = true;
+      }
+    });
+    return user;
   }
 }

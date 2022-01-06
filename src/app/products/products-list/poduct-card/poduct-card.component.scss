@@ -16,8 +16,8 @@
   &__image {
     display: block;
     width: 100%;
-    flex: 0 0 250px;
-    height: 250px;
+    flex: 0 0 200px;
+    height: 200px;
     margin: 0px 0px 5px 0px;
     background-position: 50% 50%;
     background-repeat: no-repeat;
@@ -27,6 +27,11 @@
   &__description {
     flex: 1 1 auto;
     overflow: hidden;
+  }
+  &__name {
+    font-weight: 500;
+    font-size: 20px;
+    margin: 0px 0px 5px 0px;
   }
   &__stars {
     display: flex;
@@ -48,9 +53,13 @@
     background-color: $main-color;
     padding: 0px 8px;
     border-radius: $border-radius;
-    transition: 0.3s;
+    transition: 0.2s;
+    user-select: none;
     &:hover {
-      box-shadow: 0 0 5px inset #ff8800;
+      box-shadow: 0 0 5px inset #ff8800, 0 0 10px inset #ff8800;
+    }
+    &:active {
+      background-color: #ff8800;
     }
   }
 }

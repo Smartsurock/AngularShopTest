@@ -2,7 +2,7 @@
   <div class="rating__container">
     <span class="your-rating">Ваша оценка:</span>
     <div starsDirective class="rating__body">
-      <div class="rating__active"></div>
+      <div #starsActive class="rating__active"></div>
       <div class="rating__items">
         <input formControlName="rating" type="radio" class="rating__item" name="rating" value="1">
         <input formControlName="rating" type="radio" class="rating__item" name="rating" value="2">
@@ -15,8 +15,6 @@
   <div class="form__inputs">
     <label for="name">Ваше имя:</label>
     <input type="text" formControlName="name" id="name">
-    <label for="mail">Ваш Email:</label>
-    <input type="mail" formControlName="mail" id="mail">
     <label for="text">Ваш комментарий:</label>
     <textarea formControlName="text" id="text" cols="30" rows="5"></textarea>
   </div>

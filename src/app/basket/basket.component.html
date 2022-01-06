@@ -3,9 +3,50 @@
     <div class="basket-card" *ngFor="let buyer of buyers">
       <app-basket-item [buyer]="buyer"></app-basket-item>
     </div>
+    <div *ngIf="!buyers.length" class="basket-empty"
+      style="background-image: url('https://st.depositphotos.com/2518853/3153/v/450/depositphotos_31537851-stock-illustration-vector-supermarket-cart.jpg');">
+      <span>Ваша корзина пуста, но Вы просто обязаны это исправить!</span>
+    </div>
   </div>
-  <div class="basket-order">
-    <p>Оформить заказ</p>
-    <button>Подтвердить</button>
-  </div>
+  <form [formGroup]="orderForm" (ngSubmit)="onSubmit()" class="basket-order">
+    <div class="basket-order__radio">
+      <span>Почтовая служба:</span>
+      <div>
+        <input formControlName="mailService" type="radio" name="mailService" id="NewMail" value="NewMail">
+        <label for="NewMail">Новая почта</label>
+      </div>
+      <div>
+        <input formControlName="mailService" type="radio" name="mailService" id="Justin" value="Justin">
+        <label for="Justin">Джастин</label>
+      </div>
+      <div>
+        <input formControlName="mailService" type="radio" name="mailService" id="UkrPost" value="UkrPost">
+        <label for="UkrPost">Укрпочта</label>
+      </div>
+    </div>
+    <div class="basket-order__row">
+      <label for="address">Адрес доставки:</label>
+      <input formControlName="address" type="text" id="address" name="address">
+    </div>
+    <div class="basket-order__radio">
+      <span>Способ оплаты:</span>
+      <div>
+        <input formControlName="payment" type="radio" name="payment" id="cash" value="cash">
+        <label for="cash">Наличка</label>
+      </div>
+      <div>
+        <input formControlName="payment" type="radio" name="payment" id="MasterCard" value="MasterCard">
+        <label for="MasterCard">MasterCard</label>
+      </div>
+      <div>
+        <input formControlName="payment" type="radio" name="payment" id="Visa" value="Visa">
+        <label for="Visa">Visa</label>
+      </div>
+      <div>
+        <input formControlName="payment" type="radio" name="payment" id="WebMoney" value="WebMoney">
+        <label for="WebMoney">WebMoney</label>
+      </div>
+    </div>
+    <button [disabled]="orderForm.invalid">Подтвердить</button>
+  </form>
 </div>

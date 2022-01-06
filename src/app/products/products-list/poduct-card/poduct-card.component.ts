@@ -43,13 +43,25 @@ export class PoductCardComponent implements OnInit, AfterViewInit {
   }
 
   onAddToBasket() {
-    let email: string;
+    let user: boolean = false;
     this.store.select('auth').pipe(take(1)).subscribe(state => {
       if (state.user) {
-        email = state.user.email;
+        user = true;
       }
     });
-    if (email) {
+
+    if (user) {
+      let alreadyInBasket: boolean = false;
+      this.store.select('products').pipe(take(1)).subscribe(state => {
+        state.basket.filter(product => {
+          if (product.productId === this.product.id) {
+            alreadyInBasket = true;
+            return;
+          }
+        });
+      });
+      if (alreadyInBasket) return;
+
       this.store.dispatch(new ProductsActions.AddToBasket({
         productId: this.product.id, count: 1, userMail: this.userMail
       }));

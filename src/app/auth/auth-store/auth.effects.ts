@@ -129,7 +129,7 @@ function hendleAuthentication(response) {
 function hendleError(error) {
   let errorMessage = "Непонятный эрор!";
 
-  if (!error.error || error.error.error) {
+  if (!error.error || !error.error.error) {
     return of(new AuthActions.AuthFail(errorMessage));
   }
 
@@ -138,7 +138,7 @@ function hendleError(error) {
       break;
     case 'OPERATION_NOT_ALLOWED': errorMessage = "Регистрация не завершена, обратитесь через несколько лет!";
       break;
-    case 'TOO_MANY_ATTEMPTS_TRY_LATER : Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.': errorMessage = "Хз чё ты тут наклацал, придёться подождать... недельку...!";
+    case 'TOO_MANY_ATTEMPTS_TRY_LATER : Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later.': errorMessage = "Хз чё ты тут наклацал, но придёться подождать... недельку...!";
       break;
     case 'EMAIL_NOT_FOUND': errorMessage = "Нет такого мыла!";
       break;

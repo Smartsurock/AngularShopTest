@@ -47,16 +47,17 @@ export class BasketItemComponent implements OnInit, OnDestroy {
   }
 
   onPlus() {
-    this.editCount();
+    const newBuyer = new Buyer(this.buyer.productId, this.buyer.count + 1, this.buyer.userMail);
+    this.editCount(newBuyer);
   }
 
   onMinus() {
     if (this.buyer.count === 1) return;
-    this.editCount();
+    const newBuyer = new Buyer(this.buyer.productId, this.buyer.count - 1, this.buyer.userMail);
+    this.editCount(newBuyer);
   }
 
-  editCount() {
-    const newBuyer = new Buyer(this.buyer.productId, this.buyer.count + 1, this.buyer.userMail);
+  editCount(newBuyer: Buyer) {
     this.store.dispatch(new ProductsActions.EditBasket({
       newBuyer, index: this.buyerIndex,
     }));
