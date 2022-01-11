@@ -1,6 +1,7 @@
 import { Action } from "@ngrx/store";
-import { Buyer } from "../buyer.model";
-import { Product } from "../product.model";
+import { Buyer } from "../products-models/buyer.model";
+import { Order } from "../products-models/order.model";
+import { Product } from "../products-models/product.model";
 
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const SET_PRODUCTS = "SET_PRODUCTS";
@@ -10,6 +11,8 @@ export const REMOVE_FROM_BASKET = "REMOVE_FROM_BASKET";
 export const GET_BASKET = "GET_BASKET";
 export const SET_BASKET = "SET_BASKET";
 export const EDIT_BASKET = "EDIT_BASKET";
+export const SAVE_BASKET_STATE = "SAVE_BASKET_STATE";
+export const SAVE_ORDER = "SAVE_ORDER";
 
 export class GetProducts implements Action {
   readonly type = GET_PRODUCTS;
@@ -55,7 +58,19 @@ export class EditBasket implements Action {
   constructor(public payload: { newBuyer: Buyer, index: number }) { }
 }
 
+export class SaveBasketState implements Action {
+  readonly type = SAVE_BASKET_STATE;
+}
+
+export class SaveOrder implements Action {
+  readonly type = SAVE_ORDER;
+
+  constructor(public payload: Order) { }
+}
+
 export type ProductsActions =
+  | SaveOrder
+  | SaveBasketState
   | EditProduct
   | AddToBasket
   | EditBasket

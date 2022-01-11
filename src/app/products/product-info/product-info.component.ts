@@ -2,12 +2,13 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2, Vie
 import { ActivatedRoute, Params } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs/operators';
-import { Product } from '../product.model';
-import { Comment } from '../comment.model';
+import { Product } from '../products-models/product.model';
+import { Comment } from '../products-models/comment.model';
 import { Subscription } from 'rxjs';
 import * as fromAppReducer from 'src/app/store/app.reducer';
 import * as ProductsActions from '../products-store/products.actions';
 import * as AuthActions from 'src/app/auth/auth-store/auth.actions';
+import { BasketService } from 'src/app/basket/basket.service';
 
 @Component({
   selector: 'app-product-info',
@@ -18,17 +19,20 @@ export class ProductInfoComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private route: ActivatedRoute,
     private renderer: Renderer2,
-    private store: Store<fromAppReducer.AppState>
+    private store: Store<fromAppReducer.AppState>,
+    private basketService: BasketService,
   ) { }
 
   product: Product;
   @ViewChild('starsActive') starsActive: ElementRef;
   productsSub: Subscription;
+  authSub: Subscription;
+  basketServiceSub: Subscription;
   productGrade: number;
   commentForm: boolean = false;
   index: number;
   userMail: string;
-  alreadyInBasket: boolean = false;
+  alreadyInBasket: number = null;
   needAuthorization: boolean = false;
 
   ngOnInit() {
@@ -44,10 +48,17 @@ export class ProductInfoComponent implements OnInit, OnDestroy, AfterViewInit {
       });
     });
 
-    this.store.select('auth').pipe(take(1)).subscribe(state => {
+    this.authSub = this.store.select('auth').subscribe(state => {
       if (state.user) {
         this.userMail = state.user.email;
+      } else {
+        this.userMail = null;
+        this.commentForm = false;
       }
+    });
+
+    this.basketServiceSub = this.basketService.basketCheck.subscribe(alreadyInBasket => {
+      this.alreadyInBasket = alreadyInBasket;
     });
   }
 
@@ -57,6 +68,8 @@ export class ProductInfoComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnDestroy(): void {
     this.unsubscriber(this.productsSub);
+    this.unsubscriber(this.authSub);
+    this.unsubscriber(this.basketServiceSub);
   }
 
   unsubscriber(subscription: Subscription) {
@@ -70,9 +83,7 @@ export class ProductInfoComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onAddComment(comment?: Comment) {
-    let user = this.checkUser();
-
-    if (!user) {
+    if (!this.userMail) {
       if (this.needAuthorization) return;
       this.needAuthorization = true;
       setTimeout(() => {
@@ -96,43 +107,6 @@ export class ProductInfoComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onAddToBasket() {
-    let user = this.checkUser();
-
-    if (user) {
-      let alreadyInBasket: boolean = false;
-      this.store.select('products').pipe(take(1)).subscribe(state => {
-        state.basket.find(product => {
-          if (product.productId === this.product.id) {
-            alreadyInBasket = true;
-            return;
-          }
-        });
-      });
-
-      if (alreadyInBasket) {
-        if (this.alreadyInBasket) return;
-        this.alreadyInBasket = true;
-        setTimeout(() => {
-          this.alreadyInBasket = false;
-        }, 2000);
-        return;
-      };
-
-      this.store.dispatch(new ProductsActions.AddToBasket({
-        productId: this.product.id, count: 1, userMail: this.userMail
-      }));
-    } else {
-      this.store.dispatch(new AuthActions.TryToLogin(true));
-    }
-  }
-
-  checkUser() {
-    let user: boolean = false;
-    this.store.select('auth').pipe(take(1)).subscribe(state => {
-      if (state.user) {
-        user = true;
-      }
-    });
-    return user;
+    this.basketService.onAddToBasket(this.product.id);
   }
 }

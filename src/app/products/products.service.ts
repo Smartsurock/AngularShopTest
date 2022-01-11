@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Comment } from "./comment.model";
-import { Product } from "./product.model";
+import { Comment } from "./products-models/comment.model";
+import { Product } from "./products-models/product.model";
 import * as fromAppReducer from 'src/app/store/app.reducer';
 import { Store } from "@ngrx/store";
 

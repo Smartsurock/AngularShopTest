@@ -3,10 +3,11 @@ import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import { map, switchMap, withLatestFrom } from "rxjs/operators";
-import { Product } from "../product.model";
+import { Product } from "../products-models/product.model";
 import * as ProductsActions from "./products.actions";
 import * as fromAppReducer from "src/app/store/app.reducer";
-import { Buyer } from "../buyer.model";
+import { Buyer } from "../products-models/buyer.model";
+import { Order } from "../products-models/order.model";
 
 @Injectable()
 export class ProductsEffects {
@@ -64,10 +65,19 @@ export class ProductsEffects {
 
   @Effect({ dispatch: false })
   saveBasket = this.actions.pipe(
-    ofType(ProductsActions.ADD_TO_BASKET, ProductsActions.REMOVE_FROM_BASKET, ProductsActions.EDIT_BASKET),
+    ofType(ProductsActions.ADD_TO_BASKET, ProductsActions.SAVE_BASKET_STATE, ProductsActions.EDIT_BASKET),
     withLatestFrom(this.store.select('products')),
     switchMap(([action, state]) => {
       return this.http.put<Buyer[]>('https://shopapp-22f84-default-rtdb.europe-west1.firebasedatabase.app/basket.json', state.basket);
+    })
+  );
+
+  @Effect({ dispatch: false })
+  saveOrder = this.actions.pipe(
+    ofType(ProductsActions.SAVE_ORDER),
+    withLatestFrom(this.store.select('products')),
+    switchMap(([action, state]) => {
+      return this.http.post<Order[]>('https://shopapp-22f84-default-rtdb.europe-west1.firebasedatabase.app/orders.json', state.orders);
     })
   );
 }

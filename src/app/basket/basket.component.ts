@@ -1,12 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as fromAppReducer from 'src/app/store/app.reducer';
-import { take } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Buyer } from '../products/buyer.model';
+import { Buyer } from '../products/products-models/buyer.model';
 import * as ProductsActions from '../products/products-store/products.actions';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Order } from '../products/products-models/order.model';
+import { Delivery } from '../products/products-models/delivery.model';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-basket',
@@ -24,6 +26,7 @@ export class BasketComponent implements OnInit, OnDestroy {
   productsSub: Subscription;
   userMail: string;
   orderForm: FormGroup;
+  orderAccepted: boolean = false;
 
   ngOnInit(): void {
     this.authSub = this.store.select('auth').subscribe(state => {
@@ -58,12 +61,41 @@ export class BasketComponent implements OnInit, OnDestroy {
     this.orderForm = new FormGroup({
       mailService: new FormControl(null, [Validators.required]),
       address: new FormControl(null, [Validators.required]),
+      telephone: new FormControl(null, [Validators.required, Validators.pattern("[0-9 ]{12}")]),
       payment: new FormControl(null, [Validators.required]),
     });
   }
 
   onSubmit() {
-    console.log(this.orderForm.value);
-    console.log(this.buyers);
+    if (!this.buyers.length) return;
+    this.orderAccepted = true;
+
+    const delivery = new Delivery(
+      this.orderForm.value.mailService,
+      this.orderForm.value.address,
+      this.orderForm.value.telephone,
+      this.orderForm.value.payment,
+      this.userMail,
+    );
+    const order = new Order(this.buyers, delivery);
+
+    this.store.dispatch(new ProductsActions.SaveOrder(order));
+
+    this.buyers.forEach(el => {
+      let index: number;
+      this.store.select('products').pipe(take(1)).subscribe(state => {
+        index = state.basket.findIndex(item => {
+          return item.productId === el.productId
+            && item.userMail === el.userMail;
+        });
+      });
+      this.store.dispatch(new ProductsActions.RemoveFromBasket(index));
+    });
+
+    this.store.dispatch(new ProductsActions.SaveBasketState());
+  }
+
+  onAccept() {
+    this.orderAccepted = false;
   }
 }

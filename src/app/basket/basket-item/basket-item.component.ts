@@ -1,9 +1,8 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { take } from 'rxjs/operators';
-import { Buyer } from 'src/app/products/buyer.model';
-import { Product } from 'src/app/products/product.model';
+import { Buyer } from 'src/app/products/products-models/buyer.model';
+import { Product } from 'src/app/products/products-models/product.model';
 import * as fromAppReducer from 'src/app/store/app.reducer';
 import * as ProductsActions from 'src/app/products/products-store/products.actions';
 import { Subscription } from 'rxjs';
@@ -65,5 +64,6 @@ export class BasketItemComponent implements OnInit, OnDestroy {
 
   onDelete() {
     this.store.dispatch(new ProductsActions.RemoveFromBasket(this.buyerIndex));
+    this.store.dispatch(new ProductsActions.SaveBasketState());
   }
 }

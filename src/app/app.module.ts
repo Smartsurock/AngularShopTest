@@ -30,6 +30,7 @@ import { DropdownDirective } from './basket/dropdown.directive';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { AuthErrorComponent } from './auth/auth-error/auth-error.component';
 import { SpinnerComponent } from './auth/spinner/spinner.component';
+import { BasketInfoComponent } from './basket/basket-info/basket-info.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { SpinnerComponent } from './auth/spinner/spinner.component';
     ErrorPageComponent,
     AuthErrorComponent,
     SpinnerComponent,
+    BasketInfoComponent,
   ],
   imports: [
     BrowserModule,

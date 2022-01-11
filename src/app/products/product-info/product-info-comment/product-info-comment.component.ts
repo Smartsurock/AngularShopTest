@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { Comment } from '../../comment.model';
+import { Comment } from '../../products-models/comment.model';
 
 @Component({
   selector: 'app-product-info-comment',

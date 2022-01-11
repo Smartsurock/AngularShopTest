@@ -1,8 +1,7 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { ProductsService } from '../products/products.service';
 import * as fromAppReducer from '../store/app.reducer';
 
 @Component({

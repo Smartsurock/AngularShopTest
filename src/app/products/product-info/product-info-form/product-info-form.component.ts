@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Comment } from '../../comment.model';
+import { Comment } from '../../products-models/comment.model';
 import * as fromAppReducer from 'src/app/store/app.reducer';
 
 @Component({

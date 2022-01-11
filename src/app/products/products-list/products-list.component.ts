@@ -2,8 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { Product } from '../product.model';
-import { ProductsService } from '../products.service';
+import { Product } from '../products-models/product.model';
 import * as fromAppReducer from 'src/app/store/app.reducer';
 import * as ProductsActions from '../products-store/products.actions';
 import { take } from 'rxjs/operators';
@@ -15,7 +14,6 @@ import { take } from 'rxjs/operators';
 })
 export class ProductsListComponent implements OnInit, OnDestroy {
   constructor(
-    private productsService: ProductsService,
     private route: ActivatedRoute,
     private store: Store<fromAppReducer.AppState>,
   ) { }

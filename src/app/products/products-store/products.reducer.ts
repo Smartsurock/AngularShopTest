@@ -1,11 +1,12 @@
-import { Buyer } from "../buyer.model";
-import { Comment } from "../comment.model";
-import { Product } from "../product.model";
+import { Buyer } from "../products-models/buyer.model";
+import { Order } from "../products-models/order.model";
+import { Product } from "../products-models/product.model";
 import * as ProductsActions from "./products.actions";
 
 export interface State {
   products: Product[];
   basket: Buyer[];
+  orders: Order[];
 }
 
 const initialState = {
@@ -52,6 +53,7 @@ const initialState = {
     //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt cumque officiis animi dignissimos ipsam aut omnis quod, earum reprehenderit et beatae culpa asperiores. Quo nam dolor ducimus fugiat magnam quia?")]),
   ],
   basket: [],
+  orders: [],
 }
 
 export function productsReducer(
@@ -83,10 +85,9 @@ export function productsReducer(
       }
 
     case ProductsActions.ADD_TO_BASKET:
-      const newBuyer = [...state.basket, action.payload];
       return {
         ...state,
-        basket: [...newBuyer]
+        basket: [...state.basket, action.payload],
       }
 
     case ProductsActions.REMOVE_FROM_BASKET:
@@ -107,6 +108,12 @@ export function productsReducer(
       return {
         ...state,
         basket: [...editedBasket]
+      }
+
+    case ProductsActions.SAVE_ORDER:
+      return {
+        ...state,
+        orders: [...state.orders, action.payload],
       }
 
     default: return state;

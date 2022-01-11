@@ -16,5 +16,8 @@
   <div class="card__row">
     <div class="card__price">{{product.price}} &#8372;</div>
     <div (click)="onAddToBasket()" class="card__buy">купить</div>
+    <span [ngClass]="product.id === alreadyInBasket ? 'active' : ''">
+      {{product.id === alreadyInBasket ? 'Товар уже в корзине!' : ''}}
+    </span>
   </div>
 </div>
