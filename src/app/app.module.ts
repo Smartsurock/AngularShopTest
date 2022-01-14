@@ -31,6 +31,9 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { AuthErrorComponent } from './auth/auth-error/auth-error.component';
 import { SpinnerComponent } from './auth/spinner/spinner.component';
 import { BasketInfoComponent } from './basket/basket-info/basket-info.component';
+import { SliderComponent } from './slider/slider.component';
+import { SearchComponent } from './search/search.component';
+import { SearchEmptyComponent } from './search/search-empty/search-empty.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +56,9 @@ import { BasketInfoComponent } from './basket/basket-info/basket-info.component'
     AuthErrorComponent,
     SpinnerComponent,
     BasketInfoComponent,
+    SliderComponent,
+    SearchComponent,
+    SearchEmptyComponent,
   ],
   imports: [
     BrowserModule,

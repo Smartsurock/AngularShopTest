@@ -32,11 +32,14 @@ export class HeaderComponent implements OnInit {
   }
 
   onSubmit() {
+    if (!this.searchForm.value.search.trim()) return;
 
+    this.router.navigate(['search', { title: this.searchForm.value.search.trim().toLowerCase() }]);
+
+    this.searchForm.reset();
   }
 
   onLogin() {
-    // this.loginStart.emit(true);
     this.store.dispatch(new AuthActions.TryToLogin(true));
   }
 

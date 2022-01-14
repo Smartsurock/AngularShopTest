@@ -1,0 +1,8 @@
+<div class="container">
+  <div class="product-card" *ngFor="let product of products">
+    <app-poduct-card [product]="product" [userMail]="userMail"></app-poduct-card>
+  </div>
+</div>
+<div *ngIf="!products.length" class="search-empty">
+  <app-search-empty></app-search-empty>
+</div>

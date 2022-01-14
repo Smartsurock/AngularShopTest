@@ -7,6 +7,7 @@ import { ProductInfoComponent } from './products/product-info/product-info.compo
 import { ProductsListComponent } from './products/products-list/products-list.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductsResolver } from './products/products.resolver';
+import { SearchComponent } from './search/search.component';
 
 export const appRoutes: Routes = [
   { path: '', redirectTo: '/goods', pathMatch: 'full', },
@@ -22,6 +23,10 @@ export const appRoutes: Routes = [
   {
     path: 'basket', component: BasketComponent,
     resolve: [ProductsResolver, BasketResolver],
+  },
+  {
+    path: 'search', component: SearchComponent,
+    resolve: [ProductsResolver],
   },
   {
     path: 'error', component: ErrorPageComponent,

@@ -7,6 +7,7 @@ import { take } from 'rxjs/operators';
 import * as AuthActions from 'src/app/auth/auth-store/auth.actions';
 import { BasketService } from 'src/app/basket/basket.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-poduct-card',
@@ -18,6 +19,7 @@ export class PoductCardComponent implements OnInit, OnDestroy, AfterViewInit {
     private store: Store<fromAppReducer.AppState>,
     private renderer: Renderer2,
     private basketService: BasketService,
+    private router: Router,
   ) { }
 
   @ViewChild('starsActive') starsActive: ElementRef;
@@ -59,30 +61,9 @@ export class PoductCardComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onAddToBasket() {
     this.basketService.onAddToBasket(this.product.id);
-    // let user: boolean = false;
-    // this.store.select('auth').pipe(take(1)).subscribe(state => {
-    //   if (state.user) {
-    //     user = true;
-    //   }
-    // });
+  }
 
-    // if (user) {
-    //   let alreadyInBasket: boolean = false;
-    //   this.store.select('products').pipe(take(1)).subscribe(state => {
-    //     state.basket.filter(product => {
-    //       if (product.productId === this.product.id) {
-    //         alreadyInBasket = true;
-    //         return;
-    //       }
-    //     });
-    //   });
-    //   if (alreadyInBasket) return;
-
-    //   this.store.dispatch(new ProductsActions.AddToBasket({
-    //     productId: this.product.id, count: 1, userMail: this.userMail
-    //   }));
-    // } else {
-    //   this.store.dispatch(new AuthActions.TryToLogin(true));
-    // }
+  onProductNavigate() {
+    this.router.navigate([`goods/${this.product.category}/${this.product.id}`]);
   }
 }
