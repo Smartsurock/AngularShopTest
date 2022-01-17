@@ -1,42 +1,16 @@
-<ng-container *ngIf="options">
-  <ng-container *ngTemplateOutlet="
-      carouselSlider;
-      context: {
-        watch: watch$ | async,
-        height: (responsiveFacade.height$ | async) + 'px'
-      }
-    "></ng-container>
-</ng-container>
+<div class="slider__container">
+  <div class="slider__slide" [ngClass]="hideLeft ? 'hideLeft' : ''" [ngClass]="hideRight ? 'hideRight' : ''">
+    <div (click)="onLeft()" class="slider__left">&#9668;</div>
 
-<ng-template #carouselSlider let-height="height">
-  <div class="carousel-slider" [ngStyle]="{ height: height }">
-    <ng-container *ngFor="let slide of options.slides; let index = index">
-      <ng-container *ngTemplateOutlet="carouselSlide; context: { slide: slide, index: index }"></ng-container>
-    </ng-container>
-    <div class="carousel-indicators" *ngIf="options.indicators">
-      <button type="button" class="btn carousel-indicator" (click)="changeSlide$.next(index)"
-        *ngFor="let slide of options.slides; let index = index"
-        [class.carousel-indicator_active]="options.active === index"></button>
-    </div>
-    <div class="carousel-scroll" *ngIf="options.scrollAnchor">
-      <button type="button" class="btn btn-carousel-scroll" (click)="onScroll()">
-        <img class="carousel-scroll-icon" [src]="'assets/images/icons/down-arrow.svg'" alt="" />
-      </button>
+    <!-- <div style="background-image: url({{slides[previos]}});" class="slider__previos"></div> -->
+    <div style="background-image: url({{slides[active]}});" class="slider__image"></div>
+    <!-- <div style="background-image: url({{slides[next]}});" class="slider__next"></div> -->
+
+    <div (click)="onRight()" class="slider__right">&#9658;</div>
+  </div>
+  <div class="slider__nav">
+    <div *ngFor="let slide of slides; let i = index" (click)="onNavClick(i)" [ngClass]="active === i ? 'active' : ''"
+      style="background-image: url({{slide}});" class="slider__nav-img">
     </div>
   </div>
-</ng-template>
-
-<ng-template #carouselSlide let-slide="slide" let-index="index">
-  <div class="carousel-slide" [class.carousel-slide_hide]="options.hide === index"
-    [class.carousel-slide_active]="options.active === index">
-    <div class="carousel-slide-image" [ngStyle]="{ backgroundImage: 'url(' + slide.src + ')' }"></div>
-    <div class="carousel-slide-content">
-      <div class="carousel-slide-title">
-        {{ slide.title | translate }}
-      </div>
-      <div class="carousel-slide-description">
-        {{ slide.description | translate }}
-      </div>
-    </div>
-  </div>
-</ng-template>
+</div>

@@ -2,7 +2,9 @@
   <div class="info__name">{{product.name}}</div>
   <div class="info__row">
     <div class="info__left">
-      <div class="info__image" style="background-image: url({{product.images[0]}});"></div>
+      <div class="info__image">
+        <app-slider [slides]="product.images"></app-slider>
+      </div>
       <div class="info__description">{{product.description}}</div>
       <div class="info__details">
       </div>

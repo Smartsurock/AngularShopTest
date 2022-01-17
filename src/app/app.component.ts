@@ -31,10 +31,6 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-  // onLoginStart(value: boolean) {
-  //   this.loginStart = value;
-  // }
-
   @HostListener('document:keydown.escape')
   onEscape() {
     this.loginStart = false;

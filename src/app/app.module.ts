@@ -34,6 +34,7 @@ import { BasketInfoComponent } from './basket/basket-info/basket-info.component'
 import { SliderComponent } from './slider/slider.component';
 import { SearchComponent } from './search/search.component';
 import { SearchEmptyComponent } from './search/search-empty/search-empty.component';
+import { CatalogDirective } from './catalog/catalog.directive';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { SearchEmptyComponent } from './search/search-empty/search-empty.compone
     SliderComponent,
     SearchComponent,
     SearchEmptyComponent,
+    CatalogDirective,
   ],
   imports: [
     BrowserModule,

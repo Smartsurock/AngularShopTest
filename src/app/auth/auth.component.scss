@@ -9,6 +9,7 @@
   top: 0;
   left: 0;
   @include flex-center;
+  z-index: 9;
 }
 .spinner {
   width: 100%;

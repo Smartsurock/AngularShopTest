@@ -1,75 +1,66 @@
-import { ChangeDetectionStrategy, Component, Inject, Input, OnInit, PLATFORM_ID } from '@angular/core';
-import { SliderOptions } from './slider.model';
+import { Component, Input, OnInit } from '@angular/core';
+import { take } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import * as fromAppReducer from '../store/app.reducer';
 
-// import { ResponsiveFacade } from '@medium-stories/responsive';
-import { interval, Observable, Subject } from 'rxjs';
-import { isPlatformBrowser } from '@angular/common';
-import { startWith, switchMap, tap } from 'rxjs/operators';
-
-const OPTIONS_DEFAULT: SliderOptions = {
-  slides: [],
-  active: 0,
-  hide: null,
-  interval: 6000,
-  indicators: true
-};
 
 @Component({
   selector: 'app-slider',
   templateUrl: './slider.component.html',
-  styleUrls: ['./slider.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./slider.component.scss']
 })
 export class SliderComponent implements OnInit {
   constructor(
-    // public responsiveFacade: ResponsiveFacade,
-    /* tslint:disable-next-line:ban-types */
-    @Inject(PLATFORM_ID) private platformId: Object
+    private store: Store<fromAppReducer.AppState>,
   ) { }
 
+  @Input() slides: string[];
+  active: number = 0;
+  previos: number = null;
+  next: number = 1;
+  hideLeft: boolean = false;
+  hideRight: boolean = false;
+
   ngOnInit(): void {
+    this.previos = this.slides.length - 1;
   }
 
-  options: SliderOptions | null = null;
+  onNavClick(active: number) {
+    this.active = active;
+  }
 
-  watch$!: Observable<number>;
+  onLeft() {
+    if (this.hideLeft || this.hideRight) return;
+    this.hideLeft = true;
+    // if (this.active === 0) {
+    //   this.next = this.slides.length - 1;
+    // } else {
+    //   this.next -= 1;
+    // }
+    // console.log(this.next);
 
-  changeSlide$ = new Subject<number>();
+    setTimeout(() => {
+      this.hideLeft = false;
+    }, 1000);
 
-  @Input() set config(options: Partial<SliderOptions>) {
-    this.options = { ...OPTIONS_DEFAULT, ...options };
-    if (isPlatformBrowser(this.platformId)) {
-      this.watch$ = this.changeSlide$.pipe(
-        startWith(-1),
-        switchMap(index => {
-          if (index >= 0) {
-            this.options.hide = this.options.active;
-            this.options.active = index;
-          }
-          return interval(this.options.interval).pipe(
-            tap(() => {
-              if (!window.document.hidden) {
-                if (this.options.active + 1 === this.options.slides.length) {
-                  this.options.hide = this.options.slides.length - 1;
-                  this.options.active = 0;
-                } else {
-                  this.options.hide = this.options.active;
-                  this.options.active++;
-                }
-              }
-            })
-          );
-        })
-      );
+    if (this.active === 0) {
+      this.active = this.slides.length - 1;
+    } else {
+      this.active -= 1;
     }
   }
 
-  onScroll(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      const anchor = window.document.getElementById(this.options.scrollAnchor);
-      if (anchor) {
-        anchor.scrollIntoView({ behavior: 'smooth' });
-      }
+  onRight() {
+    if (this.hideLeft || this.hideRight) return;
+    this.hideRight = true;
+    setTimeout(() => {
+      this.hideRight = false;
+    }, 1000);
+
+    if (this.active === this.slides.length - 1) {
+      this.active = 0;
+    } else {
+      this.active += 1;
     }
   }
 }
