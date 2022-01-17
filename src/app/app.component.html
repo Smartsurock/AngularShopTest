@@ -1,8 +1,5 @@
 <div class="container">
-  <app-header (catalog)="onCatalogClick()"></app-header>
-  <div class="catalog" [ngClass]="catalog ? 'active' : ''">
-    <app-catalog (catalog)="onCatalogClick()"></app-catalog>
-  </div>
+  <app-header></app-header>
   <div class="products">
     <router-outlet></router-outlet>
   </div>

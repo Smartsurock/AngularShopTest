@@ -39,8 +39,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
     }
   }
 
-  onCategory(category) {
-    setTimeout(() => this.catalog.emit(), 50);
+  onCategory(category: string) {
     this.router.navigate([`goods/${category}`]);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { appAnimation } from './app.animation';
@@ -15,7 +15,6 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(private store: Store<fromAppReducer.AppState>) { }
 
   loginStart: boolean = false;
-  catalog: boolean = false;
   authSub: Subscription;
 
   ngOnInit() {
@@ -29,15 +28,5 @@ export class AppComponent implements OnInit, OnDestroy {
     if (this.authSub) {
       this.authSub.unsubscribe();
     }
-  }
-
-  @HostListener('document:keydown.escape')
-  onEscape() {
-    this.loginStart = false;
-    this.catalog = false;
-  }
-
-  onCatalogClick() {
-    this.catalog = !this.catalog;
   }
 }

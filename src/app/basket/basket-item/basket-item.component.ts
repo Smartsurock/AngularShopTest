@@ -30,7 +30,7 @@ export class BasketItemComponent implements OnInit, OnDestroy {
       });
       this.product = state.products[productIndex];
       this.buyerIndex = state.basket.findIndex(buyer => {
-        return buyer.productId === this.buyer.productId;
+        return buyer.productId === this.buyer.productId && buyer.userMail === this.buyer.userMail;
       });
     });
   }

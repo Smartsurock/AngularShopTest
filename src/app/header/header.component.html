@@ -1,5 +1,5 @@
 <header class="header">
-  <div class="header__catalog" (click)="onCatalog()">Каталог</div>
+  <div class="header__catalog" #catalogBtn (click)="onCatalog()">Каталог</div>
   <div class="header__logo" routerLink="goods">Товары</div>
   <div class="header__search">
     <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
@@ -13,3 +13,7 @@
   </div>
   <div class="header__basket" (click)="onBasket()">Корзина</div>
 </header>
+
+<div [ngClass]="catalog ? 'active' : ''" class="catalog">
+  <app-catalog></app-catalog>
+</div>

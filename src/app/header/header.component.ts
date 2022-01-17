@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -18,8 +18,8 @@ export class HeaderComponent implements OnInit {
 
   searchForm: FormGroup;
   @Output() loginStart = new EventEmitter<boolean>();
-  @Output() catalog = new EventEmitter<boolean>();
   isLogged: boolean = false;
+  catalog: boolean = false;
 
   ngOnInit() {
     this.searchForm = new FormGroup({
@@ -29,10 +29,15 @@ export class HeaderComponent implements OnInit {
     this.store.select('auth').subscribe(state => {
       this.isLogged = state.logged;
     });
+
+
   }
 
   onSubmit() {
-    if (!this.searchForm.value.search.trim()) return;
+    if (!this.searchForm.value.search || !this.searchForm.value.search.trim()) {
+      this.searchForm.reset();
+      return;
+    }
 
     this.router.navigate(['search', { title: this.searchForm.value.search.trim().toLowerCase() }]);
 
@@ -49,14 +54,28 @@ export class HeaderComponent implements OnInit {
 
   onBasket() {
     if (!this.isLogged) {
-      this.onLogin();
       this.store.dispatch(new AuthActions.BasketRedirect(true));
+      this.onLogin();
     } else {
       this.router.navigate(['basket']);
     }
   }
 
   onCatalog() {
-    this.catalog.emit();
+    this.catalog = !this.catalog;
+  }
+
+  @ViewChild('catalogBtn') catalogBtn: ElementRef;
+
+  @HostListener("document:click", ['$event'])
+  onDocumentClick(event) {
+    if (event.target != this.catalogBtn.nativeElement) {
+      this.catalog = false;
+    }
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscape() {
+    this.catalog = false;
   }
 }

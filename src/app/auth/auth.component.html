@@ -6,6 +6,7 @@
     <div class="error" *ngIf="error">
       <app-auth-error [error]="error"></app-auth-error>
     </div>
+    <div *ngIf="warning" class="warning">Сперва нужно авторизироваться!</div>
     <form [formGroup]="authForm" *ngIf="!loading && !error">
       <input formControlName="email" type="email" id="email">
       <input formControlName="password" type="password" id="password">
@@ -14,5 +15,6 @@
         <button type="button" (click)="onSignUp()">Sign Up</button>
       </div>
     </form>
+    <div (click)="onCloseAuth()" class="close">&times;</div>
   </div>
 </div>

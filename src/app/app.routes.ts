@@ -8,7 +8,6 @@ import { ProductsListComponent } from './products/products-list/products-list.co
 import { ProductsComponent } from './products/products.component';
 import { ProductsResolver } from './products/products.resolver';
 import { SearchComponent } from './search/search.component';
-import { SliderComponent } from './slider/slider.component';
 
 export const appRoutes: Routes = [
   { path: '', redirectTo: '/goods', pathMatch: 'full', },

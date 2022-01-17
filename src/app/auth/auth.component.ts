@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
@@ -16,6 +16,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   authForm: FormGroup;
   authSub: Subscription;
   loading: boolean = false;
+  warning: boolean = false;
   error: string = null;
 
   ngOnInit() {
@@ -27,6 +28,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.authSub = this.store.select('auth').subscribe(state => {
       this.loading = state.loading;
       this.error = state.error;
+      this.warning = state.basketRedirect;
     });
   }
 
@@ -48,5 +50,16 @@ export class AuthComponent implements OnInit, OnDestroy {
       email: this.authForm.value.email,
       password: this.authForm.value.password,
     }));
+  }
+
+  onCloseAuth() {
+    this.store.dispatch(new AuthActions.TryToLogin(false));
+    this.store.dispatch(new AuthActions.BasketRedirect(false));
+  }
+
+
+  @HostListener('document:keydown.escape')
+  onEscape() {
+    this.onCloseAuth();
   }
 }
