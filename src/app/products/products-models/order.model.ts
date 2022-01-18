@@ -5,5 +5,6 @@ export class Order {
   constructor(
     public goods: Buyer[],
     public delivery: Delivery,
+    public totalPrice: number,
   ) { }
 }

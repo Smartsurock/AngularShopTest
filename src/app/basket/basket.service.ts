@@ -25,7 +25,7 @@ export class BasketService {
     return userMail;
   }
 
-  onAddToBasket(productId: number) {
+  onAddToBasket(productId: number, price: number) {
     let userMail = this.getUserMail();
 
     if (userMail) {
@@ -52,7 +52,7 @@ export class BasketService {
       };
 
       this.store.dispatch(new ProductsActions.AddToBasket({
-        productId, count: 1, userMail
+        productId, count: 1, price, userMail
       }));
     } else {
       this.store.dispatch(new AuthActions.TryToLogin(true));

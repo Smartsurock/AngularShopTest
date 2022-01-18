@@ -39,7 +39,12 @@
       top: 100%;
       font-size: 20px;
       & i {
+        cursor: pointer;
         text-decoration: underline;
+        transition: 0.4s;
+        &:hover {
+          text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+        }
       }
     }
   }
@@ -120,6 +125,21 @@
     }
     & label {
       cursor: pointer;
+    }
+  }
+  &__price {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 2px;
+    margin: 0px 0px 20px 0px;
+    line-height: 40px;
+    display: flex;
+    justify-content: space-between;
+    & span {
+      padding: 0px 10px;
+      &:last-child {
+        color: red;
+        font-size: 26px;
+      }
     }
   }
 }

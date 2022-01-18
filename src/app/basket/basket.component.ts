@@ -27,6 +27,7 @@ export class BasketComponent implements OnInit, OnDestroy {
   userMail: string;
   orderForm: FormGroup;
   orderAccepted: boolean = false;
+  totalPrice: number = 0;
 
   ngOnInit(): void {
     this.authSub = this.store.select('auth').subscribe(state => {
@@ -40,6 +41,11 @@ export class BasketComponent implements OnInit, OnDestroy {
     this.productsSub = this.store.select('products').subscribe(state => {
       this.buyers = state.basket.filter(buyer => {
         return buyer.userMail === this.userMail;
+      });
+
+      this.totalPrice = 0;
+      this.buyers.forEach(buyer => {
+        this.totalPrice += buyer.count * buyer.price;
       });
     });
 
@@ -61,6 +67,7 @@ export class BasketComponent implements OnInit, OnDestroy {
     this.orderForm = new FormGroup({
       mailService: new FormControl(null, [Validators.required]),
       address: new FormControl(null, [Validators.required]),
+      receiver: new FormControl(null, [Validators.required]),
       telephone: new FormControl(null, [Validators.required, Validators.pattern("[0-9 ]{12}")]),
       payment: new FormControl(null, [Validators.required]),
     });
@@ -73,11 +80,12 @@ export class BasketComponent implements OnInit, OnDestroy {
     const delivery = new Delivery(
       this.orderForm.value.mailService,
       this.orderForm.value.address,
+      this.orderForm.value.receiver,
       this.orderForm.value.telephone,
       this.orderForm.value.payment,
       this.userMail,
     );
-    const order = new Order(this.buyers, delivery);
+    const order = new Order(this.buyers, delivery, this.totalPrice);
 
     this.store.dispatch(new ProductsActions.SaveOrder(order));
 

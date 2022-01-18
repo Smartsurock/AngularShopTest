@@ -5,10 +5,14 @@
     </div>
     <div *ngIf="!buyers.length" class="basket-empty"
       style="background-image: url('https://st.depositphotos.com/2518853/3153/v/450/depositphotos_31537851-stock-illustration-vector-supermarket-cart.jpg');">
-      <span>Ваша корзина пуста, но Вы просто <i>обязаны</i> это исправить!</span>
+      <span>Ваша корзина пуста, но Вы просто <i routerLink="/goods">обязаны</i> это исправить!</span>
     </div>
   </div>
   <form *ngIf="buyers.length" [formGroup]="orderForm" (ngSubmit)="onSubmit()" class="basket-order">
+    <div class="basket-order__price">
+      <span>Всего к оплате:</span>
+      <span>{{totalPrice}} &#8372;</span>
+    </div>
     <div class="basket-order__radio">
       <span>Почтовая служба:</span>
       <div>
@@ -27,6 +31,10 @@
     <div class="basket-order__row">
       <label for="address">Адрес доставки:</label>
       <input formControlName="address" type="text" id="address" name="address">
+    </div>
+    <div class="basket-order__row">
+      <label for="receiver">Имя получателя:</label>
+      <input formControlName="receiver" type="text" id="receiver" name="receiver">
     </div>
     <div class="basket-order__row">
       <label for="telephone">Телефон:</label>

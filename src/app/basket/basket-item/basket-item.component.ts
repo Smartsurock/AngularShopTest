@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Buyer } from 'src/app/products/products-models/buyer.model';
@@ -6,13 +6,14 @@ import { Product } from 'src/app/products/products-models/product.model';
 import * as fromAppReducer from 'src/app/store/app.reducer';
 import * as ProductsActions from 'src/app/products/products-store/products.actions';
 import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-basket-item',
   templateUrl: './basket-item.component.html',
   styleUrls: ['./basket-item.component.scss']
 })
-export class BasketItemComponent implements OnInit, OnDestroy {
+export class BasketItemComponent implements OnInit {
   constructor(
     private store: Store<fromAppReducer.AppState>,
     private router: Router,
@@ -24,7 +25,7 @@ export class BasketItemComponent implements OnInit, OnDestroy {
   buyerIndex: number;
 
   ngOnInit(): void {
-    this.productsSub = this.store.select('products').subscribe(state => {
+    this.store.select('products').pipe(take(1)).subscribe(state => {
       const productIndex = state.products.findIndex(product => {
         return product.id === this.buyer.productId;
       });
@@ -35,24 +36,18 @@ export class BasketItemComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {
-    if (this.productsSub) {
-      this.productsSub.unsubscribe();
-    }
-  }
-
   routerLink() {
     this.router.navigate([`goods/${this.product.category}/${this.product.id}`]);
   }
 
   onPlus() {
-    const newBuyer = new Buyer(this.buyer.productId, this.buyer.count + 1, this.buyer.userMail);
+    const newBuyer = new Buyer(this.buyer.productId, this.buyer.count + 1, this.product.price, this.buyer.userMail);
     this.editCount(newBuyer);
   }
 
   onMinus() {
     if (this.buyer.count === 1) return;
-    const newBuyer = new Buyer(this.buyer.productId, this.buyer.count - 1, this.buyer.userMail);
+    const newBuyer = new Buyer(this.buyer.productId, this.buyer.count - 1, this.product.price, this.buyer.userMail);
     this.editCount(newBuyer);
   }
 

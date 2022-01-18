@@ -60,7 +60,7 @@ export class PoductCardComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onAddToBasket() {
-    this.basketService.onAddToBasket(this.product.id);
+    this.basketService.onAddToBasket(this.product.id, this.product.price);
   }
 
   onProductNavigate() {
