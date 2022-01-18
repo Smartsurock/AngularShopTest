@@ -1,11 +1,8 @@
-<div class="slider__container">
-  <div class="slider__slide" [ngClass]="hideLeft ? 'hideLeft' : ''" [ngClass]="hideRight ? 'hideRight' : ''">
+<div [ngClass]="sliderFullScreen ? 'open' : ''" class="slider__container">
+  <div (click)="closeSlider()" class="slider__close">&times;</div>
+  <div class="slider__slide">
     <div (click)="onLeft()" class="slider__left">&#9668;</div>
-
-    <!-- <div style="background-image: url({{slides[previos]}});" class="slider__previos"></div> -->
-    <div style="background-image: url({{slides[active]}});" class="slider__image"></div>
-    <!-- <div style="background-image: url({{slides[next]}});" class="slider__next"></div> -->
-
+    <div (click)="openSlider()" style="background-image: url({{slides[active]}});" class="slider__image"></div>
     <div (click)="onRight()" class="slider__right">&#9658;</div>
   </div>
   <div class="slider__nav">
