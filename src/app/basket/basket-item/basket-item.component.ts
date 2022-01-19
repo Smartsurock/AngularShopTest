@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Buyer } from 'src/app/products/products-models/buyer.model';
@@ -13,7 +13,7 @@ import { take } from 'rxjs/operators';
   templateUrl: './basket-item.component.html',
   styleUrls: ['./basket-item.component.scss']
 })
-export class BasketItemComponent implements OnInit {
+export class BasketItemComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store<fromAppReducer.AppState>,
     private router: Router,
@@ -25,7 +25,7 @@ export class BasketItemComponent implements OnInit {
   buyerIndex: number;
 
   ngOnInit(): void {
-    this.store.select('products').pipe(take(1)).subscribe(state => {
+    this.productsSub = this.store.select('products').subscribe(state => {
       const productIndex = state.products.findIndex(product => {
         return product.id === this.buyer.productId;
       });
@@ -34,6 +34,12 @@ export class BasketItemComponent implements OnInit {
         return buyer.productId === this.buyer.productId && buyer.userMail === this.buyer.userMail;
       });
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.productsSub) {
+      this.productsSub.unsubscribe();
+    }
   }
 
   routerLink() {

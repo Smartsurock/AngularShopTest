@@ -10,5 +10,7 @@ export class Product {
     public stars: number[],
     public price: number,
     public comments: Comment[],
+    public fabricator: string,
+    public sort: string,
   ) { }
 }

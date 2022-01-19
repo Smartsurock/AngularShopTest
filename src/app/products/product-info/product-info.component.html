@@ -23,8 +23,10 @@
         <div (click)="onAddToBasket()" role="button" class="info__buy">
           Купить
         </div>
-        <span [ngClass]="alreadyInBasket ? 'active' : ''">
-          {{alreadyInBasket ? 'Товар уже в корзине!' : ''}}
+        <span [ngClass]="basketClick ? 'active' : ''">
+          <i [ngClass]="alreadyInBasket ? 'red' : 'green'">
+            {{alreadyInBasket ? 'Товар уже в корзине!' : 'Товар добавлен в корзину.'}}
+          </i>
         </span>
       </div>
       <div class="info__comments">

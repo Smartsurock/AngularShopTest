@@ -3,7 +3,7 @@
   <div class="header__logo" routerLink="goods">Товары</div>
   <div class="header__search">
     <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
-      <input type="text" id="search" formControlName="search">
+      <input type="text" id="search" formControlName="search" placeholder="Поиск ...">
       <button>Найти</button>
     </form>
   </div>

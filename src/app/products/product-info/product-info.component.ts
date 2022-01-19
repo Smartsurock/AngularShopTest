@@ -34,6 +34,7 @@ export class ProductInfoComponent implements OnInit, OnDestroy, AfterViewInit {
   userMail: string;
   alreadyInBasket: number = null;
   needAuthorization: boolean = false;
+  basketClick: boolean = false;
 
   ngOnInit() {
     this.route.params.pipe(take(1)).subscribe((params: Params) => {
@@ -107,6 +108,11 @@ export class ProductInfoComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onAddToBasket() {
+    if (this.basketClick) return;
+    this.basketClick = true;
+    setTimeout(() => {
+      this.basketClick = false;
+    }, 2000);
     this.basketService.onAddToBasket(this.product.id, this.product.price);
   }
 }

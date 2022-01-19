@@ -46,7 +46,6 @@
       position: absolute;
       top: 110%;
       left: 0;
-      color: red;
       opacity: 0;
       visibility: hidden;
       background-color: #fff;
@@ -54,6 +53,12 @@
       z-index: 111;
       &.active {
         animation: alreadyInBasket 2s;
+        & i.red {
+          color: red;
+        }
+        & i.green {
+          color: green;
+        }
       }
     }
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);

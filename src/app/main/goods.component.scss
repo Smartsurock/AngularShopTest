@@ -1,6 +1,7 @@
 .goods {
   &__items {
     display: flex;
+    flex-wrap: wrap;
   }
   &__item {
     flex: 0 0 25%;
