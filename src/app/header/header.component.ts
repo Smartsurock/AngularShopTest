@@ -29,8 +29,6 @@ export class HeaderComponent implements OnInit {
     this.store.select('auth').subscribe(state => {
       this.isLogged = state.logged;
     });
-
-
   }
 
   onSubmit() {
@@ -39,7 +37,9 @@ export class HeaderComponent implements OnInit {
       return;
     }
 
-    this.router.navigate(['search', { title: this.searchForm.value.search.trim().toLowerCase() }]);
+    this.router.navigate(['search',
+      { title: this.searchForm.value.search.trim() }
+    ]);
 
     this.searchForm.reset();
   }

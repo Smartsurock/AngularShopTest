@@ -1,5 +1,11 @@
 <div class="container">
+  <div class="product-filter">
+    <app-products-filter [fabricators]="fabricators" [sorts]="sorts"></app-products-filter>
+  </div>
   <div class="product-card" *ngFor="let product of products">
-    <app-poduct-card [product]="product" [userMail]="userMail"></app-poduct-card>
+    <app-poduct-card [product]="product"></app-poduct-card>
+  </div>
+  <div class="product-empty" *ngIf="!products.length">
+    <span>Голяк !</span>
   </div>
 </div>

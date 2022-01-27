@@ -22,7 +22,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe((param: Params) => {
-      const search = param.title;
+      const search = param.title.toLowerCase();
       this.products = [];
       this.store.select('products').pipe(take(1)).subscribe(state => {
         state.products.forEach(product => {

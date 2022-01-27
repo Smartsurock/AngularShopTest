@@ -1,8 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
 import { Comment } from '../../products-models/comment.model';
-import * as fromAppReducer from 'src/app/store/app.reducer';
 
 @Component({
   selector: 'app-product-info-form',
@@ -11,7 +9,6 @@ import * as fromAppReducer from 'src/app/store/app.reducer';
 })
 export class ProductInfoFormComponent implements OnInit {
   constructor(
-    private store: Store<fromAppReducer.AppState>,
     private renderer: Renderer2,
   ) { }
 

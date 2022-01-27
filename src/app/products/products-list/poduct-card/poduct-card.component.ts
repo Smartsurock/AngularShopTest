@@ -1,13 +1,11 @@
 import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Product } from '../../products-models/product.model';
-import * as fromAppReducer from 'src/app/store/app.reducer';
-import * as ProductsActions from '../../products-store/products.actions';
 import { take } from 'rxjs/operators';
-import * as AuthActions from 'src/app/auth/auth-store/auth.actions';
 import { BasketService } from 'src/app/basket/basket.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import * as fromAppReducer from 'src/app/store/app.reducer';
 
 @Component({
   selector: 'app-poduct-card',
@@ -25,14 +23,13 @@ export class PoductCardComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('starsActive') starsActive: ElementRef;
 
   @Input() product: Product;
-  @Input() userMail: string;
   productGrade: number;
   index: number;
   alreadyInBasket: number = null;
   basketServiceSub: Subscription;
 
   ngOnInit() {
-    this.productGrade = this.product.stars.reduce((a, b) => a + b) / this.product.stars.length;
+    this.productGrade = this.product.stars.reduce(((a, b) => a + b), 0) / this.product.stars.length;
 
     this.store.select('products').pipe(take(1)).subscribe(state => {
       this.index = state.products.findIndex(product => {

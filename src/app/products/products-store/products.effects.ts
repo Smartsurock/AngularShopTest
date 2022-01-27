@@ -28,6 +28,8 @@ export class ProductsEffects {
         return products.map(product => {
           return {
             ...product,
+            images: product.images ? product.images : ['https://steamuserimages-a.akamaihd.net/ugc/959724730134724116/87D4EBC9EC9ACA9DBFF3FD3AFFE854D3A537F4B6/?imw=512&amp;imh=512&amp;ima=fit&amp;impolicy=Letterbox&amp;imcolor=%23000000&amp;letterbox=true'],
+            stars: product.stars ? product.stars : [],
             comments: product.comments ? product.comments : [],
           }
         });

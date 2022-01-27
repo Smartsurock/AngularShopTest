@@ -1,0 +1,23 @@
+<h4>Фильтр</h4>
+<div class="filter">
+  <ul *ngIf="fabricators.length" class="filter__list">
+    <div class="filter__title">Производитель</div>
+    <a class="filter__link" [ngClass]="fabricator.checked ? 'checked' : ''" *ngFor="let fabricator of fabricators"
+      id="{{fabricator.fabricator}}" (click)="onFilterClick(fabricator, $event)">
+      {{toCapitalizeCase(fabricator.fabricator)}}
+    </a>
+  </ul>
+  <ul *ngIf="sorts.length" class="filter__list">
+    <div class="filter__title">Вид</div>
+    <a class="filter__link" [ngClass]="sort.checked ? 'checked' : ''" *ngFor="let sort of sorts" id="{{sort.sort}}"
+      (click)="onFilterClick(sort, $event)">
+      {{toCapitalizeCase(sort.sort)}}
+    </a>
+  </ul>
+</div>
+<div *ngIf="fabricators.length || sorts.length" class="filter__reset">
+  <button (click)="resetFilter()" type="button">Сбросить</button>
+</div>
+<div *ngIf="!fabricators.length || !sorts.length" class="filter__reset">
+  <i>К сожалению фильтров не завезли...</i>
+</div>

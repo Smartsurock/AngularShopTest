@@ -45,7 +45,7 @@ export class ProductInfoComponent implements OnInit, OnDestroy, AfterViewInit {
           return product.id === id;
         });
         this.product = state.products[this.index];
-        this.productGrade = this.product.stars.reduce((a, b) => a + b) / this.product.stars.length;
+        this.productGrade = this.product.stars.reduce(((a, b) => a + b), 0) / this.product.stars.length;
       });
     });
 
