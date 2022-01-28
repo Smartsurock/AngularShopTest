@@ -6,7 +6,6 @@ import { Product } from 'src/app/products/products-models/product.model';
 import * as fromAppReducer from 'src/app/store/app.reducer';
 import * as ProductsActions from 'src/app/products/products-store/products.actions';
 import { Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-basket-item',

@@ -1,11 +1,11 @@
 <div class="container">
   <div class="product-filter">
-    <app-products-filter [fabricators]="fabricators" [sorts]="sorts"></app-products-filter>
+    <app-products-filter [fabricators]="fabricators" [sorts]="sorts" [select]="select"></app-products-filter>
   </div>
   <div class="product-card" *ngFor="let product of products">
     <app-poduct-card [product]="product"></app-poduct-card>
   </div>
-  <div class="product-empty" *ngIf="!products.length">
-    <span>Голяк !</span>
+  <div class="product-empty" *ngIf="!products.length"
+    style="background-image: url('https://tradersterritory.com/uploads/monthly_2020_04/002.gif.c0f9075f773d4062f261881901203450.gif');">
   </div>
 </div>

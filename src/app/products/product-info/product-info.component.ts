@@ -7,7 +7,6 @@ import { Comment } from '../products-models/comment.model';
 import { Subscription } from 'rxjs';
 import * as fromAppReducer from 'src/app/store/app.reducer';
 import * as ProductsActions from '../products-store/products.actions';
-import * as AuthActions from 'src/app/auth/auth-store/auth.actions';
 import { BasketService } from 'src/app/basket/basket.service';
 
 @Component({

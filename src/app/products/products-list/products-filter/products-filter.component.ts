@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -14,8 +15,13 @@ export class ProductsFilterComponent implements OnInit {
 
   @Input() fabricators = [];
   @Input() sorts = [];
+  @Input() select: string;
+  selectForm: FormGroup;
 
   ngOnInit(): void {
+    this.selectForm = new FormGroup({
+      select: new FormControl(this.select),
+    });
   }
 
   toCapitalizeCase(name: string) {
@@ -75,6 +81,14 @@ export class ProductsFilterComponent implements OnInit {
       this.useFilter(filterKey, null);
     } else {
       this.useFilter(filterKey, queryParams.join(','));
+    }
+  }
+
+  selectChanges(event) {
+    if (event.target.value === 'default') {
+      this.useFilter('sorting', null);
+    } else {
+      this.useFilter('sorting', event.target.value);
     }
   }
 }

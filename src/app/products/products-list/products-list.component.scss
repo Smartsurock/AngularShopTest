@@ -17,9 +17,11 @@
     flex: 0 0 25%;
   }
   &-empty {
-    text-align: center;
-    font-weight: 500;
-    font-size: 22px;
-    margin: 50px auto 0px;
+    width: 498px;
+    height: 280px;
+    margin: 50px auto;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
   }
 }

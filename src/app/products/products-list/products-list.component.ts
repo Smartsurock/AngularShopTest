@@ -25,6 +25,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
 
   fabricators = [];
   sorts = [];
+  select: string = 'default';
 
   ngOnInit() {
     this.paramsSub = this.route.params.subscribe((params: Params) => {
@@ -33,13 +34,22 @@ export class ProductsListComponent implements OnInit, OnDestroy {
     });
 
     this.queryParamsSub = this.route.queryParams.subscribe((params: Params) => {
-      let fabricator = params['fabricator'];
-      let sort = params['sort'];
+      const fabricator = params['fabricator'];
+      const sort = params['sort'];
 
       if (fabricator || sort) {
         this.filterProductsList(fabricator, sort);
       } else {
         this.updateProductsList();
+      }
+
+      const sorting = params['sorting'];
+
+      if (sorting) {
+        this.select = sorting;
+        this.sortingProducts(sorting);
+      } else {
+        this.select = 'default';
       }
     });
   }
@@ -121,7 +131,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
     this.fabricators = [];
     this.sorts = [];
     this.products.forEach(product => {
-      if (product.filters) {
+      if (product.filters.fabricator) {
         if (!this.fabricators.includes(JSON.stringify({
           checked: false,
           fabricator: product.filters.fabricator,
@@ -131,6 +141,8 @@ export class ProductsListComponent implements OnInit, OnDestroy {
             fabricator: product.filters.fabricator,
           }));
         }
+      }
+      if (product.filters.sort) {
         if (!this.sorts.includes(JSON.stringify({
           checked: false,
           sort: product.filters.sort,
@@ -149,6 +161,28 @@ export class ProductsListComponent implements OnInit, OnDestroy {
     this.sorts = this.sorts.map(el => {
       return JSON.parse(el);
     });
+  }
+
+  sortingProducts(value: string) {
+    switch (value) {
+      case 'lowPrice':
+        this.products.sort((a, b) => {
+          return a.price - b.price;
+        });
+        break;
+      case 'highPrice':
+        this.products.sort((a, b) => {
+          return b.price - a.price;
+        });
+        break;
+      case 'rating':
+        this.products.sort((a, b) => {
+          return b.stars.reduce(((a, b) => a + b), 0) / b.stars.length - a.stars.reduce(((a, b) => a + b), 0) / a.stars.length;
+        });
+        break;
+
+      default: return;
+    }
   }
 
   ngOnDestroy() {
