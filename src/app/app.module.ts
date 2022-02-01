@@ -35,6 +35,7 @@ import { SliderComponent } from './slider/slider.component';
 import { SearchComponent } from './search/search.component';
 import { SearchEmptyComponent } from './search/search-empty/search-empty.component';
 import { ProductsFilterComponent } from './products/products-list/products-filter/products-filter.component';
+import { SearchDirective } from './header/search.directive';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { ProductsFilterComponent } from './products/products-list/products-filte
     GoodsComponent,
     BasketItemComponent,
     DropdownDirective,
+    SearchDirective,
     ErrorPageComponent,
     AuthErrorComponent,
     SpinnerComponent,

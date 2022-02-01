@@ -54,7 +54,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
     });
   }
 
-  filterProductsList(fabricator?, sort?) {
+  filterProductsList(fabricator?: string, sort?: string) {
     if (fabricator) {
       this.products = this.fromCategory.filter(product => {
         let temp = false;
@@ -177,7 +177,15 @@ export class ProductsListComponent implements OnInit, OnDestroy {
         break;
       case 'rating':
         this.products.sort((a, b) => {
-          return b.stars.reduce(((a, b) => a + b), 0) / b.stars.length - a.stars.reduce(((a, b) => a + b), 0) / a.stars.length;
+          let num1 = b.stars.reduce(((a, b) => a + b), 0) / b.stars.length;
+          let num2 = a.stars.reduce(((a, b) => a + b), 0) / a.stars.length;
+          if (!b.stars.length) {
+            num1 = 0;
+          }
+          if (!a.stars.length) {
+            num2 = 0;
+          }
+          return num1 - num2;
         });
         break;
 

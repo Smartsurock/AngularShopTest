@@ -69,7 +69,7 @@ export class HeaderComponent implements OnInit {
 
   @HostListener("document:click", ['$event'])
   onDocumentClick(event) {
-    if (event.target != this.catalogBtn.nativeElement) {
+    if (event.target.closest('.header__catalog') !== this.catalogBtn.nativeElement) {
       this.catalog = false;
     }
   }

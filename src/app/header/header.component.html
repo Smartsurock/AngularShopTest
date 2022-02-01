@@ -1,17 +1,59 @@
 <header class="header">
-  <div class="header__catalog" #catalogBtn (click)="onCatalog()">Каталог</div>
-  <div class="header__logo" routerLink="goods">Товары</div>
+  <div class="header__catalog" #catalogBtn (click)="onCatalog()">
+    <p>Каталог</p>
+    <span class="fa-album"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="album-collection"
+        role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+        <path fill="currentColor"
+          d="M496 104a24 24 0 0 0-24-24H40a24 24 0 0 0-24 24v24h480zm-16-80a24 24 0 0 0-24-24H56a24 24 0 0 0-24 24v24h448zM256 325.65c-16.63 0-30 9.93-29.86 22.09s13.5 21.72 29.86 21.72 29.73-9.68 29.87-21.72-13.23-22.09-29.87-22.09zM480 160H32A32 32 0 0 0 .13 194.9l26.19 288A32 32 0 0 0 58.18 512h395.64a32 32 0 0 0 31.86-29.1l26.19-288A32 32 0 0 0 480 160zM256 472.89c-94.26 0-174.39-54.53-179.21-125.15C71.71 273.1 151.82 209.4 256 209.4s184.29 63.7 179.21 138.34c-4.82 70.63-84.95 125.15-179.21 125.15z"
+          class=""></path>
+      </svg></span>
+  </div>
+  <div class="header__logo" routerLink="goods">
+    <p>Товары</p>
+    <span class="fa-chest"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="treasure-chest"
+        role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+        <path fill="currentColor"
+          d="M0 448c0 17.67 14.33 32 32 32h64V288H0v160zm0-320v128h96V32C42.98 32 0 74.98 0 128zm352 208c0 8.84-7.16 16-16 16h-96c-8.84 0-16-7.16-16-16v-48h-96v192h320V288h-96v48zm128 144h64c17.67 0 32-14.33 32-32V288h-96v192zM128 256h96v-48c0-8.84 7.16-16 16-16h96c8.84 0 16 7.16 16 16v48h96V32H128v224zM480 32v224h96V128c0-53.02-42.98-96-96-96zM304 304v-64c0-8.84-7.16-16-16-16s-16 7.16-16 16v64c0 8.84 7.16 16 16 16s16-7.16 16-16z"
+          class=""></path>
+      </svg></span>
+  </div>
   <div class="header__search">
+    <div searchDirective class="header__search-open">Поиск</div>
     <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
       <input type="text" id="search" formControlName="search" placeholder="Поиск ...">
-      <button>Найти</button>
+      <button><span>Найти</span></button>
     </form>
   </div>
-  <div class="header__user">
-    <span *ngIf="!isLogged" (click)="onLogin()">Войти</span>
-    <span *ngIf="isLogged" (click)="onLogout()">Выйти</span>
+  <div dropdownDirective class="header__user">
+    <p *ngIf="!isLogged">
+      <button class="fa fa-user"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" role="img"
+          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+          <path fill="currentColor"
+            d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"
+            class=""></path>
+        </svg></button>
+      <span (click)="onLogin()">Войти</span>
+    </p>
+    <p *ngIf="isLogged">
+      <button class="fa fa-door"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="door-open"
+          role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+          <path fill="currentColor"
+            d="M624 448h-80V113.45C544 86.19 522.47 64 496 64H384v64h96v384h144c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16zM312.24 1.01l-192 49.74C105.99 54.44 96 67.7 96 82.92V448H16c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h336V33.18c0-21.58-19.56-37.41-39.76-32.17zM264 288c-13.25 0-24-14.33-24-32s10.75-32 24-32 24 14.33 24 32-10.75 32-24 32z"
+            class=""></path>
+        </svg></button>
+      <span (click)="onLogout()">Выйти</span>
+    </p>
   </div>
-  <div class="header__basket" (click)="onBasket()">Корзина</div>
+  <div class="header__basket" (click)="onBasket()">
+    <p>Корзина</p>
+    <span><svg class="header__basket-icon" aria-hidden="true" focusable="false" data-prefix="fas"
+        data-icon="cart-arrow-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+        <path fill="currentColor"
+          d="M504.717 320H211.572l6.545 32h268.418c15.401 0 26.816 14.301 23.403 29.319l-5.517 24.276C523.112 414.668 536 433.828 536 456c0 31.202-25.519 56.444-56.824 55.994-29.823-.429-54.35-24.631-55.155-54.447-.44-16.287 6.085-31.049 16.803-41.548H231.176C241.553 426.165 248 440.326 248 456c0 31.813-26.528 57.431-58.67 55.938-28.54-1.325-51.751-24.385-53.251-52.917-1.158-22.034 10.436-41.455 28.051-51.586L93.883 64H24C10.745 64 0 53.255 0 40V24C0 10.745 10.745 0 24 0h102.529c11.401 0 21.228 8.021 23.513 19.19L159.208 64H551.99c15.401 0 26.816 14.301 23.403 29.319l-47.273 208C525.637 312.246 515.923 320 504.717 320zM403.029 192H360v-60c0-6.627-5.373-12-12-12h-24c-6.627 0-12 5.373-12 12v60h-43.029c-10.691 0-16.045 12.926-8.485 20.485l67.029 67.029c4.686 4.686 12.284 4.686 16.971 0l67.029-67.029c7.559-7.559 2.205-20.485-8.486-20.485z">
+        </path>
+      </svg>
+    </span>
+  </div>
 </header>
 
 <div [ngClass]="catalog ? 'active' : ''" class="catalog">

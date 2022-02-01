@@ -35,7 +35,7 @@
   }
   &__delete {
     position: absolute;
-    top: -12px;
+    top: 0;
     right: 0;
     user-select: none;
     & span {
@@ -45,7 +45,7 @@
       font-size: 24px;
       padding: 0px 5px;
       &:hover {
-        text-shadow: 0 0 3px #000;
+        text-shadow: 0 0 1px #000;
       }
     }
     & button {
