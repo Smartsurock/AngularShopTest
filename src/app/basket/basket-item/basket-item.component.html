@@ -5,14 +5,14 @@
       <span (click)="routerLink()">{{product.name}}</span>
     </div>
     <div class="item__price">{{product.price}} &#8372;</div>
+  </div>
+  <div class="item__count">
+    <span (click)="onMinus()" class="item__minus" [ngClass]="buyer.count === 1 ? 'disabled' : ''">&minus;</span>
+    <span class="item__number">{{buyer.count}}</span>
+    <span (click)="onPlus()" class="item__plus">+</span>
     <div dropdownDirective class="item__delete">
       <span>&#9850;</span>
       <button type="button" (click)="onDelete()">Удалить товар</button>
     </div>
-  </div>
-  <div class="item__count">
-    <span (click)="onMinus()" class="item__plus">&minus;</span>
-    <span class="item__number">{{buyer.count}}</span>
-    <span (click)="onPlus()" class="item__minus">+</span>
   </div>
 </div>

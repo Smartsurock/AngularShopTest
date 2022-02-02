@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -17,6 +17,8 @@ export class ProductsFilterComponent implements OnInit {
   @Input() sorts = [];
   @Input() select: string;
   selectForm: FormGroup;
+  openFilter: boolean = false;
+  @Output() filterOpen = new EventEmitter<boolean>();
 
   ngOnInit(): void {
     this.selectForm = new FormGroup({
@@ -90,5 +92,10 @@ export class ProductsFilterComponent implements OnInit {
     } else {
       this.useFilter('sorting', event.target.value);
     }
+  }
+
+  openFilters() {
+    this.openFilter = !this.openFilter;
+    this.filterOpen.emit(this.openFilter);
   }
 }

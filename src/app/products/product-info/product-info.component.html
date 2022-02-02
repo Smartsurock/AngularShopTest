@@ -10,27 +10,31 @@
       </div>
     </div>
     <div class="info__right">
-      <div class="info__rating stars">
-        <div class="stars__container">
-          <div class="stars__body">
-            <div #starsActive class="stars__active"></div>
-          </div>
-          <div class="stars__value">{{productGrade ? productGrade.toFixed(2) : 0}} (оценок: {{product.stars.length}})
+      <div class="info__block">
+        <div class="info__rating stars">
+          <h4>Рейтинг товара:</h4>
+          <div class="stars__container">
+            <div class="stars__body">
+              <div #starsActive class="stars__active"></div>
+            </div>
+            <div class="stars__value">{{productGrade ? productGrade.toFixed(2) : 0}} (оценок: {{product.stars.length}})
+            </div>
           </div>
         </div>
-      </div>
-      <div class="info__basket">
-        <div class="info__price">{{product.price}} &#8372;</div>
-        <div (click)="onAddToBasket()" role="button" class="info__buy">
-          Купить
+        <div class="info__basket">
+          <div class="info__price">{{product.price}} &#8372;</div>
+          <div (click)="onAddToBasket()" role="button" class="info__buy">
+            Купить
+          </div>
+          <span [ngClass]="basketClick ? 'active' : ''">
+            <i [ngClass]="alreadyInBasket ? 'red' : 'green'">
+              {{alreadyInBasket ? 'Товар уже в корзине!' : 'Товар добавлен в корзину.'}}
+            </i>
+          </span>
         </div>
-        <span [ngClass]="basketClick ? 'active' : ''">
-          <i [ngClass]="alreadyInBasket ? 'red' : 'green'">
-            {{alreadyInBasket ? 'Товар уже в корзине!' : 'Товар добавлен в корзину.'}}
-          </i>
-        </span>
       </div>
       <div class="info__comments">
+        <h3>Отзывы:</h3>
         <app-product-info-comment *ngFor="let comment of product.comments" [comment]="comment">
         </app-product-info-comment>
       </div>

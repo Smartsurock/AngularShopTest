@@ -3,18 +3,50 @@
   flex-wrap: wrap;
   width: calc(100% - 200px);
   margin-left: auto;
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+  &.open {
+    .product-filter {
+      transform: translateX(0);
+    }
+  }
 }
 .product {
   &-filter {
     position: fixed;
     width: 200px;
-    height: calc(100% - 90px);
+    height: calc(100vh - 90px);
     border-right: 1px solid rgba(0, 0, 0, 0.3);
     left: 0;
+    top: 80px;
     padding: 10px;
+    transition: 0.4s;
+    @media (max-width: 767px) {
+      transform: translateX(-200px);
+      background-color: rgb(245, 245, 245);
+      z-index: 13;
+      height: calc(100% - 70px);
+      top: 70px;
+      border-top: 1px solid rgba(0, 0, 0, 0.3);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    }
+    @media (max-width: 450px) {
+      height: calc(100% - 120px);
+      top: 95px;
+    }
   }
   &-card {
     flex: 0 0 25%;
+    @media (max-width: 1000px) {
+      flex: 0 0 33.333%;
+    }
+    @media (max-width: 600px) {
+      flex: 0 0 50%;
+    }
+    @media (max-width: 360px) {
+      flex: 0 0 100%;
+    }
   }
   &-empty {
     width: 498px;

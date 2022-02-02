@@ -1,6 +1,7 @@
-<div class="container">
+<div class="container" [ngClass]="openFilter ? 'open' : ''">
   <div class="product-filter">
-    <app-products-filter [fabricators]="fabricators" [sorts]="sorts" [select]="select"></app-products-filter>
+    <app-products-filter (filterOpen)="onFilterOpen($event)" [fabricators]="fabricators" [sorts]="sorts"
+      [select]="select"></app-products-filter>
   </div>
   <div class="product-card" *ngFor="let product of products">
     <app-poduct-card [product]="product"></app-poduct-card>

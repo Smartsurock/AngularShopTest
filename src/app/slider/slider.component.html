@@ -1,9 +1,10 @@
 <div [ngClass]="sliderFullScreen ? 'open' : ''" class="slider__container">
   <div (click)="closeSlider()" class="slider__close">&times;</div>
   <div class="slider__slide">
-    <div (click)="onLeft()" class="slider__left">&#9668;</div>
-    <div (click)="openSlider()" style="background-image: url({{slides[active]}});" class="slider__image"></div>
-    <div (click)="onRight()" class="slider__right">&#9658;</div>
+    <div (click)="onLeft()" *ngIf="this.slides.length > 1" class="slider__left">&#9668;</div>
+    <div (click)="openSlider()" style="background-image: url({{slides[active]}});" class="slider__image">
+    </div>
+    <div (click)="onRight()" *ngIf="this.slides.length > 1" class="slider__right">&#9658;</div>
   </div>
   <div class="slider__nav">
     <div *ngFor="let slide of slides; let i = index" (click)="onNavClick(i)" [ngClass]="active === i ? 'active' : ''"

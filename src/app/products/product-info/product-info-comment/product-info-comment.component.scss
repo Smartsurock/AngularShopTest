@@ -2,6 +2,9 @@
   &__container {
     display: flex;
     align-items: center;
+    @media (max-width: 767px) {
+      justify-content: end;
+    }
   }
   &__body {
     position: relative;
@@ -29,25 +32,22 @@
       color: #ff8800;
     }
   }
-  &__value {
-    margin: 0px 0px 0px 15px;
-    font-size: 13px;
-  }
 }
 .comment {
   border-bottom: 1px solid rgb(75, 75, 75);
   padding: 0px 0px 10px 0px;
+  @media (max-width: 767px) {
+    text-align: right;
+  }
   &__name {
     overflow: hidden;
     text-overflow: ellipsis;
     font-weight: 500;
     font-size: 18px;
-    margin: 0px 0px 10px 0px;
   }
   &__text {
     overflow: hidden;
     text-overflow: ellipsis;
     color: rgb(75, 75, 75);
-    padding: 0px 10px 0px 0px;
   }
 }

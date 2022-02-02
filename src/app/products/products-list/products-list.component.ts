@@ -3,8 +3,8 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { Product } from '../products-models/product.model';
-import * as fromAppReducer from 'src/app/store/app.reducer';
 import { take } from 'rxjs/operators';
+import * as fromAppReducer from 'src/app/store/app.reducer';
 
 @Component({
   selector: 'app-products-list',
@@ -26,6 +26,8 @@ export class ProductsListComponent implements OnInit, OnDestroy {
   fabricators = [];
   sorts = [];
   select: string = 'default';
+
+  openFilter: boolean = false;
 
   ngOnInit() {
     this.paramsSub = this.route.params.subscribe((params: Params) => {
@@ -202,5 +204,9 @@ export class ProductsListComponent implements OnInit, OnDestroy {
     if (subscription) {
       subscription.unsubscribe();
     }
+  }
+
+  onFilterOpen(value: boolean) {
+    this.openFilter = value;
   }
 }

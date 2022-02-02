@@ -1,39 +1,41 @@
-<div class="filter">
-  <h4>Фильтр</h4>
-  <div class="filter__body">
-    <ul *ngIf="fabricators.length" class="filter__list">
-      <div class="filter__title">Производитель</div>
-      <a class="filter__link" [ngClass]="fabricator.checked ? 'checked' : ''" *ngFor="let fabricator of fabricators"
-        id="{{fabricator.fabricator}}" (click)="onFilterClick(fabricator, $event)">
-        {{toCapitalizeCase(fabricator.fabricator)}}
-      </a>
-    </ul>
-    <ul *ngIf="sorts.length" class="filter__list">
-      <div class="filter__title">Тип</div>
-      <a class="filter__link" [ngClass]="sort.checked ? 'checked' : ''" *ngFor="let sort of sorts" id="{{sort.sort}}"
-        (click)="onFilterClick(sort, $event)">
-        {{toCapitalizeCase(sort.sort)}}
-      </a>
-    </ul>
+<div class="side-menu" [ngClass]="openFilter ? 'open' : ''">
+  <div class="sorting">
+    <div class="filter__toggle" (click)="openFilters()"><span>&#10148;</span></div>
+    <h4>Сортировка</h4>
+    <div class="sorting__body">
+      <form [formGroup]="selectForm" class="sorting__select">
+        <select (change)="selectChanges($event)" formControlName="select">
+          <option [selected]="select === 'default' ? true : false" value="default">Произвольно</option>
+          <option value="lowPrice">Подешевле</option>
+          <option value="highPrice">Подороже</option>
+          <option value="rating">Покачественней</option>
+        </select>
+      </form>
+    </div>
   </div>
-  <div *ngIf="fabricators.length || sorts.length" class="filter__reset">
-    <button (click)="resetFilter()" type="button">Сбросить</button>
-  </div>
-  <div *ngIf="!fabricators.length && !sorts.length" class="filter__reset">
-    <i>К сожалению фильтров не завезли...</i>
-  </div>
-</div>
-<div class="sorting">
-  <h4>Сортировка</h4>
-  <p></p>
-  <div class="sorting__body">
-    <form [formGroup]="selectForm" class="sorting__select">
-      <select (change)="selectChanges($event)" formControlName="select">
-        <option [selected]="select === 'default' ? true : false" value="default">Произвольно</option>
-        <option value="lowPrice">Подешевле</option>
-        <option value="highPrice">Подороже</option>
-        <option value="rating">Покачественней</option>
-      </select>
-    </form>
+  <div class="filter">
+    <h4>Фильтр</h4>
+    <div class="filter__body">
+      <ul *ngIf="fabricators.length" class="filter__list">
+        <div class="filter__title">Производитель</div>
+        <a class="filter__link" [ngClass]="fabricator.checked ? 'checked' : ''" *ngFor="let fabricator of fabricators"
+          id="{{fabricator.fabricator}}" (click)="onFilterClick(fabricator, $event)">
+          {{toCapitalizeCase(fabricator.fabricator)}}
+        </a>
+      </ul>
+      <ul *ngIf="sorts.length" class="filter__list">
+        <div class="filter__title">Тип</div>
+        <a class="filter__link" [ngClass]="sort.checked ? 'checked' : ''" *ngFor="let sort of sorts" id="{{sort.sort}}"
+          (click)="onFilterClick(sort, $event)">
+          {{toCapitalizeCase(sort.sort)}}
+        </a>
+      </ul>
+    </div>
+    <div *ngIf="fabricators.length || sorts.length" class="filter__reset">
+      <button (click)="resetFilter()" type="button">Сбросить</button>
+    </div>
+    <div *ngIf="!fabricators.length && !sorts.length" class="filter__reset">
+      <i>К сожалению фильтров не завезли...</i>
+    </div>
   </div>
 </div>

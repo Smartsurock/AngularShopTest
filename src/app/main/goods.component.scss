@@ -7,6 +7,15 @@
     flex: 0 0 25%;
     padding: 0px 10px;
     cursor: pointer;
+    @media (max-width: 1000px) {
+      flex: 0 0 33.333%;
+    }
+    @media (max-width: 700px) {
+      flex: 0 0 50%;
+    }
+    @media (max-width: 400px) {
+      flex: 0 0 100%;
+    }
   }
   &__image {
     width: 100%;
