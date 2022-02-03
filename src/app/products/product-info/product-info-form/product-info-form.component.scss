@@ -2,6 +2,9 @@
 @import "../../../scss/mixins.scss";
 
 .rating {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   &__container {
     display: flex;
     align-items: center;
@@ -58,6 +61,7 @@
 }
 .form {
   &__inputs {
+    flex: 1 1 auto;
     & label {
       display: block;
       cursor: pointer;
@@ -77,13 +81,13 @@
     }
     & textarea {
       width: 100%;
+      height: calc(100% - 80px);
       line-height: 30px;
       padding: 0px 10px;
       font-size: 16px;
       color: rgb(114, 114, 114);
       border: 1px solid rgba(0, 0, 0, 0.1);
       border-radius: $border-radius;
-      margin: 0px 0px 10px 0px;
       resize: none;
       &.ng-touched.ng-invalid {
         border: 1px solid red;
@@ -92,6 +96,7 @@
   }
   &__buttons {
     display: flex;
+    margin: 10px 0px;
     & button {
       flex: 0 0 calc(50% - 5px);
       line-height: 30px;
