@@ -1,15 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { appAnimation } from './app.animation';
 import * as AuthActions from './auth/auth-store/auth.actions';
 import * as fromAppReducer from './store/app.reducer';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  animations: [appAnimation]
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy {
   constructor(private store: Store<fromAppReducer.AppState>) { }

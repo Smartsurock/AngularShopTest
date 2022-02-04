@@ -4,5 +4,5 @@
   </div>
 </div>
 <div *ngIf="!products.length" class="search-empty">
-  <app-search-empty></app-search-empty>
+  <app-search-empty [searchRequest]="searchRequest"></app-search-empty>
 </div>

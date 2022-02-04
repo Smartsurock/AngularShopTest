@@ -30,7 +30,7 @@ export const appRoutes: Routes = [
   },
   {
     path: 'error', component: ErrorPageComponent,
-    data: { message: 'Такая страница не существует или ещё не создана...' }
+    data: { message: 'Такая страница не существует или ещё не создана...' },
   },
   { path: '**', redirectTo: '/error', pathMatch: 'full' },
 ];

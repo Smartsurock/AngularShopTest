@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-
 import { AppComponent } from './app.component';
 import { appRoutes } from './app.routes';
 import { HeaderComponent } from './header/header.component';
@@ -14,7 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import * as fromAppReducer from './store/app.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './auth/auth-store/auth.effects';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProductsComponent } from './products/products.component';
 import { ProductInfoComponent } from './products/product-info/product-info.component';
 import { ProductsListComponent } from './products/products-list/products-list.component';
@@ -36,6 +35,8 @@ import { SearchComponent } from './search/search.component';
 import { SearchEmptyComponent } from './search/search-empty/search-empty.component';
 import { ProductsFilterComponent } from './products/products-list/products-filter/products-filter.component';
 import { SearchDirective } from './header/search.directive';
+import { AuthInterceptor } from './auth/auth.interceptor';
+import { SearchFormComponent } from './header/search-form/search-form.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { SearchDirective } from './header/search.directive';
     SearchComponent,
     SearchEmptyComponent,
     ProductsFilterComponent,
+    SearchFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,7 +76,9 @@ import { SearchDirective } from './header/search.directive';
     BrowserAnimationsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

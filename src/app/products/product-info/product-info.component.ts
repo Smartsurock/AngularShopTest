@@ -107,11 +107,13 @@ export class ProductInfoComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onAddToBasket() {
-    if (this.basketClick) return;
-    this.basketClick = true;
-    setTimeout(() => {
-      this.basketClick = false;
-    }, 2000);
+    if (this.basketService.getUserMail()) {
+      if (this.basketClick) return;
+      this.basketClick = true;
+      setTimeout(() => {
+        this.basketClick = false;
+      }, 2000);
+    }
     this.basketService.onAddToBasket(this.product.id, this.product.price);
   }
 }

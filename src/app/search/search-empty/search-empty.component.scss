@@ -1,7 +1,54 @@
+@import "../../scss/variables.scss";
+
 .search {
   text-align: center;
   width: 100%;
   font-size: 20px;
   padding: 50px 0px;
   line-height: 30px;
+  &-form {
+    max-width: 800px;
+    margin: 20px auto 0px;
+    & form {
+      display: flex;
+      height: 30px;
+      @media (max-width: 500px) {
+        display: block;
+      }
+    }
+    & input {
+      flex: 1 1 auto;
+      height: 100%;
+      border-radius: $border-radius;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      font-size: 16px;
+      margin: 0px 5px 0px 0px;
+      padding: 0px 10px;
+      @media (max-width: 500px) {
+        width: 100%;
+        margin: 0px 0px 10px 0px;
+      }
+    }
+    & button {
+      height: 100%;
+      border-radius: $border-radius;
+      background-color: $dark-main-color;
+      font-size: 16px;
+      padding: 0px 10px;
+      transition: 0.3s;
+      @media (max-width: 500px) {
+        padding: 0px 30px;
+      }
+      @media (max-width: 400px) {
+        width: 100%;
+      }
+      &:hover {
+        box-shadow: 0 0 5px inset rgb(0, 100, 22), 0 0 10px inset rgb(0, 100, 22);
+        background-color: $main-color;
+      }
+    }
+  }
+  @media (max-width: 420px) {
+    font-size: 18px;
+  }
 }

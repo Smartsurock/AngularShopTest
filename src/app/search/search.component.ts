@@ -19,19 +19,24 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   routeSub: Subscription;
   products: Product[] = [];
+  searchRequest: string;
 
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe((param: Params) => {
-      const search = param.title.toLowerCase();
       this.products = [];
-      this.store.select('products').pipe(take(1)).subscribe(state => {
-        state.products.forEach(product => {
-          if (product.category.toLowerCase().search(search) !== -1 ||
-            product.name.toLowerCase().search(search) !== -1) {
-            this.products.push(product);
-          }
+      if (param.title) {
+        this.searchRequest = param.title;
+        this.store.select('products').pipe(take(1)).subscribe(state => {
+          state.products.forEach(product => {
+            if (product.category.toLowerCase().search(
+              this.searchRequest.toLowerCase()) !== -1
+              || product.name.toLowerCase().search(
+                this.searchRequest.toLowerCase()) !== -1) {
+              this.products.push(product);
+            }
+          });
         });
-      });
+      }
     });
   }
 
@@ -40,8 +45,6 @@ export class SearchComponent implements OnInit, OnDestroy {
   }
 
   unsubscriber(subscription: Subscription) {
-    if (subscription) {
-      subscription.unsubscribe();
-    }
+    if (subscription) subscription.unsubscribe();
   }
 }

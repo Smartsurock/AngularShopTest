@@ -15,7 +15,6 @@ export class SearchDirective {
 
   @HostListener('document:click', ['$event'])
   dropdownOpen(event: Event) {
-
     if (this.element.nativeElement.nextSibling.children[0].contains(event.target)) return;
 
     this.element.nativeElement.contains(event.target)

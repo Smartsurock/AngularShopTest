@@ -1,0 +1,7 @@
+<div class="header__search">
+  <div searchDirective class="header__search-open">Поиск</div>
+  <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+    <input type="text" id="search" formControlName="search" placeholder="Поиск ...">
+    <button><span>Найти</span></button>
+  </form>
+</div>

@@ -1,4 +1,10 @@
 <div class="search">
   <p>По Вашему запросу ничего не найдено.</p>
   <p>Пожалуйста, уточните поисковой запрос.</p>
+  <div class="search-form">
+    <form [formGroup]="clarifyForm" (ngSubmit)="onSubmit()">
+      <input #input type="text" id="search" formControlName="search">
+      <button><span>Уточнить</span></button>
+    </form>
+  </div>
 </div>

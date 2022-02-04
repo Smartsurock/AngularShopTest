@@ -17,13 +17,7 @@
           class=""></path>
       </svg></span>
   </div>
-  <div class="header__search">
-    <div searchDirective class="header__search-open">Поиск</div>
-    <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
-      <input type="text" id="search" formControlName="search" placeholder="Поиск ...">
-      <button><span>Найти</span></button>
-    </form>
-  </div>
+  <app-search-form class="header__search"></app-search-form>
   <div dropdownDirective class="header__user">
     <p *ngIf="!isLogged">
       <button class="fa fa-user"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user" role="img"

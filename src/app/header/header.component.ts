@@ -1,7 +1,7 @@
-import { Component, ElementRef, EventEmitter, HostListener, OnInit, Output, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, ElementRef, EventEmitter, HostListener, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import * as AuthActions from '../auth/auth-store/auth.actions';
 import * as fromAppReducer from '../store/app.reducer';
 
@@ -10,38 +10,27 @@ import * as fromAppReducer from '../store/app.reducer';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store<fromAppReducer.AppState>,
     private router: Router,
   ) { }
 
-  searchForm: FormGroup;
   @Output() loginStart = new EventEmitter<boolean>();
   isLogged: boolean = false;
   catalog: boolean = false;
+  authSub: Subscription;
 
   ngOnInit() {
-    this.searchForm = new FormGroup({
-      search: new FormControl(null),
-    });
-
-    this.store.select('auth').subscribe(state => {
+    this.authSub = this.store.select('auth').subscribe(state => {
       this.isLogged = state.logged;
     });
   }
 
-  onSubmit() {
-    if (!this.searchForm.value.search || !this.searchForm.value.search.trim()) {
-      this.searchForm.reset();
-      return;
+  ngOnDestroy(): void {
+    if (this.authSub) {
+      this.authSub.unsubscribe();
     }
-
-    this.router.navigate(['search',
-      { title: this.searchForm.value.search.trim() }
-    ]);
-
-    this.searchForm.reset();
   }
 
   onLogin() {
