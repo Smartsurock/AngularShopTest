@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs/operators';
@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import * as fromAppReducer from 'src/app/store/app.reducer';
 import * as ProductsActions from '../products-store/products.actions';
 import { BasketService } from 'src/app/basket/basket.service';
+import { StarsService } from './stars.service';
 
 @Component({
   selector: 'app-product-info',
@@ -17,9 +18,9 @@ import { BasketService } from 'src/app/basket/basket.service';
 export class ProductInfoComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private route: ActivatedRoute,
-    private renderer: Renderer2,
     private store: Store<fromAppReducer.AppState>,
     private basketService: BasketService,
+    private starsService: StarsService,
   ) { }
 
   product: Product;
@@ -63,7 +64,7 @@ export class ProductInfoComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.setStarsValue(this.starsActive, this.productGrade);
+    this.starsService.setStarsValue(this.starsActive, this.productGrade);
   }
 
   ngOnDestroy(): void {
@@ -73,13 +74,7 @@ export class ProductInfoComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   unsubscriber(subscription: Subscription) {
-    if (subscription) {
-      subscription.unsubscribe();
-    }
-  }
-
-  setStarsValue(active: ElementRef, grade: number) {
-    this.renderer.setStyle(active.nativeElement, 'width', `${grade / 0.05}%`);
+    if (subscription) subscription.unsubscribe();
   }
 
   onAddComment(comment?: Comment) {
@@ -95,13 +90,13 @@ export class ProductInfoComponent implements OnInit, OnDestroy, AfterViewInit {
 
       if (comment) {
         const newProduct: Product = JSON.parse(JSON.stringify(this.product));
-        newProduct.comments.unshift(comment);
+        newProduct.comments.push(comment);
         newProduct.stars.push(+comment.rating);
         this.store.dispatch(new ProductsActions.EditProduct({
           newProduct, index: this.index
         }));
 
-        this.setStarsValue(this.starsActive, this.productGrade);
+        this.starsService.setStarsValue(this.starsActive, this.productGrade);
       }
     }
   }

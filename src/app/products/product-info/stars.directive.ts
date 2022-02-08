@@ -8,7 +8,7 @@ export class StarsDirective {
 
   @HostListener("mouseover", ['$event'])
   onMouseOver(event) {
-    this.setStarsValue(+event.target.value);
+    this.renderStarsValue(+event.target.value);
   }
 
   @HostListener("mouseleave", ['$event'])
@@ -21,18 +21,18 @@ export class StarsDirective {
       }
     });
     if (checked) {
-      this.setStarsValue(checked);
+      this.renderStarsValue(checked);
     } else {
-      this.setStarsValue(0);
+      this.renderStarsValue(0);
     }
   }
 
   @HostListener("click", ["$event"])
   onMouseClick(event) {
-    this.setStarsValue(+event.target.value);
+    this.renderStarsValue(+event.target.value);
   }
 
-  private setStarsValue(value: number) {
+  private renderStarsValue(value: number) {
     this.renderer.setStyle(this.element.nativeElement.children[0], "width", `${value * 20}%`);
   }
 }

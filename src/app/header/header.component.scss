@@ -24,8 +24,14 @@
     cursor: pointer;
     user-select: none;
     transition: 0.3s;
+    & p {
+      transition: 0.3s;
+    }
     &:hover {
       background-color: rgb(0, 100, 22);
+      & p {
+        color: #fff;
+      }
     }
   }
   &__catalog,

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Product } from '../../products-models/product.model';
 import { take } from 'rxjs/operators';
@@ -6,6 +6,7 @@ import { BasketService } from 'src/app/basket/basket.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import * as fromAppReducer from 'src/app/store/app.reducer';
+import { StarsService } from '../../product-info/stars.service';
 
 @Component({
   selector: 'app-poduct-card',
@@ -15,9 +16,9 @@ import * as fromAppReducer from 'src/app/store/app.reducer';
 export class PoductCardComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private store: Store<fromAppReducer.AppState>,
-    private renderer: Renderer2,
     private basketService: BasketService,
     private router: Router,
+    private starsService: StarsService,
   ) { }
 
   @ViewChild('starsActive') starsActive: ElementRef;
@@ -43,17 +44,13 @@ export class PoductCardComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.setStarsValue();
+    this.starsService.setStarsValue(this.starsActive, this.productGrade);
   }
 
   ngOnDestroy(): void {
     if (this.basketServiceSub) {
       this.basketServiceSub.unsubscribe();
     }
-  }
-
-  setStarsValue() {
-    this.renderer.setStyle(this.starsActive.nativeElement, 'width', `${this.productGrade / 0.05}%`);
   }
 
   onAddToBasket() {
