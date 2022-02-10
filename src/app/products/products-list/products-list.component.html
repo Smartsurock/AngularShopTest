@@ -4,7 +4,7 @@
       [select]="select"></app-products-filter>
   </div>
   <div class="product-card" *ngFor="let product of products">
-    <app-poduct-card [product]="product"></app-poduct-card>
+    <app-product-card [product]="product"></app-product-card>
   </div>
   <div class="product-empty" *ngIf="!products.length"
     style="background-image: url('https://tradersterritory.com/uploads/monthly_2020_04/002.gif.c0f9075f773d4062f261881901203450.gif');">

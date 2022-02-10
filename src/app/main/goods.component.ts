@@ -21,7 +21,7 @@ export class GoodsComponent implements OnInit {
   };
   productsSub: Subscription;
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.productsSub = this.store.select('products').subscribe(state => {
       state.products.forEach(product => {
         if (!this.goods.categories.includes(product.category)) {

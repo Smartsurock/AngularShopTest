@@ -9,11 +9,11 @@ import * as fromAppReducer from 'src/app/store/app.reducer';
 import { StarsService } from '../../product-info/stars.service';
 
 @Component({
-  selector: 'app-poduct-card',
-  templateUrl: './poduct-card.component.html',
-  styleUrls: ['./poduct-card.component.scss']
+  selector: 'app-product-card',
+  templateUrl: './product-card.component.html',
+  styleUrls: ['./product-card.component.scss']
 })
-export class PoductCardComponent implements OnInit, OnDestroy, AfterViewInit {
+export class ProductCardComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private store: Store<fromAppReducer.AppState>,
     private basketService: BasketService,

@@ -6,7 +6,7 @@ import { appRoutes } from './app.routes';
 import { HeaderComponent } from './header/header.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { PoductCardComponent } from './products/products-list/poduct-card/poduct-card.component';
+import { ProductCardComponent } from './products/products-list/product-card/product-card.component';
 import { AuthComponent } from './auth/auth.component';
 import { StoreModule } from '@ngrx/store';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -43,7 +43,7 @@ import { SearchFormComponent } from './header/search-form/search-form.component'
     AppComponent,
     HeaderComponent,
     CatalogComponent,
-    PoductCardComponent,
+    ProductCardComponent,
     AuthComponent,
     ProductsComponent,
     ProductInfoComponent,

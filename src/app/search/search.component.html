@@ -1,6 +1,6 @@
 <div class="container">
   <div class="product-card" *ngFor="let product of products">
-    <app-poduct-card [product]="product" [userMail]="userMail"></app-poduct-card>
+    <app-product-card [product]="product" [userMail]="userMail"></app-product-card>
   </div>
 </div>
 <div *ngIf="!products.length" class="search-empty">
