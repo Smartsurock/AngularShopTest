@@ -15,6 +15,10 @@ export class SliderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  get navigationNeeded(): boolean {
+    return this.slides.length > 1;
+  }
+
   onNavClick(active: number) {
     this.active = active;
   }
@@ -43,12 +47,19 @@ export class SliderComponent implements OnInit {
     }
   }
 
-  @HostListener('document:keydown.escape')
-  onEscape() {
+  closeSlider() {
     this.sliderFullScreen = false;
   }
 
-  closeSlider() {
-    this.sliderFullScreen = false;
+  @HostListener('document:keydown.escape')
+  onEscape() {
+    this.closeSlider();
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClick(event) {
+    if (!event.target.closest('.slider__container.open')) {
+      this.closeSlider();
+    }
   }
 }

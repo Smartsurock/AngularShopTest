@@ -16,8 +16,8 @@ import { StarsService } from '../../product-info/stars.service';
 export class ProductCardComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private store: Store<fromAppReducer.AppState>,
-    private basketService: BasketService,
     private router: Router,
+    private basketService: BasketService,
     private starsService: StarsService,
   ) { }
 
