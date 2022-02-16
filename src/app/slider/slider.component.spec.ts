@@ -14,17 +14,87 @@ describe('SliderComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SliderComponent);
     component = fixture.componentInstance;
-    component.slides = ['1', '2', '3', '4', '5'];
+    component.slides = ['1', '2', '3', '4'];
     fixture.detectChanges();
   });
 
-  it('компонент создан', () => {
+  it('Компонент создан', () => {
     expect(component).toBeTruthy();
   });
 
-  it('nav click', () => {
-    const active = 0;
-    component.onNavClick(5);
-    expect(active).toBe(5);
+  it('Стартовые переменные в норме', () => {
+    expect(component.active).toEqual(0);
+    expect(component.sliderFullScreen).toBe(false);
+    expect(component.navigationNeeded).toBe(true);
+  });
+
+  describe('Проверка метода клика по слайду', () => {
+    it('onNavClick', () => {
+      component.onNavClick(3);
+      expect(component.active).toEqual(3);
+    });
+  });
+
+  describe('Проверка методов навигация слайдера', () => {
+    it('onLeft', () => {
+      component.onNavClick(2);
+      component.onLeft();
+      expect(component.active).toEqual(1);
+    });
+    it('onRight', () => {
+      component.onRight();
+      expect(component.active).toEqual(1);
+    });
+  });
+
+  describe('Проверка открытия слайдера', () => {
+    it('openSlider', () => {
+      component.openSlider();
+      expect(component.sliderFullScreen).toBe(true);
+      component.openSlider();
+      expect(component.active).toEqual(1);
+      component.openSlider();
+      expect(component.active).toEqual(2);
+      component.openSlider();
+      expect(component.active).toEqual(3);
+      component.openSlider();
+      expect(component.active).toEqual(0);
+    });
+  });
+
+  describe('Проверка закрытия слайдера', () => {
+    it('closeSlider', () => {
+      component.closeSlider();
+      expect(component.sliderFullScreen).toBe(false);
+    });
+  });
+
+  describe('Проверка события клавиатуры', () => {
+    it('onEscape', () => {
+      component.openSlider();
+      expect(component.sliderFullScreen).toBe(true);
+
+      const d = new KeyboardEvent('keydown', {
+        key: 'd',
+      });
+      document.dispatchEvent(d);
+      expect(component.sliderFullScreen).toBe(true);
+
+      const escape = new KeyboardEvent('keydown', {
+        key: 'Escape',
+      });
+      document.dispatchEvent(escape);
+      expect(component.sliderFullScreen).toBe(false);
+    });
+  });
+
+  describe('Проверка клика вне области', () => {
+    it('onClick', () => {
+      component.openSlider();
+      expect(component.sliderFullScreen).toBe(true);
+      // const click = new PointerEvent('click', {
+      // });
+      // console.log(document.dispatchEvent(click));
+    });
   });
 });
