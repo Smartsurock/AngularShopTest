@@ -22,15 +22,14 @@ export class ProductCardComponent implements OnInit, OnDestroy, AfterViewInit {
   ) { }
 
   @ViewChild('starsActive') starsActive: ElementRef;
-
   @Input() product: Product;
   productGrade: number;
   index: number;
-  alreadyInBasket: number = null;
+  alreadyInBasket: number | null = null;
   basketServiceSub: Subscription;
 
   ngOnInit() {
-    this.productGrade = this.product.stars.reduce(((a, b) => a + b), 0) / this.product.stars.length;
+    this.productGrade = this.product.stars.reduce(((a, b) => a + b), 0) / (this.product.stars.length ? this.product.stars.length : 1);
 
     this.store.select('products').pipe(take(1)).subscribe(state => {
       this.index = state.products.findIndex(product => {
@@ -43,7 +42,7 @@ export class ProductCardComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.starsService.setStarsValue(this.starsActive, this.productGrade);
   }
 

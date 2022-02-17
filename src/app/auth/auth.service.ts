@@ -28,14 +28,11 @@ export class AuthService {
   }
 
   basketRedirect() {
-    let goToBasket: boolean;
     this.store.select('auth').pipe(take(1)).subscribe(state => {
-      goToBasket = state.basketRedirect;
+      if (state.basketRedirect) {
+        this.router.navigate(['basket']);
+        this.store.dispatch(new AuthActions.BasketRedirect(false));
+      }
     });
-
-    if (goToBasket) {
-      this.router.navigate(['basket']);
-      this.store.dispatch(new AuthActions.BasketRedirect(false));
-    }
   }
 }

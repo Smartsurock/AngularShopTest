@@ -17,7 +17,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   authSub: Subscription;
   loading: boolean = false;
   warning: boolean = false;
-  error: string = null;
+  error: string | null = null;
 
   ngOnInit() {
     this.authForm = new FormGroup({

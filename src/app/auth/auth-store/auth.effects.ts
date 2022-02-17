@@ -2,12 +2,11 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { catchError, map, switchMap, tap } from "rxjs/operators";
 import { Actions, Effect, ofType } from "@ngrx/effects";
-import * as AuthActions from "./auth.actions";
 import { environment } from "src/environments/environment";
 import { AuthService } from "../auth.service";
-import { of } from "rxjs";
 import { User } from "../user.model";
-import { Router } from "@angular/router";
+import { of } from "rxjs";
+import * as AuthActions from "./auth.actions";
 
 export interface AuthResponseData {
   idToken: string;
@@ -18,14 +17,12 @@ export interface AuthResponseData {
   registered?: boolean;
 }
 
-
 @Injectable()
 export class AuthEffects {
   constructor(
     private actions: Actions,
     private http: HttpClient,
     private authService: AuthService,
-    private router: Router,
   ) { }
 
   @Effect()
@@ -118,7 +115,7 @@ export class AuthEffects {
   );
 }
 
-function hendleAuthentication(response) {
+function hendleAuthentication(response: any) {
   const expiration = new Date(new Date().getTime() + response.expiresIn * 1000);
   const user = new User(response.email, response.localId, response.idToken, expiration);
   localStorage.setItem("user", JSON.stringify(user));
@@ -126,7 +123,7 @@ function hendleAuthentication(response) {
   return new AuthActions.AuthSuccess(user);
 }
 
-function hendleError(error) {
+function hendleError(error: any) {
   let errorMessage = "Непонятный эрор!";
 
   if (!error.error || !error.error.error) {

@@ -1,3 +1,4 @@
+import { not } from '@angular/compiler/src/output/output_ast';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SliderComponent } from './slider.component';
 
@@ -42,8 +43,9 @@ describe('SliderComponent', () => {
       expect(component.active).toEqual(1);
     });
     it('onRight', () => {
+      component.onLeft();
       component.onRight();
-      expect(component.active).toEqual(1);
+      expect(component.active).toEqual(0);
     });
   });
 
@@ -92,9 +94,13 @@ describe('SliderComponent', () => {
     it('onClick', () => {
       component.openSlider();
       expect(component.sliderFullScreen).toBe(true);
-      // const click = new PointerEvent('click', {
-      // });
-      // console.log(document.dispatchEvent(click));
+      fixture.detectChanges();
+
+      const slider = fixture.debugElement.nativeElement.querySelector('.slider__container.open');
+      slider.click();
+      expect(component.sliderFullScreen).toBe(true);
+      // логика клика вне области слайдера
+      // expect(component.sliderFullScreen).toBe(false);
     });
   });
 });

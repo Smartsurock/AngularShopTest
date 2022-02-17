@@ -2,15 +2,15 @@ import { User } from "../user.model";
 import * as AuthActoins from "./auth.actions";
 
 export interface State {
-  user: User;
-  error: string;
+  user: User | null;
+  error: string | null;
   loading: boolean;
   logged: boolean;
   basketRedirect: boolean;
   tryToLogin: boolean;
 }
 
-const initialState = {
+const initialState: State = {
   user: null,
   error: null,
   loading: false,
