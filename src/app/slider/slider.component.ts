@@ -57,7 +57,7 @@ export class SliderComponent implements OnInit {
   }
 
   @HostListener('document:click', ['$event'])
-  onClick(event) {
+  onClick(event: any) {
     if (!event.target.closest('.slider__container.open')) {
       this.closeSlider();
     }

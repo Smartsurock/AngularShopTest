@@ -4,6 +4,16 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import * as fromAppReducer from '../store/app.reducer';
 
+interface Goods {
+  categories: string[];
+  items: Items[];
+}
+
+interface Items {
+  category: string;
+  image: string;
+}
+
 @Component({
   selector: 'app-goods',
   templateUrl: './goods.component.html',
@@ -15,7 +25,7 @@ export class GoodsComponent implements OnInit {
     private router: Router,
   ) { }
 
-  goods = {
+  goods: Goods = {
     categories: [],
     items: [],
   };
@@ -45,7 +55,7 @@ export class GoodsComponent implements OnInit {
     }
   }
 
-  onGoodClick(category) {
+  onGoodClick(category: string) {
     this.router.navigate([`goods/${category}`]);
   }
 }

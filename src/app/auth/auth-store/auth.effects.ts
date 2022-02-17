@@ -95,7 +95,7 @@ export class AuthEffects {
         id: string,
         _token: string,
         _tokenExpirationDate: Date,
-      } = JSON.parse(localStorage.getItem('user'));
+      } = JSON.parse((localStorage.getItem('user') || ''));
 
       if (!user) {
         return { type: "Непонятный эрор!" };

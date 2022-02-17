@@ -32,7 +32,7 @@ export class ProductsFilterComponent implements OnInit {
     }
   }
 
-  useFilter(key, value) {
+  useFilter(key: string, value: string | null) {
     const queryParams = {
       [key]: value,
     }
@@ -55,12 +55,12 @@ export class ProductsFilterComponent implements OnInit {
     });
   }
 
-  onFilterClick(object, event) {
-    const queryParams = [];
-    const filterKey = Object.keys(object).find(key => object[key] === event.target.id);
+  onFilterClick(object: any, event: any) {
+    const queryParams: any[] = [];
+    const filterKey: string = (Object.keys(object).find(key => object[key] === event.target.id) || '');
 
     if (filterKey === 'fabricator') {
-      this.fabricators.filter(el => {
+      this.fabricators.filter((el: any) => {
         if (event.target.id === el[filterKey]) {
           el.checked = !el.checked;
         }
@@ -69,7 +69,7 @@ export class ProductsFilterComponent implements OnInit {
         }
       });
     } else if (filterKey === 'sort') {
-      this.sorts.filter(el => {
+      this.sorts.filter((el: any) => {
         if (event.target.id === el[filterKey]) {
           el.checked = !el.checked;
         }
@@ -86,7 +86,7 @@ export class ProductsFilterComponent implements OnInit {
     }
   }
 
-  selectChanges(event) {
+  selectChanges(event: any) {
     if (event.target.value === 'default') {
       this.useFilter('sorting', null);
     } else {

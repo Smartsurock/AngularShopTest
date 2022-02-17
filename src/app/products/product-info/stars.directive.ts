@@ -7,7 +7,7 @@ export class StarsDirective {
   constructor(private element: ElementRef, private renderer: Renderer2) { }
 
   @HostListener("mouseover", ['$event'])
-  onMouseOver(event) {
+  onMouseOver(event: any) {
     this.renderStarsValue(+event.target.value);
   }
 
@@ -28,7 +28,9 @@ export class StarsDirective {
   }
 
   @HostListener("click", ["$event"])
-  onMouseClick(event) {
+  onMouseClick(event: any) {
+    console.log(event.target);
+
     this.renderStarsValue(+event.target.value);
   }
 

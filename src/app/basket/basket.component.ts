@@ -96,8 +96,8 @@ export class BasketComponent implements OnInit, OnDestroy {
           return item.productId === el.productId
             && item.userMail === el.userMail;
         });
+        this.store.dispatch(new ProductsActions.RemoveFromBasket(index));
       });
-      this.store.dispatch(new ProductsActions.RemoveFromBasket(index));
     });
 
     this.store.dispatch(new ProductsActions.SaveBasketState());

@@ -6,6 +6,16 @@ import { Product } from '../products-models/product.model';
 import { take } from 'rxjs/operators';
 import * as fromAppReducer from 'src/app/store/app.reducer';
 
+interface Fabricators {
+  fabricator: string;
+  checked: boolean;
+}
+
+interface Sorts {
+  sort: string;
+  checked: boolean;
+}
+
 @Component({
   selector: 'app-products-list',
   templateUrl: './products-list.component.html',
@@ -23,8 +33,8 @@ export class ProductsListComponent implements OnInit, OnDestroy {
   queryParamsSub: Subscription;
   category: string;
 
-  fabricators = [];
-  sorts = [];
+  fabricators: Fabricators[] = [];
+  sorts: Sorts[] = [];
   select: string = 'default';
 
   openFilter: boolean = false;
@@ -130,26 +140,27 @@ export class ProductsListComponent implements OnInit, OnDestroy {
   }
 
   fillFilters() {
-    this.fabricators = [];
-    this.sorts = [];
+    let fabricators: string[] = [];
+    let sorts: string[] = [];
+
     this.products.forEach(product => {
       if (product.filters.fabricator) {
-        if (!this.fabricators.includes(JSON.stringify({
+        if (!fabricators.includes(JSON.stringify({
           checked: false,
           fabricator: product.filters.fabricator,
         }))) {
-          this.fabricators.push(JSON.stringify({
+          fabricators.push(JSON.stringify({
             checked: false,
             fabricator: product.filters.fabricator,
           }));
         }
       }
       if (product.filters.sort) {
-        if (!this.sorts.includes(JSON.stringify({
+        if (!sorts.includes(JSON.stringify({
           checked: false,
           sort: product.filters.sort,
         }))) {
-          this.sorts.push(JSON.stringify({
+          sorts.push(JSON.stringify({
             checked: false,
             sort: product.filters.sort,
           }));
@@ -157,10 +168,10 @@ export class ProductsListComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.fabricators = this.fabricators.map(el => {
+    this.fabricators = fabricators.map(el => {
       return JSON.parse(el);
     });
-    this.sorts = this.sorts.map(el => {
+    this.sorts = sorts.map(el => {
       return JSON.parse(el);
     });
   }

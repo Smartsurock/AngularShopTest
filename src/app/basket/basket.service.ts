@@ -13,10 +13,10 @@ export class BasketService {
   ) { }
 
   alreadyInBasket: boolean = false;
-  basketCheck = new Subject<number>();
+  basketCheck = new Subject<number | null>();
 
   getUserMail() {
-    let userMail: string = null;
+    let userMail: string | null = null;
     this.store.select('auth').pipe(take(1)).subscribe(state => {
       if (state.user) {
         userMail = state.user.email;
@@ -29,7 +29,7 @@ export class BasketService {
     let userMail = this.getUserMail();
 
     if (userMail) {
-      let alreadyInBasket: number = null;
+      let alreadyInBasket: number | null = null;
       this.store.select('products').pipe(take(1)).subscribe(state => {
         state.basket.find(product => {
           if (product.productId === productId

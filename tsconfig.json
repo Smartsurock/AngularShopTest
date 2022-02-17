@@ -20,8 +20,8 @@
       "es2018",
       "dom"
     ],
-    // "strictNullChecks": true,
-    // "noImplicitAny": true
+    "strictNullChecks": true,
+    "noImplicitAny": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

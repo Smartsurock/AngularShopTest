@@ -57,7 +57,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @ViewChild('catalogBtn') catalogBtn: ElementRef;
 
   @HostListener("document:click", ['$event'])
-  onDocumentClick(event) {
+  onDocumentClick(event: any) {
     if (event.target.closest('.header__catalog') !== this.catalogBtn.nativeElement) {
       this.catalog = false;
     }

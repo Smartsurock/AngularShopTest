@@ -43,3 +43,4 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+shopapp-22f84-default-rtdb-export.json

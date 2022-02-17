@@ -31,8 +31,8 @@ export class ProductInfoComponent implements OnInit, OnDestroy, AfterViewInit {
   productGrade: number;
   commentForm: boolean = false;
   index: number;
-  userMail: string;
-  alreadyInBasket: number = null;
+  userMail: string | null;
+  alreadyInBasket: number | null = null;
   needAuthorization: boolean = false;
   basketClick: boolean = false;
 
