@@ -1,8 +1,6 @@
 import { Directive, ElementRef, Renderer2, HostListener } from '@angular/core';
 
-@Directive({
-  selector: '[starsDirective]'
-})
+@Directive({ selector: '[starsDirective]' })
 export class StarsDirective {
   constructor(private element: ElementRef, private renderer: Renderer2) { }
 
@@ -14,7 +12,7 @@ export class StarsDirective {
   @HostListener("mouseleave", ['$event'])
   onMouseLeave() {
     const inputs: any[] = Array.from(this.element.nativeElement.children[1].children);
-    let checked = 0;
+    let checked: number = 0;
     inputs.filter(input => {
       if (input.checked) {
         checked = input.value;
@@ -29,8 +27,6 @@ export class StarsDirective {
 
   @HostListener("click", ["$event"])
   onMouseClick(event: any) {
-    console.log(event.target);
-
     this.renderStarsValue(+event.target.value);
   }
 

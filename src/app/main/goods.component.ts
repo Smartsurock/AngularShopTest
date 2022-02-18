@@ -50,9 +50,7 @@ export class GoodsComponent implements OnInit {
   }
 
   unsubscriber(subscription: Subscription) {
-    if (subscription) {
-      subscription.unsubscribe();
-    }
+    if (subscription) subscription.unsubscribe();
   }
 
   onGoodClick(category: string) {

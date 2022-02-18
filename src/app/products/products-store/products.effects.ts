@@ -4,17 +4,17 @@ import { Actions, Effect, ofType } from "@ngrx/effects";
 import { Store } from "@ngrx/store";
 import { map, switchMap, withLatestFrom } from "rxjs/operators";
 import { Product } from "../products-models/product.model";
-import * as ProductsActions from "./products.actions";
-import * as fromAppReducer from "src/app/store/app.reducer";
 import { Buyer } from "../products-models/buyer.model";
 import { Order } from "../products-models/order.model";
+import * as ProductsActions from "./products.actions";
+import * as fromAppReducer from "src/app/store/app.reducer";
 
 @Injectable()
 export class ProductsEffects {
   constructor(
     private actions: Actions,
     private http: HttpClient,
-    private store: Store<fromAppReducer.AppState>
+    private store: Store<fromAppReducer.AppState>,
   ) { }
 
   @Effect()

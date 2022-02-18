@@ -1,8 +1,6 @@
 import { Directive, ElementRef, HostListener } from "@angular/core";
 
-@Directive({
-  selector: '[searchDirective]',
-})
+@Directive({ selector: '[searchDirective]' })
 export class SearchDirective {
   constructor(private element: ElementRef) { }
 

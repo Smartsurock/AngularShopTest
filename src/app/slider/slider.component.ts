@@ -12,8 +12,7 @@ export class SliderComponent implements OnInit {
   active: number = 0;
   sliderFullScreen: boolean = false;
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   get navigationNeeded(): boolean {
     return this.slides.length > 1;

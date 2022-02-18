@@ -9,9 +9,7 @@ import * as AuthActions from '../auth-store/auth.actions';
   styleUrls: ['./auth-error.component.scss']
 })
 export class AuthErrorComponent implements OnInit {
-  constructor(
-    private store: Store<fromAppReducer.AppState>
-  ) { }
+  constructor(private store: Store<fromAppReducer.AppState>) { }
 
   @Input() error: string;
 

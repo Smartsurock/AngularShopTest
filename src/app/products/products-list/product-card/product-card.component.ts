@@ -28,7 +28,7 @@ export class ProductCardComponent implements OnInit, OnDestroy, AfterViewInit {
   alreadyInBasket: number | null = null;
   basketServiceSub: Subscription;
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.productGrade = this.product.stars.reduce(((a, b) => a + b), 0) / (this.product.stars.length ? this.product.stars.length : 1);
 
     this.store.select('products').pipe(take(1)).subscribe(state => {

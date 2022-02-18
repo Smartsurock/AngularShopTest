@@ -9,7 +9,7 @@ export interface State {
   orders: Order[];
 }
 
-const initialState = {
+const initialState: State = {
   products: [],
   basket: [],
   orders: [],

@@ -10,8 +10,7 @@ export class BasketInfoComponent implements OnInit {
 
   @Output() accept = new EventEmitter<boolean>();
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   onAccept() {
     this.accept.emit(false);

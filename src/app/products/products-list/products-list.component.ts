@@ -32,11 +32,9 @@ export class ProductsListComponent implements OnInit, OnDestroy {
   paramsSub: Subscription;
   queryParamsSub: Subscription;
   category: string;
-
   fabricators: Fabricators[] = [];
   sorts: Sorts[] = [];
   select: string = 'default';
-
   openFilter: boolean = false;
 
   ngOnInit() {
@@ -201,7 +199,6 @@ export class ProductsListComponent implements OnInit, OnDestroy {
           return num1 - num2;
         });
         break;
-
       default: return;
     }
   }
@@ -212,9 +209,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
   }
 
   unsubscriber(subscription: Subscription) {
-    if (subscription) {
-      subscription.unsubscribe();
-    }
+    if (subscription) subscription.unsubscribe();
   }
 
   onFilterOpen(value: boolean) {

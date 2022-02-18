@@ -18,7 +18,7 @@ import { take } from 'rxjs/operators';
 export class BasketComponent implements OnInit, OnDestroy {
   constructor(
     private store: Store<fromAppReducer.AppState>,
-    private router: Router
+    private router: Router,
   ) { }
 
   buyers: Buyer[];

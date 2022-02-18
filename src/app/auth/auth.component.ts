@@ -57,7 +57,6 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.store.dispatch(new AuthActions.BasketRedirect(false));
   }
 
-
   @HostListener('document:keydown.escape')
   onEscape() {
     this.onCloseAuth();

@@ -8,9 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./search-empty.component.scss']
 })
 export class SearchEmptyComponent implements OnInit, AfterViewInit {
-  constructor(
-    private router: Router,
-  ) { }
+  constructor(private router: Router) { }
 
   clarifyForm: FormGroup;
   @Input() searchRequest: string;

@@ -34,9 +34,7 @@ export class CatalogComponent implements OnInit, OnDestroy {
   }
 
   unsubscriber(subscription: Subscription) {
-    if (subscription) {
-      subscription.unsubscribe();
-    }
+    if (subscription) subscription.unsubscribe();
   }
 
   onCategory(category: string) {

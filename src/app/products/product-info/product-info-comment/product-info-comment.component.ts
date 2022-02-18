@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Comment } from '../../products-models/comment.model';
+import { StarsService } from '../stars.service';
 
 @Component({
   selector: 'app-product-info-comment',
@@ -7,19 +8,14 @@ import { Comment } from '../../products-models/comment.model';
   styleUrls: ['./product-info-comment.component.scss']
 })
 export class ProductInfoCommentComponent implements OnInit, AfterViewInit {
-  constructor(private renderer: Renderer2) { }
+  constructor(private starsService: StarsService) { }
 
   @Input() comment: Comment;
   @ViewChild('starsActive') starsActive: ElementRef;
 
-  ngOnInit() {
-  }
+  ngOnInit(): void { }
 
-  ngAfterViewInit() {
-    this.setStarsValue();
-  }
-
-  setStarsValue() {
-    this.renderer.setStyle(this.starsActive.nativeElement, 'width', `${this.comment.rating * 20}%`);
+  ngAfterViewInit(): void {
+    this.starsService.setStarsValue(this.starsActive, this.comment.rating);
   }
 }

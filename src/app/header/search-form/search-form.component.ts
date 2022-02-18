@@ -8,9 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./search-form.component.scss']
 })
 export class SearchFormComponent implements OnInit {
-  constructor(
-    private router: Router,
-  ) { }
+  constructor(private router: Router) { }
 
   searchForm: FormGroup;
 

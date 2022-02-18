@@ -115,8 +115,8 @@ export class AuthEffects {
   );
 }
 
-function hendleAuthentication(response: any) {
-  const expiration = new Date(new Date().getTime() + response.expiresIn * 1000);
+function hendleAuthentication(response: AuthResponseData) {
+  const expiration = new Date(new Date().getTime() + +response.expiresIn * 1000);
   const user = new User(response.email, response.localId, response.idToken, expiration);
   localStorage.setItem("user", JSON.stringify(user));
 

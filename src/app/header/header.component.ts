@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   catalog: boolean = false;
   authSub: Subscription;
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.authSub = this.store.select('auth').subscribe(state => {
       this.isLogged = state.logged;
     });

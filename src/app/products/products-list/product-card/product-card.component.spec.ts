@@ -43,10 +43,10 @@ describe('ProductCardComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // describe('Проверка инициализации компонента', () => {
-  //   it('ngOnInit', () => {
-  //     component.ngOnInit();
-  //     expect(component.productGrade).toBe(0);
-  //   });
-  // });
+  describe('Проверка инициализации компонента', () => {
+    it('ngOnInit', () => {
+      component.ngOnInit();
+      expect(component.productGrade).toBe(0);
+    });
+  });
 });

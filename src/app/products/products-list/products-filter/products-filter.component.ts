@@ -16,9 +16,9 @@ export class ProductsFilterComponent implements OnInit {
   @Input() fabricators = [];
   @Input() sorts = [];
   @Input() select: string;
+  @Output() filterOpen = new EventEmitter<boolean>();
   selectForm: FormGroup;
   openFilter: boolean = false;
-  @Output() filterOpen = new EventEmitter<boolean>();
 
   ngOnInit(): void {
     this.selectForm = new FormGroup({
